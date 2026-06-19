@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Users, CheckCircle, Clock, XCircle } from 'lucide-react';
+import { Users, CheckCircle, Clock } from 'lucide-react';
 import { employerApi } from '../../lib/api';
 import type { EmployerDashboard, User } from '../../types';
 import StatCard from '../../components/StatCard';

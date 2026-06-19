@@ -226,6 +226,18 @@ def seed():
         )
         db.add(employer)
 
+        # Provider admin — linked to Tirana Wellness Club
+        db.add(User(
+            full_name="Wellness Admin",
+            email="admin@wellnessclub.al",
+            hashed_password=hash_password("password123"),
+            role="provider_admin",
+            provider_id=provider_map["Tirana Wellness Club"].id,
+            language="sq",
+            country="AL",
+            currency="ALL",
+        ))
+
         print("Seeding challenges...")
         db.add(Challenge(
             title="Wellness Week",
@@ -253,6 +265,7 @@ def seed():
         print("\nLogin credentials:")
         print("  Employee : arta@tiranatech.al / password123")
         print("  Employer : admin@tiranatech.al / password123")
+        print("  Provider : admin@wellnessclub.al / password123")
 
     except Exception as e:
         db.rollback()

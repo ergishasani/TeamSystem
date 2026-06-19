@@ -111,6 +111,13 @@ export default function LoginPage() {
                 <p className="text-white text-xs font-medium">Employer Admin</p>
                 <p className="text-app-muted text-xs">admin@tiranatech.al</p>
               </button>
+              <button
+                onClick={() => { setEmail('admin@wellnessclub.al'); setPassword('password123'); }}
+                className="w-full text-left bg-app-surface hover:bg-app-border rounded-lg px-3 py-2 transition-colors"
+              >
+                <p className="text-white text-xs font-medium">Provider Admin</p>
+                <p className="text-app-muted text-xs">admin@wellnessclub.al</p>
+              </button>
             </div>
           </div>
         </div>

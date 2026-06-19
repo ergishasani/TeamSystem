@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     JWT_SECRET_KEY: str
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
-    BACKEND_CORS_ORIGINS: str = "http://localhost:3000,http://localhost:8081"
+    BACKEND_CORS_ORIGINS: str = "http://localhost:3000,http://localhost:3001,http://localhost:8081"
 
     # OpenAI concierge. When OPENAI_API_KEY is unset the AI routes fall back to
     # the rule-based engine, so the app works with no key and no cost.
