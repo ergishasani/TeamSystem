@@ -67,9 +67,9 @@ export default function AIScreen() {
         {messages.map((msg) => (
           <View key={msg.id} style={[styles.bubble, msg.role === 'user' ? styles.userBubble : styles.aiBubble]}>
             <Text style={[styles.bubbleText, msg.role === 'user' && styles.userText]}>{msg.text}</Text>
-            {msg.response?.suggested_categories?.length > 0 && (
+            {(msg.response?.suggested_categories?.length ?? 0) > 0 && (
               <View style={styles.tags}>
-                {msg.response.suggested_categories.map((cat) => (
+                {msg.response?.suggested_categories?.map((cat) => (
                   <View key={cat} style={styles.tag}>
                     <Text style={styles.tagText}>{cat}</Text>
                   </View>

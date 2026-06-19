@@ -70,6 +70,27 @@ uvicorn app.main:app --reload
 
 ---
 
+## Continuous Integration
+
+GitHub Actions run automatically on push / pull request:
+
+| Workflow | Trigger | What it does |
+|----------|---------|--------------|
+| [`backend.yml`](./.github/workflows/backend.yml) | changes under `backend/**` | `pytest` suite on Python 3.12 (in-memory SQLite — no DB service needed) |
+| [`mobile.yml`](./.github/workflows/mobile.yml) | changes under `mobile/**` | TypeScript type-check (`tsc --noEmit`) on Node 20 |
+
+Run locally:
+
+```bash
+# backend
+cd backend && pip install -r requirements-dev.txt && pytest
+
+# mobile
+cd mobile && npm run typecheck
+```
+
+---
+
 ## Demo Accounts
 | Role | Email | Password |
 |------|-------|----------|
