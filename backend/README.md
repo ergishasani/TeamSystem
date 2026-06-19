@@ -68,3 +68,25 @@ replace the logic in `app/services/ai_service.py` — the interface is already s
 alembic revision --autogenerate -m "description"
 alembic upgrade head
 ```
+
+## Tests
+Tests run against an in-memory SQLite database — no PostgreSQL required.
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+Or inside the Docker container:
+```bash
+docker compose exec backend sh -c "pip install -q pytest && pytest"
+```
+
+Test layout (`backend/tests/`):
+- `conftest.py` — in-memory DB, `get_db` override, and seeding fixtures (`company`, `employee`, `employer`, `provider`, `offer`, `auth`)
+- `test_auth.py` — register / login / me + role failures
+- `test_offers.py` — listing, filtering, detail, auth guard
+- `test_approval_flow.py` — submit → approve → payment + QR redemption, reject/cancel budget release
+- `test_ai.py` — rule-based concierge + recommendations
+
+CI runs `pytest` automatically on every push/PR that touches `backend/**` (see `.github/workflows/backend.yml`).

@@ -105,10 +105,11 @@ def reject_request(db: Session, request_id: int, approver_company_id: int, reaso
     req.rejected_at = datetime.now(timezone.utc)
     req.rejection_reason = reason
 
-    # Release pending budget
+    # Release the reserved budget back to the employee
     profile = db.query(EmployeeProfile).filter(EmployeeProfile.user_id == req.employee_id).first()
     if profile:
         profile.pending_amount = max(0, float(profile.pending_amount) - float(req.total_amount))
+        profile.remaining_amount = float(profile.remaining_amount) + float(req.total_amount)
 
     db.commit()
     db.refresh(req)

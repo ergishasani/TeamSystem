@@ -52,6 +52,12 @@ types/index.ts         # All TypeScript types
 4. **`components/OfferCard.tsx`** — Refine offer card design
 5. **`store/authStore.ts`** — Add user preferences to store
 
+## Type-checking
+```bash
+npm run typecheck   # tsc --noEmit
+```
+CI runs this automatically on every push/PR that touches `mobile/**` (see `.github/workflows/mobile.yml`).
+
 ## Design System
 - Background: `#111111`
 - Primary: `#22C55E` (green)
