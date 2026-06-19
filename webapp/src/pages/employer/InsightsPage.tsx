@@ -30,7 +30,7 @@ export default function InsightsPage() {
   };
 
   const maxSpend = insights
-    ? Math.max(...Object.values(insights.category_spend), 1)
+    ? Math.max(...insights.category_spend.map((c) => c.total), 1)
     : 1;
 
   return (
@@ -77,7 +77,8 @@ export default function InsightsPage() {
           </div>
 
           {/* Key metrics */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            <MetricCard label="Total Requests" value={`${insights.total_requests}`} />
             <MetricCard label="Approval Rate" value={`${(insights.approval_rate * 100).toFixed(0)}%`} />
             <MetricCard label="Avg Spend / Request" value={`${insights.avg_spend.toLocaleString()} ALL`} />
             <MetricCard label="Total Approved" value={`${insights.approved_total.toLocaleString()} ALL`} />
@@ -85,25 +86,25 @@ export default function InsightsPage() {
           </div>
 
           {/* Category spend chart */}
-          {Object.keys(insights.category_spend).length > 0 && (
+          {insights.category_spend.length > 0 && (
             <div className="bg-app-card border border-app-border rounded-xl p-5">
               <div className="flex items-center gap-2 mb-5">
                 <TrendingUp size={18} className="text-app-accent" />
                 <h3 className="text-white font-semibold">Spend by Category</h3>
               </div>
               <div className="space-y-3">
-                {Object.entries(insights.category_spend)
-                  .sort((a, b) => b[1] - a[1])
-                  .map(([cat, amount], i) => (
-                    <div key={cat}>
+                {[...insights.category_spend]
+                  .sort((a, b) => b.total - a.total)
+                  .map((c, i) => (
+                    <div key={c.category}>
                       <div className="flex justify-between text-sm mb-1.5">
-                        <span className="text-white capitalize">{cat}</span>
-                        <span className="text-app-muted">{amount.toLocaleString()} ALL</span>
+                        <span className="text-white capitalize">{c.category}</span>
+                        <span className="text-app-muted">{c.total.toLocaleString()} ALL</span>
                       </div>
                       <div className="h-2 bg-app-surface rounded-full overflow-hidden">
                         <div
                           className={`h-full rounded-full ${CATEGORY_COLORS[i % CATEGORY_COLORS.length]}`}
-                          style={{ width: `${(amount / maxSpend) * 100}%` }}
+                          style={{ width: `${(c.total / maxSpend) * 100}%` }}
                         />
                       </div>
                     </div>

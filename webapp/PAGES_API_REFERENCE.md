@@ -213,7 +213,7 @@ Payment {
 ### What it renders
 On first visit shows an empty state with a "Generate Insights" button. After clicking, it hits the backend and renders:
 - An AI-generated insight sentence (highlighted banner)
-- Four metric cards: Approval Rate, Avg Spend / Request, Total Approved, Budget Utilisation
+- Five metric cards: Total Requests, Approval Rate, Avg Spend / Request, Total Approved, Budget Utilisation
 - A horizontal bar chart of spend by category
 - A ranked list of top categories
 
@@ -230,15 +230,19 @@ A "Refresh" button re-calls the endpoint at any time.
 ```ts
 EmployerInsights {
   top_categories: string[];
-  category_spend: Record<string, number>;  // { wellness: 12500, food: 3200, … }
+  category_spend: { category: string; total: number }[];  // [{ category: "wellness", total: 12500 }, …]
   approval_rate: number;                   // 0–1, e.g. 0.85 = 85 %
   avg_spend: number;
+  total_requests: number;
   pending_total: number;
   approved_total: number;
   avg_budget_utilization: number;          // 0–1
   insight: string;                         // generated sentence
 }
 ```
+
+> Source of truth for response shapes is `backend/API_REFERENCE.md` / the Pydantic schemas in
+> `backend/app/schemas/`. Cross-check there before updating this doc.
 
 ### Backend logic
 
