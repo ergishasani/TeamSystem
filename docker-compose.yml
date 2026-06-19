@@ -26,6 +26,8 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app          # hot-reload: code changes reflect instantly
+    env_file:
+      - ./backend/.env          # OPENAI_API_KEY etc. — file is gitignored
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/perka_db
       JWT_SECRET_KEY: dev_secret_change_in_production

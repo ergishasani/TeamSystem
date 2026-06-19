@@ -17,6 +17,7 @@ from app.models.package import PackageItem
 from app.models.payment import Payment
 from app.models.redemption import Redemption
 from app.models.offer import Offer
+from app.services.notification_service import create_notification
 
 
 def _generate_qr(request_id: int, offer_id: int) -> str:
@@ -87,6 +88,12 @@ def approve_request(db: Session, request_id: int, approver_company_id: int) -> B
             )
             db.add(redemption)
 
+    create_notification(
+        db, req.employee_id,
+        f"Your benefit request #{req.id} was approved.",
+        type="request_approved",
+    )
+
     db.commit()
     db.refresh(req)
     return req
@@ -110,6 +117,13 @@ def reject_request(db: Session, request_id: int, approver_company_id: int, reaso
     if profile:
         profile.pending_amount = max(0, float(profile.pending_amount) - float(req.total_amount))
         profile.remaining_amount = float(profile.remaining_amount) + float(req.total_amount)
+
+    reason_suffix = f": {reason}" if reason else ""
+    create_notification(
+        db, req.employee_id,
+        f"Your benefit request #{req.id} was rejected{reason_suffix}.",
+        type="request_rejected",
+    )
 
     db.commit()
     db.refresh(req)

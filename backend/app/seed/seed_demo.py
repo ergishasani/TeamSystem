@@ -231,6 +231,7 @@ def seed():
             title="Wellness Week",
             description="Complete 3 wellness benefits this month.",
             type="category",
+            category="wellness",
             goal=3,
             reward=200,
             starts_at=datetime.now(timezone.utc),
@@ -238,8 +239,9 @@ def seed():
         ))
         db.add(Challenge(
             title="Explorer Streak",
-            description="Submit a benefit request 3 weeks in a row.",
+            description="Redeem any 3 benefits to keep your streak alive.",
             type="streak",
+            category=None,
             goal=3,
             reward=300,
             starts_at=datetime.now(timezone.utc),

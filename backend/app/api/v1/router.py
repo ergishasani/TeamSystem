@@ -14,6 +14,7 @@ from app.api.v1.routes import (
     redemptions,
     challenges,
     interactions,
+    notifications,
 )
 
 api_router = APIRouter(prefix="/api/v1")
@@ -31,3 +32,4 @@ api_router.include_router(provider_routes.router)
 api_router.include_router(redemptions.router)
 api_router.include_router(challenges.router)
 api_router.include_router(interactions.router)
+api_router.include_router(notifications.router)

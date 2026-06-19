@@ -19,6 +19,22 @@ class OfferCreate(BaseModel):
     status: str = "active"
 
 
+class OfferUpdate(BaseModel):
+    title: Optional[str] = None
+    category: Optional[str] = None
+    price: Optional[float] = Field(default=None, gt=0)
+    description: Optional[str] = None
+    currency: Optional[str] = None
+    city: Optional[str] = None
+    country: Optional[str] = None
+    discount_percent: Optional[float] = Field(default=None, ge=0, le=100)
+    quantity_available: Optional[int] = Field(default=None, ge=0)
+    valid_until: Optional[datetime] = None
+    is_limited_drop: Optional[bool] = None
+    image_url: Optional[str] = None
+    status: Optional[str] = None
+
+
 class ProviderOut(BaseModel):
     id: int
     name: str

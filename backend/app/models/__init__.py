@@ -10,9 +10,11 @@ from app.models.redemption import Redemption
 from app.models.challenge import Challenge, ChallengeProgress
 from app.models.interaction import UserInteraction
 from app.models.saved_offer import SavedOffer
+from app.models.notification import Notification
 
 __all__ = [
     "User", "Company", "EmployeeProfile", "Provider", "Offer",
     "Package", "PackageItem", "BenefitRequest", "Payment", "Redemption",
     "Challenge", "ChallengeProgress", "UserInteraction", "SavedOffer",
+    "Notification",
 ]

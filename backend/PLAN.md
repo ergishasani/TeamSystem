@@ -5,7 +5,11 @@ state of the codebase. Each feature is broken into small, sequential checklist i
 (model/migration → schema → logic → route wiring → manual check) so any item can be picked up
 on its own. Not split by owner.
 
-## 1. Persist saved offers
+> **Status (current):** All tasks (1–7) are **done** and covered by the pytest suite.
+> Task 6 ships as an OpenAI tool-calling concierge (`llm_concierge.py`) with an automatic
+> rule-based fallback, so it works with or without an `OPENAI_API_KEY`.
+
+## 1. Persist saved offers ✅ DONE
 `app/api/v1/routes/offers.py:16` stores saved offers in an in-memory `_saved_offers` dict —
 lost on restart, broken across multiple server instances.
 - [ ] Add `SavedOffer` model: `id, user_id (FK), offer_id (FK), created_at` in `app/models/`
@@ -17,7 +21,7 @@ lost on restart, broken across multiple server instances.
 - [ ] Remove the `_saved_offers` dict entirely
 - [ ] Manually verify: save → restart server → saved offer still listed
 
-## 2. Auto-approve requests below threshold
+## 2. Auto-approve requests below threshold ✅ DONE
 `Company.approval_required_above` exists on the model but is never read.
 - [ ] In `benefit_requests.py`'s create-request route, after computing `total_amount`, fetch the
       employee's `Company.approval_required_above`
@@ -28,7 +32,7 @@ lost on restart, broken across multiple server instances.
 - [ ] Manually verify both paths: a cheap request auto-approves, an expensive one stays pending
       for employer approval
 
-## 3. Provider offer validation
+## 3. Provider offer validation ✅ DONE (incl. OfferUpdate + PATCH /provider/offers/{id})
 `POST /provider/offers` takes a raw dict with no validation.
 - [ ] Add `OfferCreate` Pydantic schema in `app/schemas/offer.py` matching the `Offer` model
       fields (title, description, category, price, currency, city, country,
@@ -38,7 +42,7 @@ lost on restart, broken across multiple server instances.
 - [ ] Confirm `provider_id` is still set from the authenticated provider, not from the body
 - [ ] Manually verify: posting an invalid payload (e.g. missing `title`) now returns 422
 
-## 4. Challenge progress automation
+## 4. Challenge progress automation ✅ DONE (added Challenge.category; see challenge_service.py)
 `ChallengeProgress.progress` is never incremented automatically.
 - [ ] Decide the matching rule for "relevant" redemption → challenge (start simple: match
       `Challenge.type` to the redeemed offer's `category`)
@@ -51,7 +55,7 @@ lost on restart, broken across multiple server instances.
 - [ ] Manually verify: confirm a redemption for an offer matching an active challenge, check
       `GET /challenges/me/progress` reflects the increment
 
-## 5. Employer insights — real aggregation
+## 5. Employer insights — real aggregation ✅ DONE (see insights_service.py)
 `POST /ai/employer-insights` in `routes/ai.py` returns canned/stub analytics.
 - [ ] Write a query for total spend by offer category (join `BenefitRequest`/`Payment` →
       `Offer.category`) scoped to the requesting employer's company
@@ -63,8 +67,10 @@ lost on restart, broken across multiple server instances.
 - [ ] Wire these into the `POST /ai/employer-insights` response, replacing the stub
 - [ ] Manually verify against seeded demo data that numbers look sane
 
-## 6. AI chatbot with tool calling
-Scope (tools, LLM provider) is still TBD — do this sub-planning step before writing code.
+## 6. AI chatbot with tool calling ✅ DONE (OpenAI + rule-based fallback; see llm_concierge.py)
+Implemented with OpenAI (`gpt-4o-mini` by default). Tools: search_offers, get_wallet_balance,
+get_recommendations, build_package — all read-only and scoped to the calling employee. Falls back
+to the rule-based engine when `OPENAI_API_KEY` is unset or the API errors.
 - [ ] Decide which backend functions the chatbot can call as tools (e.g. search offers, check
       wallet balance, submit a benefit request, build a package) — confirm with the group
 - [ ] Decide LLM provider/SDK (Anthropic, OpenAI, etc.)
@@ -76,7 +82,7 @@ Scope (tools, LLM provider) is still TBD — do this sub-planning step before wr
 - [ ] Manually verify: ask the chatbot something requiring at least one tool call (e.g. "what's
       my budget") and confirm it calls the tool rather than guessing
 
-## 7. Notifications on approval/rejection
+## 7. Notifications on approval/rejection ✅ DONE
 No notification mechanism exists when a `BenefitRequest` is approved or rejected.
 - [ ] Add a `Notification` model: `id, user_id (FK), message, type, read, created_at`
 - [ ] Generate + apply Alembic migration

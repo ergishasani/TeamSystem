@@ -32,10 +32,22 @@ class RecommendationsResponse(BaseModel):
 
 
 class EmployerInsightRequest(BaseModel):
-    company_id: int
+    # Optional — insights are always scoped to the authenticated employer's company.
+    company_id: Optional[int] = None
+
+
+class CategorySpend(BaseModel):
+    category: str
+    total: float
 
 
 class EmployerInsightResponse(BaseModel):
     top_categories: List[str]
+    category_spend: List[CategorySpend]
     avg_spend: float
+    approval_rate: float
+    total_requests: int
+    pending_total: float
+    approved_total: float
+    avg_budget_utilization: float
     insight: str

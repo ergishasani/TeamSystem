@@ -11,6 +11,8 @@ class Challenge(Base):
     description = Column(String, nullable=True)
     # streak | spending | category
     type = Column(String, nullable=False)
+    # optional offer category this challenge targets; null = any category counts
+    category = Column(String, nullable=True)
     goal = Column(Numeric(12, 2), nullable=True)
     reward = Column(Integer, default=100)  # XP reward
     starts_at = Column(DateTime(timezone=True), nullable=True)

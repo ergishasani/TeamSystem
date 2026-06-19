@@ -35,12 +35,13 @@ backend/
 │   │   ├── database.py         # Engine, SessionLocal, Base, get_db()
 │   │   ├── security.py         # hash/verify password, create/decode JWT
 │   │   └── deps.py             # get_current_user + role guards
-│   ├── models/                 # SQLAlchemy ORM models (13 tables)
+│   ├── models/                 # SQLAlchemy ORM models (15 tables)
 │   ├── schemas/                # Pydantic v2 request/response models
 │   ├── api/v1/
 │   │   ├── router.py           # Aggregates all route modules under /api/v1
 │   │   └── routes/             # One file per resource group
-│   ├── services/               # Business logic (auth, approval, ai, recommendation)
+│   ├── services/               # Business logic (auth, approval, ai, insights,
+│   │                           #   challenge, notification, recommendation)
 │   └── seed/seed_demo.py       # Idempotent demo data seeder
 ├── alembic/                    # Migration environment + versions
 ├── requirements.txt
@@ -59,6 +60,8 @@ backend/
 | `JWT_ALGORITHM` | `HS256` | JWT algorithm |
 | `ACCESS_TOKEN_EXPIRE_MINUTES` | `1440` | Token lifetime (24h) |
 | `BACKEND_CORS_ORIGINS` | `http://localhost:3000,http://localhost:8081` | Comma-separated allowed origins |
+| `OPENAI_API_KEY` | `sk-...` | **Optional.** Enables the real OpenAI concierge. Unset → free rule-based fallback |
+| `OPENAI_MODEL` | `gpt-4o-mini` | Model for the concierge (default `gpt-4o-mini`) |
 
 ---
 
@@ -136,11 +139,19 @@ All tables are defined in `app/models/`. Field lists below mirror the ORM models
 ### UserInteraction
 `id, user_id (FK), offer_id (FK), action, created_at` — `action`: `view` / `save` / `click` / `request`
 
+### SavedOffer
+`id, user_id (FK), offer_id (FK), created_at` — unique on `(user_id, offer_id)`. Backs the persistent saved-offers list.
+
 ### Challenge
-`id, title, description, type, goal, reward, starts_at, ends_at`
+`id, title, description, type, category, goal, reward, starts_at, ends_at`
+- `type`: `streak` / `spending` / `category`
+- `category`: optional offer category the challenge targets (null = any category counts)
 
 ### ChallengeProgress
 `id, challenge_id (FK), user_id (FK), progress, completed`
+
+### Notification
+`id, user_id (FK), message, type, read, created_at` — `type`: `request_approved` / `request_rejected` / `info`
 
 ---
 
@@ -179,7 +190,7 @@ All paths are prefixed with `/api/v1`. Every endpoint below is **implemented**.
 | DELETE | `/offers/{offer_id}/save` | 🧑‍💼 | Unsaves offer |
 | GET | `/offers/users/me/saved-offers` | 🧑‍💼 | Saved offers list |
 
-> ⚠️ Saved offers are stored **in-memory** (`_saved_offers` dict). Move to a DB table for persistence — see §9.
+> Saved offers are persisted in the `saved_offers` table (unique per user/offer).
 
 ### Providers — `/providers`
 | Method | Path | Auth | Notes |
@@ -197,15 +208,15 @@ All paths are prefixed with `/api/v1`. Every endpoint below is **implemented**.
 ### AI — `/ai`
 | Method | Path | Auth | Body | Notes |
 |--------|------|------|------|-------|
-| POST | `/ai/concierge` | 🧑‍💼 | `message, budget?` | Rule-based reply + suggested categories/package |
+| POST | `/ai/concierge` | 🧑‍💼 | `message, budget?` | OpenAI tool-calling concierge when `OPENAI_API_KEY` is set, else rule-based. Reply + suggested categories/package |
 | POST | `/ai/packages/generate` | 🧑‍💼 | `message, budget?` | Same engine as concierge |
 | GET | `/ai/recommendations/me` | 🧑‍💼 | — | Personalized offer recommendations |
-| POST | `/ai/employer-insights` | 👤 | `EmployerInsightRequest` | **Stub** — returns canned analytics |
+| POST | `/ai/employer-insights` | 🏢 | — | Real aggregation scoped to the caller's company (see §7) |
 
 ### Benefit Requests — `/benefit-requests`
 | Method | Path | Auth | Body | Notes |
 |--------|------|------|------|-------|
-| POST | `/benefit-requests` | 🧑‍💼 | `package_id? \| offer_id?, request_type?, ai_reason?` | Reserves budget as pending; status `pending` |
+| POST | `/benefit-requests` | 🧑‍💼 | `package_id? \| offer_id?, request_type?, ai_reason?` | Reserves budget as pending. Auto-approved if `total ≤ Company.approval_required_above`, else `pending` |
 | GET | `/benefit-requests/me` | 🧑‍💼 | — | My requests |
 | GET | `/benefit-requests/{request_id}` | 🧑‍💼 | — | Single (own) request |
 | PATCH | `/benefit-requests/{request_id}/cancel` | 🧑‍💼 | — | Only `pending`; releases reserved budget |
@@ -225,9 +236,10 @@ All paths are prefixed with `/api/v1`. Every endpoint below is **implemented**.
 |--------|------|------|------|-------|
 | GET | `/provider/dashboard` | 🛠 | — | `{ total_offers, pending_redemptions }` |
 | GET | `/provider/offers` | 🛠 | — | Provider's offers |
-| POST | `/provider/offers` | 🛠 | offer fields (dict) | Creates offer for provider |
+| POST | `/provider/offers` | 🛠 | `OfferCreate` | Creates offer for provider (validated) |
+| PATCH | `/provider/offers/{offer_id}` | 🛠 | `OfferUpdate` (all optional) | Edit own offer (404 if not owned) |
 | GET | `/provider/redemptions` | 🛠 | — | Provider's redemptions |
-| POST | `/provider/redemptions/{redemption_id}/confirm` | 🛠 | — | Marks `redeemed` |
+| POST | `/provider/redemptions/{redemption_id}/confirm` | 🛠 | — | Marks `redeemed` + advances challenge progress |
 | GET | `/provider/payments` | 🛠 | — | Provider's payments |
 
 ### Redemptions — `/redemptions`
@@ -249,6 +261,12 @@ All paths are prefixed with `/api/v1`. Every endpoint below is **implemented**.
 | POST | `/interactions` | 🧑‍💼 | `offer_id, action` | Logs an interaction |
 | POST | `/interactions/search` | 🧑‍💼 | `query, category?` | Ranked + filtered offers |
 
+### Notifications — `/notifications`
+| Method | Path | Auth | Notes |
+|--------|------|------|-------|
+| GET | `/notifications/me` | 👤 | Current user's notifications, newest first |
+| PATCH | `/notifications/{notification_id}/read` | 👤 | Mark own notification read (404 if not owned) |
+
 ---
 
 ## 7. Business Logic
@@ -259,16 +277,28 @@ On `POST /employer/approvals/{id}/approve` (employer's own company only, request
 2. Update employee budget: `used += total`, `pending -= total`, `remaining = monthly_budget - used`.
 3. For each provider involved (every `PackageItem`, or the single offer) create a **`Payment`** with `status = simulated_paid`.
 4. Create a **`Redemption`** per offer with a generated `qr_code` and `expires_at = now + 30 days`, `status = active`.
+5. Create a **`Notification`** (`request_approved`) for the employee.
 
-**Reject** sets `status = rejected`, stores `rejection_reason`, and releases the reserved `pending_amount`.
+**Reject** sets `status = rejected`, stores `rejection_reason`, releases the reserved `pending_amount` back into `remaining_amount`, and creates a `request_rejected` **`Notification`**.
 
 ### Submit flow — `app/api/v1/routes/benefit_requests.py`
-Computes `total_amount` from the package or offer, validates `remaining_amount >= total`, then moves that amount from `remaining` into `pending` and creates the request as `pending`.
+Computes `total_amount` from the package or offer, validates `remaining_amount >= total`, then moves that amount from `remaining` into `pending` and creates the request. **Auto-approval:** if the company sets `approval_required_above` and `total_amount ≤ threshold`, the request is approved immediately via the approval flow above; otherwise it stays `pending` for employer review.
 
-### AI (rule-based) — `app/services/ai_service.py`
-- `rule_based_concierge(message, interests, budget)` maps keywords (`relax`, `weekend`, `learn`, `gym`, …) to categories via `KEYWORD_MAP`, blends them with the employee's interests, and returns a human-like `reply`, `suggested_categories`, and an optional `suggested_package_title`.
+### Challenge progress — `app/services/challenge_service.py`
+On `POST /provider/redemptions/{id}/confirm`, `advance_challenges(db, user_id, offer)` runs for the redeeming employee: every active challenge whose `category` matches the offer (or is null) gets its progress row created/incremented (`spending` challenges by offer price, others by 1). Reaching `goal` marks it `completed` and adds the challenge `reward` to the employee's `xp`.
+
+### Employer insights — `app/services/insights_service.py`
+`employer_insights(db, company_id)` aggregates the company's `BenefitRequest`s into: `top_categories` + `category_spend` (from approved requests' offers/package items), `approval_rate`, `avg_spend`, `pending_total`/`approved_total`, `avg_budget_utilization` (across `EmployeeProfile`s), and a generated `insight` sentence.
+
+### Notifications — `app/services/notification_service.py`
+`create_notification(db, user_id, message, type)` adds an in-app `Notification` row (committed by the caller). Hooked into the approve/reject paths. Push delivery (Expo/FCM) is the future extension point.
+
+### AI concierge — `app/services/ai_service.py` + `llm_concierge.py`
+- `concierge(db, user, message, budget)` is the entry point. If `OPENAI_API_KEY` is set it runs the **OpenAI tool-calling** loop in `llm_concierge.py`; otherwise (or on any LLM error) it falls back to `rule_based_concierge`, so the endpoint never fails.
+- **Tools** (all read-only, scoped to the calling employee): `search_offers(category?, max_price?, query?)`, `get_wallet_balance()`, `get_recommendations()`, `build_package(offer_ids, title?)`. The model picks which to call; the loop caps at `MAX_TOOL_ROUNDS = 5`. Categories searched and any built-package title are surfaced back through `ConciergeResponse`.
+- `rule_based_concierge(message, interests, budget)` (fallback) maps keywords (`relax`, `weekend`, `learn`, `gym`, …) to categories via `KEYWORD_MAP`, blends them with the employee's interests, and returns `reply` + `suggested_categories` + optional `suggested_package_title`.
 - `get_recommendations(db, user_id)` returns offers matching the employee's interests that fit their remaining budget, each with a `reason`.
-- **Swap point:** replace the function bodies with an LLM call (e.g. OpenAI) — the response schemas (`ConciergeResponse`, `RecommendationsResponse`) stay the same.
+- The response schemas (`ConciergeResponse`, `RecommendationsResponse`) are identical for both engines, so routes and the mobile app don't change.
 
 ### Recommendation scoring — `app/services/recommendation_service.py`
 `get_ranked_offers` scores each active offer: category match (+3), city = Tirana (+2), within budget (+2), freshness (+1); returns top-N.
@@ -287,19 +317,22 @@ Idempotent — skips if a company already exists.
 | Providers | Tirana Wellness Club, FitZone Albania, Healthy Bowl Tirana, Bovilla Trips, AI Skills Academy, DentalCare Tirana |
 | Offers | Spa Access Pass (3500), Pilates Class (2500), Healthy Dinner Voucher (1200), Bovilla Day Trip (5000), AI Tools Workshop (8000), Dental Checkup (3000) — all ALL / Tirana |
 | Packages | **After Work Reset** (7200), **Weekend Explorer** (6200) |
-| Challenges | Wellness Week, Explorer Streak |
+| Challenges | Wellness Week (category `wellness`, goal 3), Explorer Streak (any category, goal 3) |
 
 ---
 
 ## 9. What to Build / Improve Next
 
-1. **Persist saved offers** — replace the in-memory `_saved_offers` dict in `routes/offers.py` with a `SavedOffer` table (or reuse `UserInteraction`).
-2. **Real AI** — implement an LLM call inside `services/ai_service.py` (keep the schemas).
-3. **`approval_required_above` logic** — auto-approve requests below the threshold instead of always requiring approval.
-4. **Provider offer validation** — `POST /provider/offers` takes a raw dict; add a Pydantic `OfferCreate` schema.
-5. **Challenge progress automation** — increment `ChallengeProgress.progress` when relevant benefits are redeemed.
-6. **Employer insights** — replace the stub in `routes/ai.py` with real aggregation queries.
-7. **Notifications** — push updates on approval/rejection.
+The core backend is feature-complete. Done: persistent saved offers, auto-approval below threshold,
+validated + editable provider offers, challenge progress automation, real employer insights,
+in-app notifications on approval/rejection, and an **OpenAI tool-calling concierge** with a
+rule-based fallback (all covered by the test suite).
+
+Remaining / optional:
+
+1. **Push delivery** — extend `notification_service.py` to send Expo/FCM push, not just in-app rows.
+2. **Notification fan-out** — also notify employers when a new request needs approval.
+3. **Conversation memory** — the concierge is currently single-turn; persist chat history for multi-turn context.
 
 ### First files to edit
 | Goal | File |

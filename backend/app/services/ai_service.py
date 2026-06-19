@@ -1,14 +1,21 @@
 """
-Rule-based AI service for demo purposes.
-Replace the rule_based_concierge / generate_package methods with LLM calls
-(e.g., OpenAI chat completion) when ready — the interface stays the same.
+AI concierge service.
+
+`concierge()` uses the OpenAI tool-calling engine when OPENAI_API_KEY is set,
+and transparently falls back to the rule-based engine otherwise (or on any LLM
+error). The rule-based functions are kept as that fallback and for offline use.
 """
+import logging
 from typing import List, Optional
 from sqlalchemy.orm import Session
 
+from app.core.config import settings
+from app.models.user import User
 from app.models.offer import Offer
 from app.models.employee_profile import EmployeeProfile
 from app.schemas.ai import ConciergeResponse, RecommendedOffer, RecommendationsResponse
+
+logger = logging.getLogger(__name__)
 
 
 KEYWORD_MAP = {
@@ -72,6 +79,22 @@ def rule_based_concierge(message: str, interests: List[str], budget: Optional[fl
         suggested_categories=all_cats,
         suggested_package_title=package_title,
     )
+
+
+def concierge(db: Session, user: User, message: str, budget: Optional[float]) -> ConciergeResponse:
+    """Primary entry point. Uses OpenAI when configured, else rule-based."""
+    profile = db.query(EmployeeProfile).filter(EmployeeProfile.user_id == user.id).first()
+    interests = profile.interests if profile and profile.interests else []
+
+    if settings.OPENAI_API_KEY:
+        try:
+            # Imported lazily so the app (and tests) run without the openai package.
+            from app.services.llm_concierge import run_concierge
+            return run_concierge(db, user, message, budget)
+        except Exception:  # noqa: BLE001 — never let the AI break the endpoint
+            logger.exception("OpenAI concierge failed; falling back to rule-based")
+
+    return rule_based_concierge(message, interests, budget)
 
 
 def get_recommendations(db: Session, user_id: int) -> RecommendationsResponse:

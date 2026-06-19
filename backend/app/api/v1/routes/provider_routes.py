@@ -9,7 +9,8 @@ from app.models.offer import Offer
 from app.models.redemption import Redemption
 from app.models.payment import Payment
 from app.models.request import BenefitRequest
-from app.schemas.offer import OfferOut, OfferCreate
+from app.schemas.offer import OfferOut, OfferCreate, OfferUpdate
+from app.services.challenge_service import advance_challenges
 
 router = APIRouter(prefix="/provider", tags=["provider"])
 
@@ -38,6 +39,21 @@ def create_offer(offer_data: OfferCreate, current_user=Depends(get_provider_admi
     return offer
 
 
+@router.patch("/offers/{offer_id}", response_model=OfferOut)
+def update_offer(offer_id: int, offer_data: OfferUpdate, current_user=Depends(get_provider_admin), db: Session = Depends(get_db)):
+    offer = db.query(Offer).filter(
+        Offer.id == offer_id,
+        Offer.provider_id == current_user.provider_id,
+    ).first()
+    if not offer:
+        raise HTTPException(status_code=404, detail="Offer not found")
+    for field, value in offer_data.model_dump(exclude_unset=True).items():
+        setattr(offer, field, value)
+    db.commit()
+    db.refresh(offer)
+    return offer
+
+
 @router.get("/redemptions")
 def provider_redemptions(current_user=Depends(get_provider_admin), db: Session = Depends(get_db)):
     return db.query(Redemption).filter(Redemption.provider_id == current_user.provider_id).all()
@@ -53,6 +69,13 @@ def confirm_redemption(redemption_id: int, current_user=Depends(get_provider_adm
         raise HTTPException(status_code=404, detail="Redemption not found")
     redemption.status = "redeemed"
     redemption.redeemed_at = datetime.now(timezone.utc)
+
+    # Advance the employee's challenge progress for this redeemed offer.
+    req = db.query(BenefitRequest).filter(BenefitRequest.id == redemption.request_id).first()
+    offer = db.query(Offer).filter(Offer.id == redemption.offer_id).first()
+    if req:
+        advance_challenges(db, req.employee_id, offer)
+
     db.commit()
     return {"message": "Redemption confirmed"}
 

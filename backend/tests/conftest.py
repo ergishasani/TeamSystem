@@ -132,6 +132,18 @@ def provider(db):
 
 
 @pytest.fixture
+def provider_admin(db, provider):
+    user = User(
+        full_name="Provider Admin", email="prov@tiranatech.al",
+        hashed_password=hash_password(PASSWORD), role="provider_admin",
+        provider_id=provider.id, language="sq", country="AL", currency="ALL",
+    )
+    db.add(user)
+    db.commit()
+    return user
+
+
+@pytest.fixture
 def offer(db, provider):
     o = Offer(
         provider_id=provider.id, title="Spa Access Pass", description="Full day spa",
