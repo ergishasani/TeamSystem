@@ -9,7 +9,7 @@ from app.models.offer import Offer
 from app.models.redemption import Redemption
 from app.models.payment import Payment
 from app.models.request import BenefitRequest
-from app.schemas.offer import OfferOut
+from app.schemas.offer import OfferOut, OfferCreate
 
 router = APIRouter(prefix="/provider", tags=["provider"])
 
@@ -30,8 +30,8 @@ def provider_offers(current_user=Depends(get_provider_admin), db: Session = Depe
 
 
 @router.post("/offers", response_model=OfferOut, status_code=201)
-def create_offer(offer_data: dict, current_user=Depends(get_provider_admin), db: Session = Depends(get_db)):
-    offer = Offer(provider_id=current_user.provider_id, **offer_data)
+def create_offer(offer_data: OfferCreate, current_user=Depends(get_provider_admin), db: Session = Depends(get_db)):
+    offer = Offer(provider_id=current_user.provider_id, **offer_data.model_dump())
     db.add(offer)
     db.commit()
     db.refresh(offer)

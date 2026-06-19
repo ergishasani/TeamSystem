@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/benefit_requests.py": {
-    "mtime": 1781898984.267309,
-    "ast_hash": "ee4e7ce6d7d76d6296e3be8efbdbb220",
+    "mtime": 1781902189.7937424,
+    "ast_hash": "150d71a045eab6ed1d627c0bc8733dda",
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/challenges.py": {
@@ -60,8 +60,8 @@
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/offers.py": {
-    "mtime": 1781898956.807333,
-    "ast_hash": "cf204f1432b449e9b634b53fe4cf4705",
+    "mtime": 1781902117.0006738,
+    "ast_hash": "7b2a86a459d811c111436fef89c53e49",
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/packages.py": {
@@ -70,8 +70,8 @@
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/provider_routes.py": {
-    "mtime": 1781899001.300537,
-    "ast_hash": "a497fa129f34cb05aec9cf69dd6dfdec",
+    "mtime": 1781902165.2853577,
+    "ast_hash": "34f2067d5f40be41636eb2b21da6a20e",
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/providers.py": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "backend/app/models/__init__.py": {
-    "mtime": 1781898839.1315103,
-    "ast_hash": "e3eb4f22515de77b2c01d762e136948f",
+    "mtime": 1781902097.7886572,
+    "ast_hash": "26cfa2d5df471090a5e0a8d31a170ef4",
     "semantic_hash": ""
   },
   "backend/app/models/challenge.py": {
@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "backend/app/schemas/offer.py": {
-    "mtime": 1781898880.307384,
-    "ast_hash": "24d69c1a8d9ebb145b8d9996eeb0d5a9",
+    "mtime": 1781902153.5450523,
+    "ast_hash": "b260b1af750932a2df654816bf63a2db",
     "semantic_hash": ""
   },
   "backend/app/schemas/package.py": {
@@ -265,8 +265,8 @@
     "semantic_hash": ""
   },
   "backend/tests/conftest.py": {
-    "mtime": 1781901260.032434,
-    "ast_hash": "5a4cdebd1c92414f625b2ad1f76f98a2",
+    "mtime": 1781902245.4236588,
+    "ast_hash": "db1fb2f04bf0494b6867f826b5022c33",
     "semantic_hash": ""
   },
   "backend/tests/test_ai.py": {
@@ -275,8 +275,8 @@
     "semantic_hash": ""
   },
   "backend/tests/test_approval_flow.py": {
-    "mtime": 1781901299.8347867,
-    "ast_hash": "14da6c05f29c9591f9b1321951d09959",
+    "mtime": 1781902253.9437864,
+    "ast_hash": "5f9ffc190423436664be8f347496fe81",
     "semantic_hash": ""
   },
   "backend/tests/test_auth.py": {
@@ -517,6 +517,26 @@
   "mobile/assets/splash.png": {
     "mtime": 1781899413.7027206,
     "ast_hash": "e57fe1713ad35159343ca745221d87a7",
+    "semantic_hash": ""
+  },
+  "backend/alembic/versions/356c2e4f01f5_initial_schema.py": {
+    "mtime": 1781902048.4410758,
+    "ast_hash": "77d47a9626a02d618e6c57bc28a5eac0",
+    "semantic_hash": ""
+  },
+  "backend/alembic/versions/6f287adc3385_add_saved_offers_table.py": {
+    "mtime": 1781902129.3653085,
+    "ast_hash": "5e032ab2ae160d43701cddd283692deb",
+    "semantic_hash": ""
+  },
+  "backend/app/models/saved_offer.py": {
+    "mtime": 1781902091.7187726,
+    "ast_hash": "d62caac6d57dde2be2fbb8494a09aa7f",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_saved_offers.py": {
+    "mtime": 1781902262.584867,
+    "ast_hash": "1f4947c83cd8ab9a8740aaa1200e7bf9",
     "semantic_hash": ""
   }
 }

@@ -6,14 +6,12 @@ from app.core.database import get_db
 from app.core.deps import get_current_user, get_employee
 from app.models.offer import Offer
 from app.models.interaction import UserInteraction
+from app.models.saved_offer import SavedOffer
 from app.models.user import User
 from app.schemas.offer import OfferOut, OfferListResponse
 from app.services.recommendation_service import get_ranked_offers
 
 router = APIRouter(prefix="/offers", tags=["offers"])
-
-# In-memory saved offers per user (replace with a DB table if needed)
-_saved_offers: dict[int, set[int]] = {}
 
 
 @router.get("", response_model=OfferListResponse)
@@ -55,22 +53,34 @@ def save_offer(offer_id: int, current_user: User = Depends(get_employee), db: Se
     offer = db.query(Offer).filter(Offer.id == offer_id).first()
     if not offer:
         raise HTTPException(status_code=404, detail="Offer not found")
-    _saved_offers.setdefault(current_user.id, set()).add(offer_id)
-    interaction = UserInteraction(user_id=current_user.id, offer_id=offer_id, action="save")
-    db.add(interaction)
-    db.commit()
+
+    already_saved = db.query(SavedOffer).filter(
+        SavedOffer.user_id == current_user.id,
+        SavedOffer.offer_id == offer_id,
+    ).first()
+    if not already_saved:
+        db.add(SavedOffer(user_id=current_user.id, offer_id=offer_id))
+        db.add(UserInteraction(user_id=current_user.id, offer_id=offer_id, action="save"))
+        db.commit()
     return {"message": "Offer saved"}
 
 
 @router.delete("/{offer_id}/save", status_code=200)
-def unsave_offer(offer_id: int, current_user: User = Depends(get_employee)):
-    _saved_offers.get(current_user.id, set()).discard(offer_id)
+def unsave_offer(offer_id: int, current_user: User = Depends(get_employee), db: Session = Depends(get_db)):
+    db.query(SavedOffer).filter(
+        SavedOffer.user_id == current_user.id,
+        SavedOffer.offer_id == offer_id,
+    ).delete()
+    db.commit()
     return {"message": "Offer removed from saved"}
 
 
 @router.get("/users/me/saved-offers", response_model=List[OfferOut])
 def get_saved_offers(current_user: User = Depends(get_employee), db: Session = Depends(get_db)):
-    ids = list(_saved_offers.get(current_user.id, set()))
-    if not ids:
-        return []
-    return db.query(Offer).filter(Offer.id.in_(ids)).all()
+    return (
+        db.query(Offer)
+        .join(SavedOffer, SavedOffer.offer_id == Offer.id)
+        .filter(SavedOffer.user_id == current_user.id)
+        .order_by(SavedOffer.created_at.desc())
+        .all()
+    )

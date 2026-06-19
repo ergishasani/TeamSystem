@@ -101,3 +101,24 @@ def test_cancel_pending_request(client, employee, offer, auth):
 def test_employee_cannot_access_approvals(client, employee, auth):
     res = client.get("/api/v1/employer/approvals", headers=auth(employee.email))
     assert res.status_code == 403
+
+
+def test_auto_approval_below_threshold(client, db, company, employee, offer, auth):
+    # Company auto-approves anything at or below 10,000 ALL; the offer is 3,500.
+    company.approval_required_above = 10000
+    db.add(company)
+    db.commit()
+
+    headers = auth(employee.email)
+    res = _submit_single_offer_request(client, headers, offer.id)
+    assert res.status_code == 201, res.text
+    # No employer step needed — it is approved immediately.
+    assert res.json()["status"] == "approved"
+
+    wallet = client.get("/api/v1/wallet/me", headers=headers).json()
+    assert wallet["used_amount"] == 3500.0
+    assert wallet["pending_amount"] == 0.0
+
+    redemptions = client.get("/api/v1/redemptions/me", headers=headers).json()
+    assert len(redemptions) == 1
+    assert redemptions[0]["qr_code"].startswith("PERKA-")

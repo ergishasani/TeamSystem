@@ -82,8 +82,10 @@ PASSWORD = "password123"
 
 @pytest.fixture
 def company(db):
+    # approval_required_above=None → every request needs manual employer approval.
+    # The auto-approval path is exercised explicitly in test_auto_approval_below_threshold.
     c = Company(name="TiranaTech", country="AL", currency="ALL",
-                monthly_budget_per_employee=15000, approval_required_above=10000)
+                monthly_budget_per_employee=15000, approval_required_above=None)
     db.add(c)
     db.commit()
     return c

@@ -1,6 +1,22 @@
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+
+class OfferCreate(BaseModel):
+    title: str
+    category: str
+    price: float = Field(gt=0)
+    description: Optional[str] = None
+    currency: str = "ALL"
+    city: str = "Tirana"
+    country: str = "AL"
+    discount_percent: float = Field(default=0, ge=0, le=100)
+    quantity_available: Optional[int] = Field(default=None, ge=0)
+    valid_until: Optional[datetime] = None
+    is_limited_drop: bool = False
+    image_url: Optional[str] = None
+    status: str = "active"
 
 
 class ProviderOut(BaseModel):

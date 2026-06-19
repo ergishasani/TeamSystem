@@ -9,7 +9,9 @@ from app.models.request import BenefitRequest
 from app.models.employee_profile import EmployeeProfile
 from app.models.package import Package
 from app.models.offer import Offer
+from app.models.company import Company
 from app.schemas.request import BenefitRequestCreate, BenefitRequestOut
+from app.services.approval_service import approve_request
 
 router = APIRouter(prefix="/benefit-requests", tags=["benefit_requests"])
 
@@ -60,6 +62,14 @@ def create_request(
     db.add(req)
     db.commit()
     db.refresh(req)
+
+    # Auto-approve when the amount is at or below the company's approval threshold.
+    # A null threshold means every request needs manual employer approval.
+    company = db.query(Company).filter(Company.id == current_user.company_id).first()
+    threshold = company.approval_required_above if company else None
+    if threshold is not None and total_amount <= float(threshold):
+        return approve_request(db, req.id, req.company_id)
+
     return req
 
 
