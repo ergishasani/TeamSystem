@@ -490,8 +490,8 @@
     "semantic_hash": ""
   },
   "docker-compose.yml": {
-    "mtime": 1781904148.6921554,
-    "ast_hash": "f4d28491776749d55cc079183daa6ef7",
+    "mtime": 1781906500.8308918,
+    "ast_hash": "cadb955dd230e354503285521f43ff51",
     "semantic_hash": ""
   },
   "mobile/APP_REFERENCE.md": {
@@ -607,6 +607,151 @@
   "backend/tests/test_llm_concierge.py": {
     "mtime": 1781903933.8530898,
     "ast_hash": "10b51cc69ee71df431dd89cbd7f82b16",
+    "semantic_hash": ""
+  },
+  "webapp/package.json": {
+    "mtime": 1781904739.7749033,
+    "ast_hash": "7200c3aac5731f56cff8ac08894806a5",
+    "semantic_hash": ""
+  },
+  "webapp/postcss.config.js": {
+    "mtime": 1781904756.7303598,
+    "ast_hash": "c735540bb63936a123bc867d950c9f69",
+    "semantic_hash": ""
+  },
+  "webapp/src/App.tsx": {
+    "mtime": 1781904850.850382,
+    "ast_hash": "4aef6803758b8e37475f27f45e0f6ac3",
+    "semantic_hash": ""
+  },
+  "webapp/src/components/Badge.tsx": {
+    "mtime": 1781904871.944029,
+    "ast_hash": "5f860f1b58282eca4095fe5356a38976",
+    "semantic_hash": ""
+  },
+  "webapp/src/components/Layout.tsx": {
+    "mtime": 1781904901.0759037,
+    "ast_hash": "590a4b4cd8ee50aaad4605a5251915e5",
+    "semantic_hash": ""
+  },
+  "webapp/src/components/LoadingSpinner.tsx": {
+    "mtime": 1781904863.6827178,
+    "ast_hash": "a38293787985d3db7a369b5241f99865",
+    "semantic_hash": ""
+  },
+  "webapp/src/components/Sidebar.tsx": {
+    "mtime": 1781904892.4746575,
+    "ast_hash": "61c6b876ff5b74dfeebfc19ee0ca9558",
+    "semantic_hash": ""
+  },
+  "webapp/src/components/StatCard.tsx": {
+    "mtime": 1781904878.0138774,
+    "ast_hash": "1f4a98ca5a682fd8a348c730e0ca6407",
+    "semantic_hash": ""
+  },
+  "webapp/src/lib/api.ts": {
+    "mtime": 1781906501.8641543,
+    "ast_hash": "0b4276d5e9469798332e4b414d28c0c3",
+    "semantic_hash": ""
+  },
+  "webapp/src/main.tsx": {
+    "mtime": 1781904780.46966,
+    "ast_hash": "e7f0b28d6fafc62b3bcdb6e3b779ed6a",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/LoginPage.tsx": {
+    "mtime": 1781904924.9325726,
+    "ast_hash": "943d0d3094416fea99d6cb5cc43af0e3",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/employer/ApprovalsPage.tsx": {
+    "mtime": 1781904968.6232154,
+    "ast_hash": "285b9cb63a14597df4d697a53a982775",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/employer/DashboardPage.tsx": {
+    "mtime": 1781904944.7057705,
+    "ast_hash": "986535f055ef26db1c9b948ba12443a6",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/employer/EmployeesPage.tsx": {
+    "mtime": 1781904982.8430314,
+    "ast_hash": "4ad8628c9b4b0af2e972b50eca0e79b8",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/employer/InsightsPage.tsx": {
+    "mtime": 1781905023.779727,
+    "ast_hash": "70a626c9907fc96381b627ca58794e23",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/employer/PaymentsPage.tsx": {
+    "mtime": 1781905001.9067476,
+    "ast_hash": "47a695d3f442f1a30daa2b5a3ea31f77",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/provider/DashboardPage.tsx": {
+    "mtime": 1781905042.4138005,
+    "ast_hash": "5db9e91de8a48772ae50b9d51ec341a2",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/provider/OffersPage.tsx": {
+    "mtime": 1781905078.272665,
+    "ast_hash": "6117efe595e7fe6fdca28647f986b558",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/provider/PaymentsPage.tsx": {
+    "mtime": 1781905119.0961082,
+    "ast_hash": "c2bb089846b0868e5bed853ba126894e",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/provider/RedemptionsPage.tsx": {
+    "mtime": 1781905105.288483,
+    "ast_hash": "b230bb703ff7b518cddf6d28e8e667d7",
+    "semantic_hash": ""
+  },
+  "webapp/src/store/authStore.ts": {
+    "mtime": 1781904840.7826245,
+    "ast_hash": "a3ca11a993bcdf24d2bdcc694ec5f16c",
+    "semantic_hash": ""
+  },
+  "webapp/src/types/index.ts": {
+    "mtime": 1781904794.052183,
+    "ast_hash": "41932bce6cadbb31ed234aa5ec007c38",
+    "semantic_hash": ""
+  },
+  "webapp/src/vite-env.d.ts": {
+    "mtime": 1781906639.773556,
+    "ast_hash": "0352474ba2918efe13895edbc3780d94",
+    "semantic_hash": ""
+  },
+  "webapp/tailwind.config.js": {
+    "mtime": 1781904753.212086,
+    "ast_hash": "f517ada2364f8d04a483c12703e7de66",
+    "semantic_hash": ""
+  },
+  "webapp/tsconfig.json": {
+    "mtime": 1781904761.5938,
+    "ast_hash": "1321eb4254606453d2cd9a44908193a3",
+    "semantic_hash": ""
+  },
+  "webapp/vite.config.ts": {
+    "mtime": 1781904746.0808063,
+    "ast_hash": "84bc7be33d6c391c192a2a485927b22b",
+    "semantic_hash": ""
+  },
+  "webapp/PAGES_API_REFERENCE.md": {
+    "mtime": 1781906606.4040635,
+    "ast_hash": "2fe9305ce5c9da8a1c1f7c0a37c3216b",
+    "semantic_hash": ""
+  },
+  "webapp/README.md": {
+    "mtime": 1781906546.903483,
+    "ast_hash": "cff9c5d78e58b1b863f718e52f2ad467",
+    "semantic_hash": ""
+  },
+  "webapp/index.html": {
+    "mtime": 1781904766.0929492,
+    "ast_hash": "3aa0c03de8ec33cb902117d56e1cc2dc",
     "semantic_hash": ""
   }
 }
