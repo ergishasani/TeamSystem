@@ -445,8 +445,8 @@
     "semantic_hash": ""
   },
   "mobile/tsconfig.json": {
-    "mtime": 1781899071.5652945,
-    "ast_hash": "dd44505e753e2adb7d02eab8f8942755",
+    "mtime": 1781906913.5236251,
+    "ast_hash": "e026b6d0c4708a1d361c64febe3e1e91",
     "semantic_hash": ""
   },
   "mobile/types/index.ts": {
@@ -752,6 +752,11 @@
   "webapp/index.html": {
     "mtime": 1781904766.0929492,
     "ast_hash": "3aa0c03de8ec33cb902117d56e1cc2dc",
+    "semantic_hash": ""
+  },
+  "FEATURES.md": {
+    "mtime": 1781907007.7929852,
+    "ast_hash": "370e9bb14ab28bb75ef87e2ac28c7110",
     "semantic_hash": ""
   }
 }
