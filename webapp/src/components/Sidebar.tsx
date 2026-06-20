@@ -9,6 +9,8 @@ import {
   QrCode,
   Wallet,
   LogOut,
+  Flame,
+  Link2,
 } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 
@@ -20,6 +22,8 @@ const employerNav = [
   { to: '/employer/employees', label: 'Employees', icon: Users },
   { to: '/employer/payments', label: 'Payments', icon: CreditCard },
   { to: '/employer/insights', label: 'Insights', icon: BarChart2 },
+  { to: '/employer/deal-of-day', label: 'Deal of the Day', icon: Flame },
+  { to: '/employer/collaborations', label: 'Collaborations', icon: Link2 },
 ];
 
 const providerNav = [

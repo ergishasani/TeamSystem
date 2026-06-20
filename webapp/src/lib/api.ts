@@ -86,3 +86,25 @@ export const providerApi = {
 export const aiApi = {
   employerInsights: () => apiClient.post('/ai/employer-insights'),
 };
+
+// ─── Deals ────────────────────────────────────────────────────────────────────
+
+export const dealsApi = {
+  today: () => apiClient.get('/deals/today'),
+  create: (data: { offer_id: number; deal_date: string; deal_price?: number; quantity_limit?: number }) =>
+    apiClient.post('/deals', data),
+};
+
+// ─── Collaborations ───────────────────────────────────────────────────────────
+
+export const collaborationsApi = {
+  list: () => apiClient.get('/collaborations'),
+  create: (data: { title: string; description?: string; items: { offer_id: number; price_share: number }[] }) =>
+    apiClient.post('/collaborations', data),
+};
+
+// ─── Offers (public) ──────────────────────────────────────────────────────────
+
+export const offersApi = {
+  list: () => apiClient.get('/offers'),
+};

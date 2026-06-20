@@ -11,6 +11,8 @@ import ApprovalsPage from './pages/employer/ApprovalsPage';
 import EmployeesPage from './pages/employer/EmployeesPage';
 import EmployerPaymentsPage from './pages/employer/PaymentsPage';
 import InsightsPage from './pages/employer/InsightsPage';
+import DealOfDayPage from './pages/employer/DealOfDayPage';
+import CollaborationsPage from './pages/employer/CollaborationsPage';
 
 // Provider pages
 import ProviderDashboard from './pages/provider/DashboardPage';
@@ -61,6 +63,8 @@ export default function App() {
           <Route path="employees" element={<EmployeesPage />} />
           <Route path="payments" element={<EmployerPaymentsPage />} />
           <Route path="insights" element={<InsightsPage />} />
+          <Route path="deal-of-day" element={<DealOfDayPage />} />
+          <Route path="collaborations" element={<CollaborationsPage />} />
         </Route>
 
         {/* Provider Admin */}
