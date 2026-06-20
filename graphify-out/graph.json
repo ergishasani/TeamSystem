@@ -4,14 +4,754 @@
   "graph": {},
   "nodes": [
     {
+      "label": "a1b2c3d4e5f6_add_gamification_features.py",
+      "file_type": "code",
+      "source_file": "backend/alembic/versions/a1b2c3d4e5f6_add_gamification_features.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "versions_a1b2c3d4e5f6_add_gamification_features",
+      "community": 102,
+      "norm_label": "a1b2c3d4e5f6_add_gamification_features.py"
+    },
+    {
+      "label": "upgrade()",
+      "file_type": "code",
+      "source_file": "backend/alembic/versions/a1b2c3d4e5f6_add_gamification_features.py",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "versions_a1b2c3d4e5f6_add_gamification_features_upgrade",
+      "community": 102,
+      "norm_label": "upgrade()"
+    },
+    {
+      "label": "downgrade()",
+      "file_type": "code",
+      "source_file": "backend/alembic/versions/a1b2c3d4e5f6_add_gamification_features.py",
+      "source_location": "L106",
+      "_origin": "ast",
+      "id": "versions_a1b2c3d4e5f6_add_gamification_features_downgrade",
+      "community": 102,
+      "norm_label": "downgrade()"
+    },
+    {
+      "label": "router.py",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/router.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "v1_router",
+      "community": 37,
+      "norm_label": "router.py"
+    },
+    {
+      "label": "ai.py",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "routes_ai",
+      "community": 54,
+      "norm_label": "ai.py"
+    },
+    {
+      "label": "concierge()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "routes_ai_concierge",
+      "community": 54,
+      "norm_label": "concierge()"
+    },
+    {
+      "label": "ConciergeRequest",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "conciergerequest",
+      "community": 54,
+      "norm_label": "conciergerequest"
+    },
+    {
+      "label": "Session",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_ai_py_session",
+      "community": 54,
+      "norm_label": "session"
+    },
+    {
+      "label": "generate_package()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "routes_ai_generate_package",
+      "community": 54,
+      "norm_label": "generate_package()"
+    },
+    {
+      "label": "GeneratePackageRequest",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "generatepackagerequest",
+      "community": 54,
+      "norm_label": "generatepackagerequest"
+    },
+    {
+      "label": "my_recommendations()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "routes_ai_my_recommendations",
+      "community": 54,
+      "norm_label": "my_recommendations()"
+    },
+    {
+      "label": "employer_insights_route()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "routes_ai_employer_insights_route",
+      "community": 54,
+      "norm_label": "employer_insights_route()"
+    },
+    {
+      "label": "EmployerInsightRequest",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "employerinsightrequest",
+      "community": 54,
+      "norm_label": "employerinsightrequest"
+    },
+    {
+      "label": "filter_offers_ai()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "routes_ai_filter_offers_ai",
+      "community": 54,
+      "norm_label": "filter_offers_ai()"
+    },
+    {
+      "label": "Parse a free-text query and return filtered offers.",
+      "file_type": "rationale",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "routes_ai_rationale_66",
+      "community": 54,
+      "norm_label": "parse a free-text query and return filtered offers."
+    },
+    {
+      "label": "collaborations.py",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "routes_collaborations",
+      "community": 4,
+      "norm_label": "collaborations.py"
+    },
+    {
+      "label": "CollabItemIn",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "routes_collaborations_collabitemin",
+      "community": 4,
+      "norm_label": "collabitemin"
+    },
+    {
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "basemodel",
+      "community": 4,
+      "norm_label": "basemodel"
+    },
+    {
+      "label": "CollabIn",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "routes_collaborations_collabin",
+      "community": 4,
+      "norm_label": "collabin"
+    },
+    {
+      "label": "CollabItemOut",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "routes_collaborations_collabitemout",
+      "community": 4,
+      "norm_label": "collabitemout"
+    },
+    {
+      "label": "CollabOut",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "routes_collaborations_collabout",
+      "community": 4,
+      "norm_label": "collabout"
+    },
+    {
+      "label": "list_collaborations()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "routes_collaborations_list_collaborations",
+      "community": 4,
+      "norm_label": "list_collaborations()"
+    },
+    {
+      "label": "User",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_collaborations_py_user",
+      "community": 4,
+      "norm_label": "user"
+    },
+    {
+      "label": "Session",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_collaborations_py_session",
+      "community": 4,
+      "norm_label": "session"
+    },
+    {
+      "label": "create_collaboration()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "routes_collaborations_create_collaboration",
+      "community": 4,
+      "norm_label": "create_collaboration()"
+    },
+    {
+      "label": "get_collaboration()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L99",
+      "_origin": "ast",
+      "id": "routes_collaborations_get_collaboration",
+      "community": 4,
+      "norm_label": "get_collaboration()"
+    },
+    {
+      "label": "deals.py",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "routes_deals",
+      "community": 4,
+      "norm_label": "deals.py"
+    },
+    {
+      "label": "DailyDealOut",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "routes_deals_dailydealout",
+      "community": 4,
+      "norm_label": "dailydealout"
+    },
+    {
+      "label": "DailyDealIn",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "routes_deals_dailydealin",
+      "community": 4,
+      "norm_label": "dailydealin"
+    },
+    {
+      "label": "get_today_deal()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "routes_deals_get_today_deal",
+      "community": 4,
+      "norm_label": "get_today_deal()"
+    },
+    {
+      "label": "User",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_deals_py_user",
+      "community": 4,
+      "norm_label": "user"
+    },
+    {
+      "label": "Session",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_deals_py_session",
+      "community": 4,
+      "norm_label": "session"
+    },
+    {
+      "label": "create_daily_deal()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "routes_deals_create_daily_deal",
+      "community": 4,
+      "norm_label": "create_daily_deal()"
+    },
+    {
+      "label": "onboarding.py",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "routes_onboarding",
+      "community": 4,
+      "norm_label": "onboarding.py"
+    },
+    {
+      "label": "InterestsIn",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "routes_onboarding_interestsin",
+      "community": 4,
+      "norm_label": "interestsin"
+    },
+    {
+      "label": "InterestOut",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "routes_onboarding_interestout",
+      "community": 4,
+      "norm_label": "interestout"
+    },
+    {
+      "label": "save_interests()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "routes_onboarding_save_interests",
+      "community": 4,
+      "norm_label": "save_interests()"
+    },
+    {
+      "label": "User",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_onboarding_py_user",
+      "community": 4,
+      "norm_label": "user"
+    },
+    {
+      "label": "Session",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_onboarding_py_session",
+      "community": 4,
+      "norm_label": "session"
+    },
+    {
+      "label": "get_interests()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "routes_onboarding_get_interests",
+      "community": 4,
+      "norm_label": "get_interests()"
+    },
+    {
+      "label": "shake.py",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "routes_shake",
+      "community": 10,
+      "norm_label": "shake.py"
+    },
+    {
+      "label": "_pick_prize()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "routes_shake_pick_prize",
+      "community": 10,
+      "norm_label": "_pick_prize()"
+    },
+    {
+      "label": "_get_or_create_credits()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "routes_shake_get_or_create_credits",
+      "community": 10,
+      "norm_label": "_get_or_create_credits()"
+    },
+    {
+      "label": "Session",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_shake_py_session",
+      "community": 10,
+      "norm_label": "session"
+    },
+    {
+      "label": "ShakeCredit",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "shakecredit",
+      "community": 10,
+      "norm_label": "shakecredit"
+    },
+    {
+      "label": "ShakeStatusOut",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "routes_shake_shakestatusout",
+      "community": 10,
+      "norm_label": "shakestatusout"
+    },
+    {
+      "label": "ShakeResultOut",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "routes_shake_shakeresultout",
+      "community": 10,
+      "norm_label": "shakeresultout"
+    },
+    {
+      "label": "shake_status()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "routes_shake_shake_status",
+      "community": 10,
+      "norm_label": "shake_status()"
+    },
+    {
+      "label": "User",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_shake_py_user",
+      "community": 10,
+      "norm_label": "user"
+    },
+    {
+      "label": "play_shake()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L78",
+      "_origin": "ast",
+      "id": "routes_shake_play_shake",
+      "community": 10,
+      "norm_label": "play_shake()"
+    },
+    {
+      "label": "swipe.py",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "routes_swipe",
+      "community": 101,
+      "norm_label": "swipe.py"
+    },
+    {
+      "label": "SwipeIn",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "routes_swipe_swipein",
+      "community": 101,
+      "norm_label": "swipein"
+    },
+    {
+      "label": "swipe_offer()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "routes_swipe_swipe_offer",
+      "community": 101,
+      "norm_label": "swipe_offer()"
+    },
+    {
+      "label": "User",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_swipe_py_user",
+      "community": 101,
+      "norm_label": "user"
+    },
+    {
+      "label": "Session",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "backend_app_api_v1_routes_swipe_py_session",
+      "community": 101,
+      "norm_label": "session"
+    },
+    {
+      "label": "get_swipe_deck()",
+      "file_type": "code",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "routes_swipe_get_swipe_deck",
+      "community": 101,
+      "norm_label": "get_swipe_deck()"
+    },
+    {
+      "label": "Returns offers the user hasn't swiped yet.",
+      "file_type": "rationale",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "routes_swipe_rationale_47",
+      "community": 101,
+      "norm_label": "returns offers the user hasn't swiped yet."
+    },
+    {
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "backend/app/models/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "models_init",
+      "community": 30,
+      "norm_label": "__init__.py"
+    },
+    {
+      "label": "collaboration.py",
+      "file_type": "code",
+      "source_file": "backend/app/models/collaboration.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "models_collaboration",
+      "community": 4,
+      "norm_label": "collaboration.py"
+    },
+    {
+      "label": "ProviderCollaboration",
+      "file_type": "code",
+      "source_file": "backend/app/models/collaboration.py",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "models_collaboration_providercollaboration",
+      "community": 4,
+      "norm_label": "providercollaboration"
+    },
+    {
+      "label": "Base",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "base",
+      "community": 13,
+      "norm_label": "base"
+    },
+    {
+      "label": "CollaborationItem",
+      "file_type": "code",
+      "source_file": "backend/app/models/collaboration.py",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "models_collaboration_collaborationitem",
+      "community": 4,
+      "norm_label": "collaborationitem"
+    },
+    {
+      "label": "daily_deal.py",
+      "file_type": "code",
+      "source_file": "backend/app/models/daily_deal.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "models_daily_deal",
+      "community": 4,
+      "norm_label": "daily_deal.py"
+    },
+    {
+      "label": "DailyDeal",
+      "file_type": "code",
+      "source_file": "backend/app/models/daily_deal.py",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "models_daily_deal_dailydeal",
+      "community": 4,
+      "norm_label": "dailydeal"
+    },
+    {
+      "label": "shake.py",
+      "file_type": "code",
+      "source_file": "backend/app/models/shake.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "models_shake",
+      "community": 13,
+      "norm_label": "shake.py"
+    },
+    {
+      "label": "ShakeCredit",
+      "file_type": "code",
+      "source_file": "backend/app/models/shake.py",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "models_shake_shakecredit",
+      "community": 13,
+      "norm_label": "shakecredit"
+    },
+    {
+      "label": "ShakeAttempt",
+      "file_type": "code",
+      "source_file": "backend/app/models/shake.py",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "models_shake_shakeattempt",
+      "community": 13,
+      "norm_label": "shakeattempt"
+    },
+    {
+      "label": "swipe.py",
+      "file_type": "code",
+      "source_file": "backend/app/models/swipe.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "models_swipe",
+      "community": 13,
+      "norm_label": "swipe.py"
+    },
+    {
+      "label": "SwipeInteraction",
+      "file_type": "code",
+      "source_file": "backend/app/models/swipe.py",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "models_swipe_swipeinteraction",
+      "community": 13,
+      "norm_label": "swipeinteraction"
+    },
+    {
+      "label": "user_interest.py",
+      "file_type": "code",
+      "source_file": "backend/app/models/user_interest.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "models_user_interest",
+      "community": 4,
+      "norm_label": "user_interest.py"
+    },
+    {
+      "label": "UserInterest",
+      "file_type": "code",
+      "source_file": "backend/app/models/user_interest.py",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "models_user_interest_userinterest",
+      "community": 4,
+      "norm_label": "userinterest"
+    },
+    {
+      "label": "seed_demo.py",
+      "file_type": "code",
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "seed_seed_demo",
+      "community": 4,
+      "norm_label": "seed_demo.py"
+    },
+    {
+      "label": "seed()",
+      "file_type": "code",
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "seed_seed_demo_seed",
+      "community": 4,
+      "norm_label": "seed()"
+    },
+    {
+      "label": "Run with: python -m app.seed.seed_demo Creates demo companies, users, providers",
+      "file_type": "rationale",
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "seed_seed_demo_rationale_1",
+      "community": 4,
+      "norm_label": "run with: python -m app.seed.seed_demo creates demo companies, users, providers"
+    },
+    {
       "label": "onboarding.tsx",
       "file_type": "code",
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "auth_onboarding",
       "community": 100,
-      "norm_label": "onboarding.tsx"
+      "norm_label": "onboarding.tsx",
+      "id": "auth_onboarding"
     },
     {
       "label": "ALL_INTERESTS",
@@ -19,9 +759,9 @@
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "auth_onboarding_all_interests",
       "community": 100,
-      "norm_label": "all_interests"
+      "norm_label": "all_interests",
+      "id": "auth_onboarding_all_interests"
     },
     {
       "label": "ICONS",
@@ -29,9 +769,9 @@
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "auth_onboarding_icons",
       "community": 100,
-      "norm_label": "icons"
+      "norm_label": "icons",
+      "id": "auth_onboarding_icons"
     },
     {
       "label": "OnboardingScreen()",
@@ -39,9 +779,9 @@
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L18",
       "_origin": "ast",
-      "id": "auth_onboarding_onboardingscreen",
       "community": 100,
-      "norm_label": "onboardingscreen()"
+      "norm_label": "onboardingscreen()",
+      "id": "auth_onboarding_onboardingscreen"
     },
     {
       "label": "styles",
@@ -49,9 +789,9 @@
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L91",
       "_origin": "ast",
-      "id": "auth_onboarding_styles",
       "community": 100,
-      "norm_label": "styles"
+      "norm_label": "styles",
+      "id": "auth_onboarding_styles"
     },
     {
       "label": "register.tsx",
@@ -59,9 +799,9 @@
       "source_file": "mobile/app/(auth)/register.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "auth_register",
       "community": 0,
-      "norm_label": "register.tsx"
+      "norm_label": "register.tsx",
+      "id": "auth_register"
     },
     {
       "label": "RegisterScreen()",
@@ -69,9 +809,9 @@
       "source_file": "mobile/app/(auth)/register.tsx",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "auth_register_registerscreen",
       "community": 0,
-      "norm_label": "registerscreen()"
+      "norm_label": "registerscreen()",
+      "id": "auth_register_registerscreen"
     },
     {
       "label": "styles",
@@ -79,9 +819,9 @@
       "source_file": "mobile/app/(auth)/register.tsx",
       "source_location": "L68",
       "_origin": "ast",
-      "id": "auth_register_styles",
       "community": 0,
-      "norm_label": "styles"
+      "norm_label": "styles",
+      "id": "auth_register_styles"
     },
     {
       "label": "_layout.tsx",
@@ -89,9 +829,9 @@
       "source_file": "mobile/app/(tabs)/_layout.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "tabs_layout",
       "community": 25,
-      "norm_label": "_layout.tsx"
+      "norm_label": "_layout.tsx",
+      "id": "tabs_layout"
     },
     {
       "label": "TabsLayout()",
@@ -99,9 +839,9 @@
       "source_file": "mobile/app/(tabs)/_layout.tsx",
       "source_location": "L4",
       "_origin": "ast",
-      "id": "tabs_layout_tabslayout",
       "community": 25,
-      "norm_label": "tabslayout()"
+      "norm_label": "tabslayout()",
+      "id": "tabs_layout_tabslayout"
     },
     {
       "label": "ai.tsx",
@@ -109,9 +849,9 @@
       "source_file": "mobile/app/(tabs)/ai.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "tabs_ai",
-      "community": 8,
-      "norm_label": "ai.tsx"
+      "community": 11,
+      "norm_label": "ai.tsx",
+      "id": "tabs_ai"
     },
     {
       "label": "Mode",
@@ -119,9 +859,9 @@
       "source_file": "mobile/app/(tabs)/ai.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "tabs_ai_mode",
-      "community": 8,
-      "norm_label": "mode"
+      "community": 11,
+      "norm_label": "mode",
+      "id": "tabs_ai_mode"
     },
     {
       "label": "Message",
@@ -129,9 +869,9 @@
       "source_file": "mobile/app/(tabs)/ai.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "tabs_ai_message",
-      "community": 8,
-      "norm_label": "message"
+      "community": 11,
+      "norm_label": "message",
+      "id": "tabs_ai_message"
     },
     {
       "label": "AIScreen()",
@@ -139,9 +879,9 @@
       "source_file": "mobile/app/(tabs)/ai.tsx",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "tabs_ai_aiscreen",
-      "community": 8,
-      "norm_label": "aiscreen()"
+      "community": 11,
+      "norm_label": "aiscreen()",
+      "id": "tabs_ai_aiscreen"
     },
     {
       "label": "styles",
@@ -149,9 +889,9 @@
       "source_file": "mobile/app/(tabs)/ai.tsx",
       "source_location": "L163",
       "_origin": "ast",
-      "id": "tabs_ai_styles",
-      "community": 8,
-      "norm_label": "styles"
+      "community": 11,
+      "norm_label": "styles",
+      "id": "tabs_ai_styles"
     },
     {
       "label": "index.tsx",
@@ -159,9 +899,9 @@
       "source_file": "mobile/app/(tabs)/index.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "tabs_index",
       "community": 52,
-      "norm_label": "index.tsx"
+      "norm_label": "index.tsx",
+      "id": "tabs_index"
     },
     {
       "label": "CATEGORY_COLORS",
@@ -169,9 +909,9 @@
       "source_file": "mobile/app/(tabs)/index.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "tabs_index_category_colors",
       "community": 52,
-      "norm_label": "category_colors"
+      "norm_label": "category_colors",
+      "id": "tabs_index_category_colors"
     },
     {
       "label": "HomeScreen()",
@@ -179,9 +919,9 @@
       "source_file": "mobile/app/(tabs)/index.tsx",
       "source_location": "L18",
       "_origin": "ast",
-      "id": "tabs_index_homescreen",
       "community": 52,
-      "norm_label": "homescreen()"
+      "norm_label": "homescreen()",
+      "id": "tabs_index_homescreen"
     },
     {
       "label": "styles",
@@ -189,9 +929,9 @@
       "source_file": "mobile/app/(tabs)/index.tsx",
       "source_location": "L139",
       "_origin": "ast",
-      "id": "tabs_index_styles",
       "community": 52,
-      "norm_label": "styles"
+      "norm_label": "styles",
+      "id": "tabs_index_styles"
     },
     {
       "label": "shake.tsx",
@@ -199,9 +939,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "tabs_shake",
       "community": 98,
-      "norm_label": "shake.tsx"
+      "norm_label": "shake.tsx",
+      "id": "tabs_shake"
     },
     {
       "label": "ShakeStatus",
@@ -209,9 +949,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "tabs_shake_shakestatus",
       "community": 98,
-      "norm_label": "shakestatus"
+      "norm_label": "shakestatus",
+      "id": "tabs_shake_shakestatus"
     },
     {
       "label": "ShakeResult",
@@ -219,9 +959,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "tabs_shake_shakeresult",
       "community": 98,
-      "norm_label": "shakeresult"
+      "norm_label": "shakeresult",
+      "id": "tabs_shake_shakeresult"
     },
     {
       "label": "PRIZE_EMOJI",
@@ -229,9 +969,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "tabs_shake_prize_emoji",
       "community": 98,
-      "norm_label": "prize_emoji"
+      "norm_label": "prize_emoji",
+      "id": "tabs_shake_prize_emoji"
     },
     {
       "label": "ShakeScreen()",
@@ -239,9 +979,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "tabs_shake_shakescreen",
       "community": 98,
-      "norm_label": "shakescreen()"
+      "norm_label": "shakescreen()",
+      "id": "tabs_shake_shakescreen"
     },
     {
       "label": "styles",
@@ -249,9 +989,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L120",
       "_origin": "ast",
-      "id": "tabs_shake_styles",
       "community": 98,
-      "norm_label": "styles"
+      "norm_label": "styles",
+      "id": "tabs_shake_styles"
     },
     {
       "label": "swipe.tsx",
@@ -259,9 +999,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "tabs_swipe",
       "community": 99,
-      "norm_label": "swipe.tsx"
+      "norm_label": "swipe.tsx",
+      "id": "tabs_swipe"
     },
     {
       "label": "{ width: SCREEN_WIDTH }",
@@ -269,9 +1009,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "tabs_swipe_width_screen_width",
       "community": 99,
-      "norm_label": "{ width: screen_width }"
+      "norm_label": "{ width: screen_width }",
+      "id": "tabs_swipe_width_screen_width"
     },
     {
       "label": "CATEGORY_COLORS",
@@ -279,9 +1019,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "tabs_swipe_category_colors",
       "community": 99,
-      "norm_label": "category_colors"
+      "norm_label": "category_colors",
+      "id": "tabs_swipe_category_colors"
     },
     {
       "label": "CATEGORY_EMOJI",
@@ -289,9 +1029,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "tabs_swipe_category_emoji",
       "community": 99,
-      "norm_label": "category_emoji"
+      "norm_label": "category_emoji",
+      "id": "tabs_swipe_category_emoji"
     },
     {
       "label": "SwipeScreen()",
@@ -299,9 +1039,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L24",
       "_origin": "ast",
-      "id": "tabs_swipe_swipescreen",
       "community": 99,
-      "norm_label": "swipescreen()"
+      "norm_label": "swipescreen()",
+      "id": "tabs_swipe_swipescreen"
     },
     {
       "label": "styles",
@@ -309,9 +1049,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L163",
       "_origin": "ast",
-      "id": "tabs_swipe_styles",
       "community": 99,
-      "norm_label": "styles"
+      "norm_label": "styles",
+      "id": "tabs_swipe_styles"
     },
     {
       "label": "deal-of-day.tsx",
@@ -319,9 +1059,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "app_deal_of_day",
       "community": 0,
-      "norm_label": "deal-of-day.tsx"
+      "norm_label": "deal-of-day.tsx",
+      "id": "app_deal_of_day"
     },
     {
       "label": "CATEGORY_COLORS",
@@ -329,9 +1069,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "app_deal_of_day_category_colors",
       "community": 0,
-      "norm_label": "category_colors"
+      "norm_label": "category_colors",
+      "id": "app_deal_of_day_category_colors"
     },
     {
       "label": "DealOfDayScreen()",
@@ -339,9 +1079,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "app_deal_of_day_dealofdayscreen",
       "community": 0,
-      "norm_label": "dealofdayscreen()"
+      "norm_label": "dealofdayscreen()",
+      "id": "app_deal_of_day_dealofdayscreen"
     },
     {
       "label": "styles",
@@ -349,9 +1089,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L138",
       "_origin": "ast",
-      "id": "app_deal_of_day_styles",
       "community": 0,
-      "norm_label": "styles"
+      "norm_label": "styles",
+      "id": "app_deal_of_day_styles"
     },
     {
       "label": "api.ts",
@@ -359,9 +1099,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "lib_api",
       "community": 8,
-      "norm_label": "api.ts"
+      "norm_label": "api.ts",
+      "id": "lib_api"
     },
     {
       "label": "apiClient",
@@ -369,9 +1109,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "lib_api_apiclient",
       "community": 8,
-      "norm_label": "apiclient"
+      "norm_label": "apiclient",
+      "id": "lib_api_apiclient"
     },
     {
       "label": "authApi",
@@ -379,9 +1119,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L23",
       "_origin": "ast",
-      "id": "lib_api_authapi",
       "community": 0,
-      "norm_label": "authapi"
+      "norm_label": "authapi",
+      "id": "lib_api_authapi"
     },
     {
       "label": "walletApi",
@@ -389,9 +1129,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L35",
       "_origin": "ast",
-      "id": "lib_api_walletapi",
       "community": 64,
-      "norm_label": "walletapi"
+      "norm_label": "walletapi",
+      "id": "lib_api_walletapi"
     },
     {
       "label": "offersApi",
@@ -399,9 +1139,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L42",
       "_origin": "ast",
-      "id": "lib_api_offersapi",
       "community": 8,
-      "norm_label": "offersapi"
+      "norm_label": "offersapi",
+      "id": "lib_api_offersapi"
     },
     {
       "label": "packagesApi",
@@ -409,9 +1149,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L57",
       "_origin": "ast",
-      "id": "lib_api_packagesapi",
       "community": 0,
-      "norm_label": "packagesapi"
+      "norm_label": "packagesapi",
+      "id": "lib_api_packagesapi"
     },
     {
       "label": "aiApi",
@@ -419,9 +1159,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L68",
       "_origin": "ast",
-      "id": "lib_api_aiapi",
-      "community": 8,
-      "norm_label": "aiapi"
+      "community": 11,
+      "norm_label": "aiapi",
+      "id": "lib_api_aiapi"
     },
     {
       "label": "requestsApi",
@@ -429,9 +1169,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L80",
       "_origin": "ast",
-      "id": "lib_api_requestsapi",
       "community": 0,
-      "norm_label": "requestsapi"
+      "norm_label": "requestsapi",
+      "id": "lib_api_requestsapi"
     },
     {
       "label": "redemptionsApi",
@@ -439,9 +1179,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L93",
       "_origin": "ast",
-      "id": "lib_api_redemptionsapi",
       "community": 0,
-      "norm_label": "redemptionsapi"
+      "norm_label": "redemptionsapi",
+      "id": "lib_api_redemptionsapi"
     },
     {
       "label": "challengesApi",
@@ -449,9 +1189,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L100",
       "_origin": "ast",
-      "id": "lib_api_challengesapi",
       "community": 52,
-      "norm_label": "challengesapi"
+      "norm_label": "challengesapi",
+      "id": "lib_api_challengesapi"
     },
     {
       "label": "providersApi",
@@ -459,9 +1199,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L108",
       "_origin": "ast",
-      "id": "lib_api_providersapi",
       "community": 8,
-      "norm_label": "providersapi"
+      "norm_label": "providersapi",
+      "id": "lib_api_providersapi"
     },
     {
       "label": "onboardingApi",
@@ -469,9 +1209,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L115",
       "_origin": "ast",
-      "id": "lib_api_onboardingapi",
       "community": 100,
-      "norm_label": "onboardingapi"
+      "norm_label": "onboardingapi",
+      "id": "lib_api_onboardingapi"
     },
     {
       "label": "swipeApi",
@@ -479,9 +1219,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L122",
       "_origin": "ast",
-      "id": "lib_api_swipeapi",
       "community": 99,
-      "norm_label": "swipeapi"
+      "norm_label": "swipeapi",
+      "id": "lib_api_swipeapi"
     },
     {
       "label": "dealsApi",
@@ -489,9 +1229,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L130",
       "_origin": "ast",
-      "id": "lib_api_dealsapi",
       "community": 8,
-      "norm_label": "dealsapi"
+      "norm_label": "dealsapi",
+      "id": "lib_api_dealsapi"
     },
     {
       "label": "collaborationsApi",
@@ -499,9 +1239,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L138",
       "_origin": "ast",
-      "id": "lib_api_collaborationsapi",
       "community": 8,
-      "norm_label": "collaborationsapi"
+      "norm_label": "collaborationsapi",
+      "id": "lib_api_collaborationsapi"
     },
     {
       "label": "shakeApi",
@@ -509,9 +1249,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L147",
       "_origin": "ast",
-      "id": "lib_api_shakeapi",
       "community": 98,
-      "norm_label": "shakeapi"
+      "norm_label": "shakeapi",
+      "id": "lib_api_shakeapi"
     },
     {
       "label": "aiFilterApi",
@@ -519,9 +1259,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L154",
       "_origin": "ast",
-      "id": "lib_api_aifilterapi",
-      "community": 8,
-      "norm_label": "aifilterapi"
+      "community": 11,
+      "norm_label": "aifilterapi",
+      "id": "lib_api_aifilterapi"
     },
     {
       "label": "App.tsx",
@@ -884,16 +1624,6 @@
       "id": "v1_init"
     },
     {
-      "label": "router.py",
-      "file_type": "code",
-      "source_file": "backend/app/api/v1/router.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 37,
-      "norm_label": "router.py",
-      "id": "v1_router"
-    },
-    {
       "label": "__init__.py",
       "file_type": "code",
       "source_file": "backend/app/api/v1/routes/__init__.py",
@@ -902,96 +1632,6 @@
       "community": 31,
       "norm_label": "__init__.py",
       "id": "routes_init"
-    },
-    {
-      "label": "ai.py",
-      "file_type": "code",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 10,
-      "norm_label": "ai.py",
-      "id": "routes_ai"
-    },
-    {
-      "label": "concierge()",
-      "file_type": "code",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L20",
-      "_origin": "ast",
-      "community": 10,
-      "norm_label": "concierge()",
-      "id": "routes_ai_concierge"
-    },
-    {
-      "label": "ConciergeRequest",
-      "file_type": "code",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L20",
-      "_origin": "ast",
-      "community": 10,
-      "norm_label": "conciergerequest",
-      "id": "conciergerequest"
-    },
-    {
-      "label": "Session",
-      "file_type": "code",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L20",
-      "_origin": "ast",
-      "community": 10,
-      "norm_label": "session",
-      "id": "backend_app_api_v1_routes_ai_py_session"
-    },
-    {
-      "label": "generate_package()",
-      "file_type": "code",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L31",
-      "_origin": "ast",
-      "community": 10,
-      "norm_label": "generate_package()",
-      "id": "routes_ai_generate_package"
-    },
-    {
-      "label": "GeneratePackageRequest",
-      "file_type": "code",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L31",
-      "_origin": "ast",
-      "community": 10,
-      "norm_label": "generatepackagerequest",
-      "id": "generatepackagerequest"
-    },
-    {
-      "label": "my_recommendations()",
-      "file_type": "code",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L42",
-      "_origin": "ast",
-      "community": 10,
-      "norm_label": "my_recommendations()",
-      "id": "routes_ai_my_recommendations"
-    },
-    {
-      "label": "employer_insights_route()",
-      "file_type": "code",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L47",
-      "_origin": "ast",
-      "community": 10,
-      "norm_label": "employer_insights_route()",
-      "id": "routes_ai_employer_insights_route"
-    },
-    {
-      "label": "EmployerInsightRequest",
-      "file_type": "code",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L47",
-      "_origin": "ast",
-      "community": 10,
-      "norm_label": "employerinsightrequest",
-      "id": "employerinsightrequest"
     },
     {
       "label": "auth.py",
@@ -1089,7 +1729,7 @@
       "source_file": "backend/app/api/v1/routes/benefit_requests.py",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 93,
+      "community": 46,
       "norm_label": "benefitrequestcreate",
       "id": "benefitrequestcreate"
     },
@@ -1294,16 +1934,6 @@
       "id": "routes_interactions_interactioncreate"
     },
     {
-      "label": "BaseModel",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "community": 4,
-      "norm_label": "basemodel",
-      "id": "basemodel"
-    },
-    {
       "label": "SearchQuery",
       "file_type": "code",
       "source_file": "backend/app/api/v1/routes/interactions.py",
@@ -1479,7 +2109,7 @@
       "source_file": "backend/app/api/v1/routes/packages.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 46,
+      "community": 97,
       "norm_label": "packages.py",
       "id": "routes_packages"
     },
@@ -1489,7 +2119,7 @@
       "source_file": "backend/app/api/v1/routes/packages.py",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 46,
+      "community": 97,
       "norm_label": "_build_package_out()",
       "id": "routes_packages_build_package_out"
     },
@@ -1499,7 +2129,7 @@
       "source_file": "backend/app/api/v1/routes/packages.py",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 46,
+      "community": 97,
       "norm_label": "package",
       "id": "package"
     },
@@ -1509,7 +2139,7 @@
       "source_file": "backend/app/api/v1/routes/packages.py",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 46,
+      "community": 97,
       "norm_label": "session",
       "id": "backend_app_api_v1_routes_packages_py_session"
     },
@@ -1529,7 +2159,7 @@
       "source_file": "backend/app/api/v1/routes/packages.py",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 46,
+      "community": 97,
       "norm_label": "list_packages()",
       "id": "routes_packages_list_packages"
     },
@@ -1539,7 +2169,7 @@
       "source_file": "backend/app/api/v1/routes/packages.py",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 46,
+      "community": 97,
       "norm_label": "get_package()",
       "id": "routes_packages_get_package"
     },
@@ -1549,7 +2179,7 @@
       "source_file": "backend/app/api/v1/routes/packages.py",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 46,
+      "community": 97,
       "norm_label": "create_package()",
       "id": "routes_packages_create_package"
     },
@@ -1759,7 +2389,7 @@
       "source_file": "backend/app/api/v1/routes/users.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 54,
       "norm_label": "users.py",
       "id": "routes_users"
     },
@@ -1769,7 +2399,7 @@
       "source_file": "backend/app/api/v1/routes/users.py",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 4,
+      "community": 54,
       "norm_label": "get_me()",
       "id": "routes_users_get_me"
     },
@@ -1779,7 +2409,7 @@
       "source_file": "backend/app/api/v1/routes/users.py",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 4,
+      "community": 54,
       "norm_label": "user",
       "id": "backend_app_api_v1_routes_users_py_user"
     },
@@ -1789,7 +2419,7 @@
       "source_file": "backend/app/api/v1/routes/users.py",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 4,
+      "community": 54,
       "norm_label": "update_me()",
       "id": "routes_users_update_me"
     },
@@ -1809,7 +2439,7 @@
       "source_file": "backend/app/api/v1/routes/users.py",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 4,
+      "community": 54,
       "norm_label": "session",
       "id": "backend_app_api_v1_routes_users_py_session"
     },
@@ -1819,7 +2449,7 @@
       "source_file": "backend/app/api/v1/routes/users.py",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 4,
+      "community": 54,
       "norm_label": "update_interests()",
       "id": "routes_users_update_interests"
     },
@@ -1839,7 +2469,7 @@
       "source_file": "backend/app/api/v1/routes/users.py",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 4,
+      "community": 54,
       "norm_label": "get_taste_profile()",
       "id": "routes_users_get_taste_profile"
     },
@@ -1849,7 +2479,7 @@
       "source_file": "backend/app/api/v1/routes/wallet.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 94,
+      "community": 54,
       "norm_label": "wallet.py",
       "id": "routes_wallet"
     },
@@ -1859,7 +2489,7 @@
       "source_file": "backend/app/api/v1/routes/wallet.py",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 94,
+      "community": 54,
       "norm_label": "get_wallet()",
       "id": "routes_wallet_get_wallet"
     },
@@ -1869,7 +2499,7 @@
       "source_file": "backend/app/api/v1/routes/wallet.py",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 94,
+      "community": 54,
       "norm_label": "user",
       "id": "backend_app_api_v1_routes_wallet_py_user"
     },
@@ -1879,7 +2509,7 @@
       "source_file": "backend/app/api/v1/routes/wallet.py",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 94,
+      "community": 54,
       "norm_label": "session",
       "id": "backend_app_api_v1_routes_wallet_py_session"
     },
@@ -1889,7 +2519,7 @@
       "source_file": "backend/app/api/v1/routes/wallet.py",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 94,
+      "community": 54,
       "norm_label": "get_wallet_history()",
       "id": "routes_wallet_get_wallet_history"
     },
@@ -2134,16 +2764,6 @@
       "id": "app_main_health"
     },
     {
-      "label": "__init__.py",
-      "file_type": "code",
-      "source_file": "backend/app/models/__init__.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 30,
-      "norm_label": "__init__.py",
-      "id": "models_init"
-    },
-    {
       "label": "challenge.py",
       "file_type": "code",
       "source_file": "backend/app/models/challenge.py",
@@ -2162,16 +2782,6 @@
       "community": 13,
       "norm_label": "challenge",
       "id": "models_challenge_challenge"
-    },
-    {
-      "label": "Base",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "community": 50,
-      "norm_label": "base",
-      "id": "base"
     },
     {
       "label": "ChallengeProgress",
@@ -2269,7 +2879,7 @@
       "source_file": "backend/app/models/offer.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 54,
+      "community": 13,
       "norm_label": "offer.py",
       "id": "models_offer"
     },
@@ -2279,7 +2889,7 @@
       "source_file": "backend/app/models/offer.py",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 54,
+      "community": 46,
       "norm_label": "offer",
       "id": "models_offer_offer"
     },
@@ -2319,7 +2929,7 @@
       "source_file": "backend/app/models/payment.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 50,
+      "community": 13,
       "norm_label": "payment.py",
       "id": "models_payment"
     },
@@ -2359,7 +2969,7 @@
       "source_file": "backend/app/models/redemption.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 50,
+      "community": 13,
       "norm_label": "redemption.py",
       "id": "models_redemption"
     },
@@ -2369,7 +2979,7 @@
       "source_file": "backend/app/models/redemption.py",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 50,
+      "community": 92,
       "norm_label": "redemption",
       "id": "models_redemption_redemption"
     },
@@ -2379,7 +2989,7 @@
       "source_file": "backend/app/models/request.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 94,
+      "community": 13,
       "norm_label": "request.py",
       "id": "models_request"
     },
@@ -2389,7 +2999,7 @@
       "source_file": "backend/app/models/request.py",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 94,
+      "community": 46,
       "norm_label": "benefitrequest",
       "id": "models_request_benefitrequest"
     },
@@ -2399,7 +3009,7 @@
       "source_file": "backend/app/models/saved_offer.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 13,
+      "community": 1,
       "norm_label": "saved_offer.py",
       "id": "models_saved_offer"
     },
@@ -2629,7 +3239,7 @@
       "source_file": "backend/app/schemas/offer.py",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 4,
+      "community": 92,
       "norm_label": "providerout",
       "id": "schemas_offer_providerout"
     },
@@ -2779,7 +3389,7 @@
       "source_file": "backend/app/schemas/user.py",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 4,
+      "community": 54,
       "norm_label": "tasteprofile",
       "id": "schemas_user_tasteprofile"
     },
@@ -2824,36 +3434,6 @@
       "id": "seed_init"
     },
     {
-      "label": "seed_demo.py",
-      "file_type": "code",
-      "source_file": "backend/app/seed/seed_demo.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 7,
-      "norm_label": "seed_demo.py",
-      "id": "seed_seed_demo"
-    },
-    {
-      "label": "seed()",
-      "file_type": "code",
-      "source_file": "backend/app/seed/seed_demo.py",
-      "source_location": "L31",
-      "_origin": "ast",
-      "community": 7,
-      "norm_label": "seed()",
-      "id": "seed_seed_demo_seed"
-    },
-    {
-      "label": "Run with: python -m app.seed.seed_demo Creates demo companies, users, providers",
-      "file_type": "rationale",
-      "source_file": "backend/app/seed/seed_demo.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 7,
-      "norm_label": "run with: python -m app.seed.seed_demo creates demo companies, users, providers",
-      "id": "seed_seed_demo_rationale_1"
-    },
-    {
       "label": "__init__.py",
       "file_type": "code",
       "source_file": "backend/app/services/__init__.py",
@@ -2869,7 +3449,7 @@
       "source_file": "backend/app/services/ai_service.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 54,
       "norm_label": "ai_service.py",
       "id": "services_ai_service"
     },
@@ -2879,7 +3459,7 @@
       "source_file": "backend/app/services/ai_service.py",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 10,
+      "community": 54,
       "norm_label": "_detect_categories()",
       "id": "services_ai_service_detect_categories"
     },
@@ -2889,7 +3469,7 @@
       "source_file": "backend/app/services/ai_service.py",
       "source_location": "L57",
       "_origin": "ast",
-      "community": 10,
+      "community": 54,
       "norm_label": "rule_based_concierge()",
       "id": "services_ai_service_rule_based_concierge"
     },
@@ -2959,7 +3539,7 @@
       "source_file": "backend/app/services/ai_service.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 54,
       "norm_label": "ai concierge service.  `concierge()` uses the openai tool-calling engine when op",
       "id": "services_ai_service_rationale_1"
     },
@@ -2979,7 +3559,7 @@
       "source_file": "backend/app/services/approval_service.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 50,
+      "community": 93,
       "norm_label": "approval_service.py",
       "id": "services_approval_service"
     },
@@ -2989,7 +3569,7 @@
       "source_file": "backend/app/services/approval_service.py",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 50,
+      "community": 93,
       "norm_label": "_generate_qr()",
       "id": "services_approval_service_generate_qr"
     },
@@ -2999,7 +3579,7 @@
       "source_file": "backend/app/services/approval_service.py",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 50,
+      "community": 93,
       "norm_label": "approve_request()",
       "id": "services_approval_service_approve_request"
     },
@@ -3009,7 +3589,7 @@
       "source_file": "backend/app/services/approval_service.py",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 50,
+      "community": 46,
       "norm_label": "session",
       "id": "backend_app_services_approval_service_py_session"
     },
@@ -3019,7 +3599,7 @@
       "source_file": "backend/app/services/approval_service.py",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 50,
+      "community": 46,
       "norm_label": "benefitrequest",
       "id": "backend_app_services_approval_service_py_benefitrequest"
     },
@@ -3029,7 +3609,7 @@
       "source_file": "backend/app/services/approval_service.py",
       "source_location": "L102",
       "_origin": "ast",
-      "community": 50,
+      "community": 46,
       "norm_label": "reject_request()",
       "id": "services_approval_service_reject_request"
     },
@@ -3039,7 +3619,7 @@
       "source_file": "backend/app/services/approval_service.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 50,
+      "community": 93,
       "norm_label": "handles the employer approval flow:   1. mark request as approved   2. deduct em",
       "id": "services_approval_service_rationale_1"
     },
@@ -3189,7 +3769,7 @@
       "source_file": "backend/app/services/insights_service.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 46,
       "norm_label": "insights_service.py",
       "id": "services_insights_service"
     },
@@ -3199,7 +3779,7 @@
       "source_file": "backend/app/services/insights_service.py",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 10,
+      "community": 46,
       "norm_label": "_category_spend()",
       "id": "services_insights_service_category_spend"
     },
@@ -3219,7 +3799,7 @@
       "source_file": "backend/app/services/insights_service.py",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 94,
+      "community": 46,
       "norm_label": "benefitrequest",
       "id": "backend_app_services_insights_service_py_benefitrequest"
     },
@@ -3229,7 +3809,7 @@
       "source_file": "backend/app/services/insights_service.py",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 10,
+      "community": 46,
       "norm_label": "_build_insight()",
       "id": "services_insights_service_build_insight"
     },
@@ -3239,7 +3819,7 @@
       "source_file": "backend/app/services/insights_service.py",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 10,
+      "community": 46,
       "norm_label": "employer_insights()",
       "id": "services_insights_service_employer_insights"
     },
@@ -3259,7 +3839,7 @@
       "source_file": "backend/app/services/insights_service.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 46,
       "norm_label": "real employer analytics \u2014 aggregates a company's benefit activity.",
       "id": "services_insights_service_rationale_1"
     },
@@ -3269,7 +3849,7 @@
       "source_file": "backend/app/services/llm_concierge.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "llm_concierge.py",
       "id": "services_llm_concierge"
     },
@@ -3279,7 +3859,7 @@
       "source_file": "backend/app/services/llm_concierge.py",
       "source_location": "L90",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "_conciergetools",
       "id": "services_llm_concierge_conciergetools"
     },
@@ -3319,7 +3899,7 @@
       "source_file": "backend/app/services/llm_concierge.py",
       "source_location": "L103",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": ".search_offers()",
       "id": "services_llm_concierge_conciergetools_search_offers"
     },
@@ -3329,7 +3909,7 @@
       "source_file": "backend/app/services/llm_concierge.py",
       "source_location": "L116",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": ".get_wallet_balance()",
       "id": "services_llm_concierge_conciergetools_get_wallet_balance"
     },
@@ -3339,7 +3919,7 @@
       "source_file": "backend/app/services/llm_concierge.py",
       "source_location": "L127",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": ".get_recommendations()",
       "id": "services_llm_concierge_conciergetools_get_recommendations"
     },
@@ -3349,7 +3929,7 @@
       "source_file": "backend/app/services/llm_concierge.py",
       "source_location": "L133",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": ".build_package()",
       "id": "services_llm_concierge_conciergetools_build_package"
     },
@@ -3359,7 +3939,7 @@
       "source_file": "backend/app/services/llm_concierge.py",
       "source_location": "L149",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "._offer_dict()",
       "id": "services_llm_concierge_conciergetools_offer_dict"
     },
@@ -3379,7 +3959,7 @@
       "source_file": "backend/app/services/llm_concierge.py",
       "source_location": "L158",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": ".dispatch()",
       "id": "services_llm_concierge_conciergetools_dispatch"
     },
@@ -3409,7 +3989,7 @@
       "source_file": "backend/app/services/llm_concierge.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "openai-powered benefits concierge with tool calling.  the llm is given a set of",
       "id": "services_llm_concierge_rationale_1"
     },
@@ -3419,7 +3999,7 @@
       "source_file": "backend/app/services/llm_concierge.py",
       "source_location": "L91",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "executes tool calls against the db, scoped to one employee.",
       "id": "services_llm_concierge_rationale_91"
     },
@@ -3509,7 +4089,7 @@
       "source_file": "backend/app/services/recommendation_service.py",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 54,
+      "community": 1,
       "norm_label": "session",
       "id": "backend_app_services_recommendation_service_py_session"
     },
@@ -3519,7 +4099,7 @@
       "source_file": "backend/app/services/recommendation_service.py",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 54,
+      "community": 1,
       "norm_label": "offer",
       "id": "backend_app_services_recommendation_service_py_offer"
     },
@@ -3699,7 +4279,7 @@
       "source_file": "backend/tests/test_ai.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 54,
       "norm_label": "test_ai.py",
       "id": "tests_test_ai"
     },
@@ -3709,7 +4289,7 @@
       "source_file": "backend/tests/test_ai.py",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 10,
+      "community": 54,
       "norm_label": "test_concierge_relax_suggests_wellness_and_food()",
       "id": "tests_test_ai_test_concierge_relax_suggests_wellness_and_food"
     },
@@ -3719,7 +4299,7 @@
       "source_file": "backend/tests/test_ai.py",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 10,
+      "community": 54,
       "norm_label": "test_concierge_weekend_suggests_travel()",
       "id": "tests_test_ai_test_concierge_weekend_suggests_travel"
     },
@@ -3729,7 +4309,7 @@
       "source_file": "backend/tests/test_ai.py",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 10,
+      "community": 54,
       "norm_label": "test_concierge_learning_suggests_learning()",
       "id": "tests_test_ai_test_concierge_learning_suggests_learning"
     },
@@ -3739,7 +4319,7 @@
       "source_file": "backend/tests/test_ai.py",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 10,
+      "community": 54,
       "norm_label": "test_concierge_endpoint()",
       "id": "tests_test_ai_test_concierge_endpoint"
     },
@@ -3749,7 +4329,7 @@
       "source_file": "backend/tests/test_ai.py",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 10,
+      "community": 54,
       "norm_label": "test_recommendations_endpoint()",
       "id": "tests_test_ai_test_recommendations_endpoint"
     },
@@ -4049,7 +4629,7 @@
       "source_file": "backend/tests/test_llm_concierge.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "test_llm_concierge.py",
       "id": "tests_test_llm_concierge"
     },
@@ -4059,7 +4639,7 @@
       "source_file": "backend/tests/test_llm_concierge.py",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "test_tool_search_offers()",
       "id": "tests_test_llm_concierge_test_tool_search_offers"
     },
@@ -4069,7 +4649,7 @@
       "source_file": "backend/tests/test_llm_concierge.py",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "test_tool_search_offers_respects_max_price()",
       "id": "tests_test_llm_concierge_test_tool_search_offers_respects_max_price"
     },
@@ -4079,7 +4659,7 @@
       "source_file": "backend/tests/test_llm_concierge.py",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "test_tool_wallet_balance()",
       "id": "tests_test_llm_concierge_test_tool_wallet_balance"
     },
@@ -4089,7 +4669,7 @@
       "source_file": "backend/tests/test_llm_concierge.py",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "test_tool_build_package_totals_offers()",
       "id": "tests_test_llm_concierge_test_tool_build_package_totals_offers"
     },
@@ -4099,7 +4679,7 @@
       "source_file": "backend/tests/test_llm_concierge.py",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "test_concierge_uses_llm_when_key_set()",
       "id": "tests_test_llm_concierge_test_concierge_uses_llm_when_key_set"
     },
@@ -4109,7 +4689,7 @@
       "source_file": "backend/tests/test_llm_concierge.py",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "test_concierge_falls_back_when_llm_errors()",
       "id": "tests_test_llm_concierge_test_concierge_falls_back_when_llm_errors"
     },
@@ -4119,7 +4699,7 @@
       "source_file": "backend/tests/test_llm_concierge.py",
       "source_location": "L64",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "test_concierge_rule_based_without_key()",
       "id": "tests_test_llm_concierge_test_concierge_rule_based_without_key"
     },
@@ -4129,7 +4709,7 @@
       "source_file": "backend/tests/test_llm_concierge.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 54,
       "norm_label": "tests for the openai concierge tool layer and the llm/rule-based orchestration.",
       "id": "tests_test_llm_concierge_rationale_1"
     },
@@ -4979,7 +5559,7 @@
       "source_file": "mobile/components/AIRecommendationCard.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 97,
+      "community": 39,
       "norm_label": "airecommendationcard.tsx",
       "id": "components_airecommendationcard"
     },
@@ -4989,7 +5569,7 @@
       "source_file": "mobile/components/AIRecommendationCard.tsx",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 97,
+      "community": 39,
       "norm_label": "props",
       "id": "components_airecommendationcard_props"
     },
@@ -4999,7 +5579,7 @@
       "source_file": "mobile/components/AIRecommendationCard.tsx",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 97,
+      "community": 39,
       "norm_label": "airecommendationcard()",
       "id": "components_airecommendationcard_airecommendationcard"
     },
@@ -5009,7 +5589,7 @@
       "source_file": "mobile/components/AIRecommendationCard.tsx",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 97,
+      "community": 39,
       "norm_label": "styles",
       "id": "components_airecommendationcard_styles"
     },
@@ -5099,7 +5679,7 @@
       "source_file": "mobile/components/EmptyState.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 52,
+      "community": 20,
       "norm_label": "emptystate.tsx",
       "id": "components_emptystate"
     },
@@ -5109,7 +5689,7 @@
       "source_file": "mobile/components/EmptyState.tsx",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 52,
+      "community": 20,
       "norm_label": "props",
       "id": "components_emptystate_props"
     },
@@ -5119,7 +5699,7 @@
       "source_file": "mobile/components/EmptyState.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 52,
+      "community": 20,
       "norm_label": "emptystate()",
       "id": "components_emptystate_emptystate"
     },
@@ -5129,7 +5709,7 @@
       "source_file": "mobile/components/EmptyState.tsx",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 52,
+      "community": 20,
       "norm_label": "styles",
       "id": "components_emptystate_styles"
     },
@@ -6039,7 +6619,7 @@
       "source_file": "mobile/types/index.ts",
       "source_location": "L141",
       "_origin": "ast",
-      "community": 8,
+      "community": 11,
       "norm_label": "aiconciergeresponse",
       "id": "types_index_aiconciergeresponse"
     },
@@ -6049,7 +6629,7 @@
       "source_file": "mobile/types/index.ts",
       "source_location": "L147",
       "_origin": "ast",
-      "community": 97,
+      "community": 39,
       "norm_label": "recommendedoffer",
       "id": "types_index_recommendedoffer"
     },
@@ -9508,12 +10088,2167 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "backend/alembic/versions/a1b2c3d4e5f6_add_gamification_features.py",
+      "source_location": "L106",
+      "weight": 1.0,
+      "source": "versions_a1b2c3d4e5f6_add_gamification_features",
+      "target": "versions_a1b2c3d4e5f6_add_gamification_features_downgrade",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/alembic/versions/a1b2c3d4e5f6_add_gamification_features.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "versions_a1b2c3d4e5f6_add_gamification_features",
+      "target": "versions_a1b2c3d4e5f6_add_gamification_features_upgrade",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai",
+      "target": "routes_ai_concierge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai",
+      "target": "routes_ai_employer_insights_route"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "routes_ai",
+      "target": "routes_ai_filter_offers_ai",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai",
+      "target": "routes_ai_generate_package"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai",
+      "target": "routes_ai_my_recommendations"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai_concierge",
+      "target": "backend_app_api_v1_routes_ai_py_session"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai_concierge",
+      "target": "conciergerequest"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "routes_ai_concierge",
+      "target": "services_ai_service_rule_based_concierge"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "backend_app_api_v1_routes_ai_py_session",
+      "target": "conciergerequest"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "conciergerequest",
+      "target": "conciergerequest",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "conciergerequest",
+      "target": "employerinsightrequest"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "conciergerequest",
+      "target": "generatepackagerequest"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L6",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "conciergerequest",
+      "target": "models_employee_profile_employeeprofile"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "backend_app_api_v1_routes_ai_py_session",
+      "target": "employerinsightrequest"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "backend_app_api_v1_routes_ai_py_session",
+      "target": "generatepackagerequest"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L6",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "backend_app_api_v1_routes_ai_py_session",
+      "target": "models_employee_profile_employeeprofile"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai_employer_insights_route",
+      "target": "backend_app_api_v1_routes_ai_py_session"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "routes_ai_filter_offers_ai",
+      "target": "backend_app_api_v1_routes_ai_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai_generate_package",
+      "target": "backend_app_api_v1_routes_ai_py_session"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai_my_recommendations",
+      "target": "backend_app_api_v1_routes_ai_py_session"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai_generate_package",
+      "target": "generatepackagerequest"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "routes_ai_generate_package",
+      "target": "services_ai_service_rule_based_concierge"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "employerinsightrequest",
+      "target": "generatepackagerequest"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "generatepackagerequest",
+      "target": "generatepackagerequest",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L6",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "generatepackagerequest",
+      "target": "models_employee_profile_employeeprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "routes_ai_my_recommendations",
+      "target": "services_ai_service_get_recommendations"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_ai_employer_insights_route",
+      "target": "employerinsightrequest"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "routes_ai_employer_insights_route",
+      "target": "services_insights_service_employer_insights"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "employerinsightrequest",
+      "target": "employerinsightrequest",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L6",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "employerinsightrequest",
+      "target": "models_employee_profile_employeeprofile"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/ai.py",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "routes_ai_rationale_66",
+      "target": "routes_ai_filter_offers_ai",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "routes_collaborations",
+      "target": "routes_collaborations_collabin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "routes_collaborations",
+      "target": "routes_collaborations_collabitemin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "routes_collaborations",
+      "target": "routes_collaborations_collabitemout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "routes_collaborations",
+      "target": "routes_collaborations_collabout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "routes_collaborations",
+      "target": "routes_collaborations_create_collaboration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "source": "routes_collaborations",
+      "target": "routes_collaborations_get_collaboration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "routes_collaborations",
+      "target": "routes_collaborations_list_collaborations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "routes_collaborations_collabitemin",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "routes_collaborations_collabitemin",
+      "target": "models_collaboration_collaborationitem",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "routes_collaborations_collabitemin",
+      "target": "models_collaboration_providercollaboration",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "routes_collaborations_collabin",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "routes_collaborations_collabitemout",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "routes_collaborations_collabout",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "routes_deals_dailydealin",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "routes_deals_dailydealout",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/interactions.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_interactions_interactioncreate",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/interactions.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_interactions_searchquery",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "routes_onboarding_interestout",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "routes_onboarding_interestsin",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "routes_shake_shakeresultout",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "routes_shake_shakestatusout",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "routes_swipe_swipein",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/ai.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_ai_categoryspend",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/ai.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_ai_conciergerequest",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/ai.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_ai_conciergeresponse",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/ai.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_ai_employerinsightrequest",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/ai.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_ai_employerinsightresponse",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/ai.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_ai_generatepackagerequest",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/ai.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_ai_recommendationsresponse",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/ai.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_ai_recommendedoffer",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/auth.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_auth_loginrequest",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/auth.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_auth_registerrequest",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/auth.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_auth_tokenresponse",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/notification.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_notification_notificationout",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/offer.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_offer_offercreate",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/offer.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_offer_offerlistresponse",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/offer.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_offer_offerout",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/offer.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_offer_offerupdate",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/offer.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_offer_providerout",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/package.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_package_packagecreate",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/package.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_package_packageitemout",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/package.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_package_packageout",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/request.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_request_approvalaction",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/request.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_request_benefitrequestcreate",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/request.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_request_benefitrequestout",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/user.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_user_interestsupdate",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/user.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_user_tasteprofile",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/user.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_user_userout",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/user.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_user_userupdate",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/wallet.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_wallet_wallethistoryitem",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/schemas/wallet.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "schemas_wallet_walletout",
+      "target": "basemodel"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "routes_collaborations_collabin",
+      "target": "models_collaboration_collaborationitem",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "routes_collaborations_collabin",
+      "target": "models_collaboration_providercollaboration",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "routes_collaborations_create_collaboration",
+      "target": "routes_collaborations_collabin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "routes_collaborations_collabitemout",
+      "target": "models_collaboration_collaborationitem",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "routes_collaborations_collabitemout",
+      "target": "models_collaboration_providercollaboration",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "routes_collaborations_collabout",
+      "target": "models_collaboration_collaborationitem",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "routes_collaborations_collabout",
+      "target": "models_collaboration_providercollaboration",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "routes_collaborations_list_collaborations",
+      "target": "backend_app_api_v1_routes_collaborations_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "routes_collaborations_list_collaborations",
+      "target": "backend_app_api_v1_routes_collaborations_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "backend_app_api_v1_routes_collaborations_py_user",
+      "target": "models_collaboration_collaborationitem",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "backend_app_api_v1_routes_collaborations_py_user",
+      "target": "models_collaboration_providercollaboration",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "routes_collaborations_create_collaboration",
+      "target": "backend_app_api_v1_routes_collaborations_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "source": "routes_collaborations_get_collaboration",
+      "target": "backend_app_api_v1_routes_collaborations_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "backend_app_api_v1_routes_collaborations_py_session",
+      "target": "models_collaboration_collaborationitem",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "source": "backend_app_api_v1_routes_collaborations_py_session",
+      "target": "models_collaboration_providercollaboration",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "routes_collaborations_create_collaboration",
+      "target": "backend_app_api_v1_routes_collaborations_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "source": "routes_collaborations_get_collaboration",
+      "target": "backend_app_api_v1_routes_collaborations_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "source": "routes_collaborations_create_collaboration",
+      "target": "models_collaboration_collaborationitem"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/api/v1/routes/collaborations.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "routes_collaborations_create_collaboration",
+      "target": "models_collaboration_providercollaboration"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "routes_deals",
+      "target": "datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "routes_deals",
+      "target": "routes_deals_create_daily_deal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "routes_deals",
+      "target": "routes_deals_dailydealin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "routes_deals",
+      "target": "routes_deals_dailydealout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "routes_deals",
+      "target": "routes_deals_get_today_deal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "routes_deals_dailydealout",
+      "target": "models_daily_deal_dailydeal",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "routes_deals_create_daily_deal",
+      "target": "routes_deals_dailydealin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "routes_deals_dailydealin",
+      "target": "models_daily_deal_dailydeal",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "routes_deals_get_today_deal",
+      "target": "backend_app_api_v1_routes_deals_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "routes_deals_get_today_deal",
+      "target": "backend_app_api_v1_routes_deals_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "backend_app_api_v1_routes_deals_py_user",
+      "target": "models_daily_deal_dailydeal",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "routes_deals_create_daily_deal",
+      "target": "backend_app_api_v1_routes_deals_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "backend_app_api_v1_routes_deals_py_session",
+      "target": "models_daily_deal_dailydeal",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "routes_deals_create_daily_deal",
+      "target": "backend_app_api_v1_routes_deals_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/api/v1/routes/deals.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "routes_deals_create_daily_deal",
+      "target": "models_daily_deal_dailydeal"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "routes_onboarding",
+      "target": "routes_onboarding_get_interests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "routes_onboarding",
+      "target": "routes_onboarding_interestout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "routes_onboarding",
+      "target": "routes_onboarding_interestsin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "routes_onboarding",
+      "target": "routes_onboarding_save_interests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "source": "routes_onboarding_interestsin",
+      "target": "models_user_interest_userinterest",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "routes_onboarding_save_interests",
+      "target": "routes_onboarding_interestsin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "source": "routes_onboarding_interestout",
+      "target": "models_user_interest_userinterest",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "routes_onboarding_save_interests",
+      "target": "backend_app_api_v1_routes_onboarding_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "routes_onboarding_save_interests",
+      "target": "backend_app_api_v1_routes_onboarding_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "routes_onboarding_save_interests",
+      "target": "models_user_interest_userinterest"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "source": "backend_app_api_v1_routes_onboarding_py_user",
+      "target": "models_user_interest_userinterest",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "routes_onboarding_get_interests",
+      "target": "backend_app_api_v1_routes_onboarding_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "source": "backend_app_api_v1_routes_onboarding_py_session",
+      "target": "models_user_interest_userinterest",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/onboarding.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "routes_onboarding_get_interests",
+      "target": "backend_app_api_v1_routes_onboarding_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "routes_shake",
+      "target": "datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "routes_shake",
+      "target": "routes_shake_get_or_create_credits",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "routes_shake",
+      "target": "routes_shake_pick_prize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "routes_shake",
+      "target": "routes_shake_play_shake",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "routes_shake",
+      "target": "routes_shake_shake_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "routes_shake",
+      "target": "routes_shake_shakeresultout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "routes_shake",
+      "target": "routes_shake_shakestatusout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L94",
+      "weight": 1.0,
+      "source": "routes_shake_play_shake",
+      "target": "routes_shake_pick_prize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "routes_shake_get_or_create_credits",
+      "target": "backend_app_api_v1_routes_shake_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "routes_shake_get_or_create_credits",
+      "target": "shakecredit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "routes_shake_play_shake",
+      "target": "routes_shake_get_or_create_credits",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "routes_shake_shake_status",
+      "target": "routes_shake_get_or_create_credits",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "backend_app_api_v1_routes_shake_py_session",
+      "target": "shakecredit",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "routes_shake_play_shake",
+      "target": "backend_app_api_v1_routes_shake_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "routes_shake_shake_status",
+      "target": "backend_app_api_v1_routes_shake_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "backend_app_api_v1_routes_shake_py_user",
+      "target": "shakecredit",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "routes_shake_shakeresultout",
+      "target": "shakecredit",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "routes_shake_shakestatusout",
+      "target": "shakecredit",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "shakecredit",
+      "target": "shakecredit",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "routes_shake_shake_status",
+      "target": "routes_shake_shakestatusout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L111",
+      "weight": 1.0,
+      "source": "routes_shake_play_shake",
+      "target": "routes_shake_shakeresultout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "routes_shake_shake_status",
+      "target": "backend_app_api_v1_routes_shake_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "routes_shake_play_shake",
+      "target": "backend_app_api_v1_routes_shake_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/api/v1/routes/shake.py",
+      "source_location": "L98",
+      "weight": 1.0,
+      "source": "routes_shake_play_shake",
+      "target": "models_shake_shakeattempt"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "routes_swipe",
+      "target": "routes_swipe_get_swipe_deck",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "routes_swipe",
+      "target": "routes_swipe_swipe_offer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "routes_swipe",
+      "target": "routes_swipe_swipein",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "routes_swipe_swipe_offer",
+      "target": "routes_swipe_swipein",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "routes_swipe_swipe_offer",
+      "target": "backend_app_api_v1_routes_swipe_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "routes_swipe_swipe_offer",
+      "target": "backend_app_api_v1_routes_swipe_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "routes_swipe_swipe_offer",
+      "target": "models_swipe_swipeinteraction"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "routes_swipe_get_swipe_deck",
+      "target": "backend_app_api_v1_routes_swipe_py_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "routes_swipe_get_swipe_deck",
+      "target": "backend_app_api_v1_routes_swipe_py_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api/v1/routes/swipe.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "routes_swipe_rationale_47",
+      "target": "routes_swipe_get_swipe_deck",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/collaboration.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "models_collaboration",
+      "target": "datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/collaboration.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "models_collaboration",
+      "target": "models_collaboration_collaborationitem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/collaboration.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_collaboration",
+      "target": "models_collaboration_providercollaboration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/collaboration.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_collaboration_providercollaboration",
+      "target": "base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L275",
+      "weight": 1.0,
+      "source": "seed_seed_demo_seed",
+      "target": "models_collaboration_providercollaboration"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/challenge.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_challenge_challenge",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/challenge.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_challenge_challengeprogress",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/collaboration.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "models_collaboration_collaborationitem",
+      "target": "base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/company.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_company_company",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/daily_deal.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_daily_deal_dailydeal",
+      "target": "base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/employee_profile.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_employee_profile_employeeprofile",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/interaction.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_interaction_userinteraction",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/notification.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_notification_notification",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/offer.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_offer_offer",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/package.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_package_package",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/package.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_package_packageitem",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/payment.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_payment_payment",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/provider.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_provider_provider",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/redemption.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_redemption_redemption",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/request.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_request_benefitrequest",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/saved_offer.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_saved_offer_savedoffer",
+      "target": "base"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/shake.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "models_shake_shakeattempt",
+      "target": "base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/shake.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_shake_shakecredit",
+      "target": "base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/swipe.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_swipe_swipeinteraction",
+      "target": "base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/user_interest.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_user_interest_userinterest",
+      "target": "base",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/user.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_user_user",
+      "target": "base"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L285",
+      "weight": 1.0,
+      "source": "seed_seed_demo_seed",
+      "target": "models_collaboration_collaborationitem"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/daily_deal.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "models_daily_deal",
+      "target": "datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/daily_deal.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_daily_deal",
+      "target": "models_daily_deal_dailydeal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L261",
+      "weight": 1.0,
+      "source": "seed_seed_demo_seed",
+      "target": "models_daily_deal_dailydeal"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/shake.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "models_shake",
+      "target": "datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/shake.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "models_shake",
+      "target": "models_shake_shakeattempt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/shake.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_shake",
+      "target": "models_shake_shakecredit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/swipe.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "models_swipe",
+      "target": "datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/swipe.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_swipe",
+      "target": "models_swipe_swipeinteraction",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/user_interest.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "models_user_interest",
+      "target": "datetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models/user_interest.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_user_interest",
+      "target": "models_user_interest_userinterest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L257",
+      "weight": 1.0,
+      "source": "seed_seed_demo_seed",
+      "target": "models_user_interest_userinterest"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "seed_seed_demo",
+      "target": "datetime"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "seed_seed_demo",
+      "target": "seed_seed_demo_seed"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "seed_seed_demo_rationale_1",
+      "target": "seed_seed_demo"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L192",
+      "weight": 1.0,
+      "source": "seed_seed_demo_seed",
+      "target": "core_security_hash_password"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/seed/seed_demo.py",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "seed_seed_demo_seed",
+      "target": "timedelta"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_onboarding",
-      "target": "auth_onboarding_all_interests",
-      "confidence_score": 1.0
+      "target": "auth_onboarding_all_interests"
     },
     {
       "relation": "contains",
@@ -9521,9 +12256,9 @@
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_onboarding",
-      "target": "auth_onboarding_icons",
-      "confidence_score": 1.0
+      "target": "auth_onboarding_icons"
     },
     {
       "relation": "contains",
@@ -9531,9 +12266,9 @@
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_onboarding",
-      "target": "auth_onboarding_onboardingscreen",
-      "confidence_score": 1.0
+      "target": "auth_onboarding_onboardingscreen"
     },
     {
       "relation": "contains",
@@ -9541,9 +12276,9 @@
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L91",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_onboarding",
-      "target": "auth_onboarding_styles",
-      "confidence_score": 1.0
+      "target": "auth_onboarding_styles"
     },
     {
       "relation": "imports_from",
@@ -9552,9 +12287,9 @@
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_onboarding",
-      "target": "lib_api",
-      "confidence_score": 1.0
+      "target": "lib_api"
     },
     {
       "relation": "imports",
@@ -9563,9 +12298,9 @@
       "source_file": "mobile/app/(auth)/onboarding.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_onboarding",
-      "target": "lib_api_onboardingapi",
-      "confidence_score": 1.0
+      "target": "lib_api_onboardingapi"
     },
     {
       "relation": "contains",
@@ -9638,9 +12373,9 @@
       "source_file": "mobile/app/(auth)/register.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_register",
-      "target": "lib_api",
-      "confidence_score": 1.0
+      "target": "lib_api"
     },
     {
       "relation": "imports",
@@ -9649,9 +12384,9 @@
       "source_file": "mobile/app/(auth)/register.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_register",
-      "target": "lib_api_authapi",
-      "confidence_score": 1.0
+      "target": "lib_api_authapi"
     },
     {
       "relation": "contains",
@@ -9670,9 +12405,9 @@
       "source_file": "mobile/app/(tabs)/ai.tsx",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_ai",
-      "target": "components_offercard_offercard",
-      "confidence_score": 1.0
+      "target": "components_offercard_offercard"
     },
     {
       "relation": "imports_from",
@@ -9681,9 +12416,9 @@
       "source_file": "mobile/app/(tabs)/ai.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_ai",
-      "target": "lib_api",
-      "confidence_score": 1.0
+      "target": "lib_api"
     },
     {
       "relation": "imports",
@@ -9692,9 +12427,9 @@
       "source_file": "mobile/app/(tabs)/ai.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_ai",
-      "target": "lib_api_aiapi",
-      "confidence_score": 1.0
+      "target": "lib_api_aiapi"
     },
     {
       "relation": "imports",
@@ -9703,9 +12438,9 @@
       "source_file": "mobile/app/(tabs)/ai.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_ai",
-      "target": "lib_api_aifilterapi",
-      "confidence_score": 1.0
+      "target": "lib_api_aifilterapi"
     },
     {
       "relation": "contains",
@@ -9733,9 +12468,9 @@
       "source_file": "mobile/app/(tabs)/ai.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_ai",
-      "target": "tabs_ai_mode",
-      "confidence_score": 1.0
+      "target": "tabs_ai_mode"
     },
     {
       "relation": "contains",
@@ -9886,9 +12621,9 @@
       "source_file": "mobile/app/(tabs)/index.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_index",
-      "target": "lib_api",
-      "confidence_score": 1.0
+      "target": "lib_api"
     },
     {
       "relation": "imports",
@@ -9908,9 +12643,9 @@
       "source_file": "mobile/app/(tabs)/index.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_index",
-      "target": "lib_api_dealsapi",
-      "confidence_score": 1.0
+      "target": "lib_api_dealsapi"
     },
     {
       "relation": "imports",
@@ -9951,9 +12686,9 @@
       "source_file": "mobile/app/(tabs)/index.tsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_index",
-      "target": "tabs_index_category_colors",
-      "confidence_score": 1.0
+      "target": "tabs_index_category_colors"
     },
     {
       "relation": "contains",
@@ -10004,9 +12739,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_shake",
-      "target": "lib_api",
-      "confidence_score": 1.0
+      "target": "lib_api"
     },
     {
       "relation": "imports",
@@ -10015,9 +12750,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_shake",
-      "target": "lib_api_shakeapi",
-      "confidence_score": 1.0
+      "target": "lib_api_shakeapi"
     },
     {
       "relation": "contains",
@@ -10025,9 +12760,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_shake",
-      "target": "tabs_shake_prize_emoji",
-      "confidence_score": 1.0
+      "target": "tabs_shake_prize_emoji"
     },
     {
       "relation": "contains",
@@ -10035,9 +12770,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_shake",
-      "target": "tabs_shake_shakeresult",
-      "confidence_score": 1.0
+      "target": "tabs_shake_shakeresult"
     },
     {
       "relation": "contains",
@@ -10045,9 +12780,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_shake",
-      "target": "tabs_shake_shakescreen",
-      "confidence_score": 1.0
+      "target": "tabs_shake_shakescreen"
     },
     {
       "relation": "contains",
@@ -10055,9 +12790,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_shake",
-      "target": "tabs_shake_shakestatus",
-      "confidence_score": 1.0
+      "target": "tabs_shake_shakestatus"
     },
     {
       "relation": "contains",
@@ -10065,9 +12800,9 @@
       "source_file": "mobile/app/(tabs)/shake.tsx",
       "source_location": "L120",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_shake",
-      "target": "tabs_shake_styles",
-      "confidence_score": 1.0
+      "target": "tabs_shake_styles"
     },
     {
       "relation": "imports_from",
@@ -10076,9 +12811,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_swipe",
-      "target": "lib_api",
-      "confidence_score": 1.0
+      "target": "lib_api"
     },
     {
       "relation": "imports",
@@ -10087,9 +12822,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_swipe",
-      "target": "lib_api_swipeapi",
-      "confidence_score": 1.0
+      "target": "lib_api_swipeapi"
     },
     {
       "relation": "contains",
@@ -10097,9 +12832,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_swipe",
-      "target": "tabs_swipe_category_colors",
-      "confidence_score": 1.0
+      "target": "tabs_swipe_category_colors"
     },
     {
       "relation": "contains",
@@ -10107,9 +12842,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_swipe",
-      "target": "tabs_swipe_category_emoji",
-      "confidence_score": 1.0
+      "target": "tabs_swipe_category_emoji"
     },
     {
       "relation": "contains",
@@ -10117,9 +12852,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L163",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_swipe",
-      "target": "tabs_swipe_styles",
-      "confidence_score": 1.0
+      "target": "tabs_swipe_styles"
     },
     {
       "relation": "contains",
@@ -10127,9 +12862,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_swipe",
-      "target": "tabs_swipe_swipescreen",
-      "confidence_score": 1.0
+      "target": "tabs_swipe_swipescreen"
     },
     {
       "relation": "contains",
@@ -10137,9 +12872,9 @@
       "source_file": "mobile/app/(tabs)/swipe.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tabs_swipe",
-      "target": "tabs_swipe_width_screen_width",
-      "confidence_score": 1.0
+      "target": "tabs_swipe_width_screen_width"
     },
     {
       "relation": "contains",
@@ -10147,9 +12882,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_deal_of_day",
-      "target": "app_deal_of_day_category_colors",
-      "confidence_score": 1.0
+      "target": "app_deal_of_day_category_colors"
     },
     {
       "relation": "contains",
@@ -10157,9 +12892,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_deal_of_day",
-      "target": "app_deal_of_day_dealofdayscreen",
-      "confidence_score": 1.0
+      "target": "app_deal_of_day_dealofdayscreen"
     },
     {
       "relation": "contains",
@@ -10167,9 +12902,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L138",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_deal_of_day",
-      "target": "app_deal_of_day_styles",
-      "confidence_score": 1.0
+      "target": "app_deal_of_day_styles"
     },
     {
       "relation": "imports",
@@ -10178,9 +12913,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_deal_of_day",
-      "target": "components_loadingstate_loadingstate",
-      "confidence_score": 1.0
+      "target": "components_loadingstate_loadingstate"
     },
     {
       "relation": "imports",
@@ -10189,9 +12924,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_deal_of_day",
-      "target": "components_primarybutton_primarybutton",
-      "confidence_score": 1.0
+      "target": "components_primarybutton_primarybutton"
     },
     {
       "relation": "imports",
@@ -10200,9 +12935,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_deal_of_day",
-      "target": "components_screenheader_screenheader",
-      "confidence_score": 1.0
+      "target": "components_screenheader_screenheader"
     },
     {
       "relation": "imports_from",
@@ -10211,9 +12946,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_deal_of_day",
-      "target": "lib_api",
-      "confidence_score": 1.0
+      "target": "lib_api"
     },
     {
       "relation": "imports",
@@ -10222,9 +12957,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_deal_of_day",
-      "target": "lib_api_dealsapi",
-      "confidence_score": 1.0
+      "target": "lib_api_dealsapi"
     },
     {
       "relation": "imports",
@@ -10233,9 +12968,9 @@
       "source_file": "mobile/app/deal-of-day.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_deal_of_day",
-      "target": "lib_api_requestsapi",
-      "confidence_score": 1.0
+      "target": "lib_api_requestsapi"
     },
     {
       "relation": "imports_from",
@@ -10275,9 +13010,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L154",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_api",
-      "target": "lib_api_aifilterapi",
-      "confidence_score": 1.0
+      "target": "lib_api_aifilterapi"
     },
     {
       "relation": "contains",
@@ -10305,9 +13040,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L100",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_api",
-      "target": "lib_api_challengesapi",
-      "confidence_score": 1.0
+      "target": "lib_api_challengesapi"
     },
     {
       "relation": "contains",
@@ -10355,9 +13090,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L115",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_api",
-      "target": "lib_api_onboardingapi",
-      "confidence_score": 1.0
+      "target": "lib_api_onboardingapi"
     },
     {
       "relation": "contains",
@@ -10365,9 +13100,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_api",
-      "target": "lib_api_packagesapi",
-      "confidence_score": 1.0
+      "target": "lib_api_packagesapi"
     },
     {
       "relation": "contains",
@@ -10385,9 +13120,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_api",
-      "target": "lib_api_providersapi",
-      "confidence_score": 1.0
+      "target": "lib_api_providersapi"
     },
     {
       "relation": "contains",
@@ -10395,9 +13130,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L93",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_api",
-      "target": "lib_api_redemptionsapi",
-      "confidence_score": 1.0
+      "target": "lib_api_redemptionsapi"
     },
     {
       "relation": "contains",
@@ -10405,9 +13140,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_api",
-      "target": "lib_api_requestsapi",
-      "confidence_score": 1.0
+      "target": "lib_api_requestsapi"
     },
     {
       "relation": "contains",
@@ -10415,9 +13150,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L147",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_api",
-      "target": "lib_api_shakeapi",
-      "confidence_score": 1.0
+      "target": "lib_api_shakeapi"
     },
     {
       "relation": "contains",
@@ -10425,9 +13160,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L122",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_api",
-      "target": "lib_api_swipeapi",
-      "confidence_score": 1.0
+      "target": "lib_api_swipeapi"
     },
     {
       "relation": "contains",
@@ -10435,9 +13170,9 @@
       "source_file": "mobile/lib/api.ts",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_api",
-      "target": "lib_api_walletapi",
-      "confidence_score": 1.0
+      "target": "lib_api_walletapi"
     },
     {
       "relation": "imports",
@@ -11097,297 +13832,6 @@
       "confidence_score": 1.0,
       "source": "versions_6f287adc3385_add_saved_offers_table",
       "target": "versions_6f287adc3385_add_saved_offers_table_upgrade"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai",
-      "target": "routes_ai_concierge"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L49",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai",
-      "target": "routes_ai_employer_insights_route"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai",
-      "target": "routes_ai_generate_package"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L43",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai",
-      "target": "routes_ai_my_recommendations"
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai_concierge",
-      "target": "backend_app_api_v1_routes_ai_py_session"
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai_concierge",
-      "target": "conciergerequest"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L27",
-      "weight": 1.0,
-      "source": "routes_ai_concierge",
-      "target": "services_ai_service_rule_based_concierge"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L7",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "backend_app_api_v1_routes_ai_py_session",
-      "target": "conciergerequest"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L7",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "conciergerequest",
-      "target": "conciergerequest"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L7",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "conciergerequest",
-      "target": "employerinsightrequest"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L7",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "conciergerequest",
-      "target": "generatepackagerequest"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L6",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "conciergerequest",
-      "target": "models_employee_profile_employeeprofile"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L7",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "backend_app_api_v1_routes_ai_py_session",
-      "target": "employerinsightrequest"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L7",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "backend_app_api_v1_routes_ai_py_session",
-      "target": "generatepackagerequest"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L6",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "backend_app_api_v1_routes_ai_py_session",
-      "target": "models_employee_profile_employeeprofile"
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L49",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai_employer_insights_route",
-      "target": "backend_app_api_v1_routes_ai_py_session"
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai_generate_package",
-      "target": "backend_app_api_v1_routes_ai_py_session"
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L43",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai_my_recommendations",
-      "target": "backend_app_api_v1_routes_ai_py_session"
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai_generate_package",
-      "target": "generatepackagerequest"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L39",
-      "weight": 1.0,
-      "source": "routes_ai_generate_package",
-      "target": "services_ai_service_rule_based_concierge"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L7",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "employerinsightrequest",
-      "target": "generatepackagerequest"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L7",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "generatepackagerequest",
-      "target": "generatepackagerequest"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L6",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "generatepackagerequest",
-      "target": "models_employee_profile_employeeprofile"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L44",
-      "weight": 1.0,
-      "source": "routes_ai_my_recommendations",
-      "target": "services_ai_service_get_recommendations"
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L49",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_ai_employer_insights_route",
-      "target": "employerinsightrequest"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L55",
-      "weight": 1.0,
-      "source": "routes_ai_employer_insights_route",
-      "target": "services_insights_service_employer_insights"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L7",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "employerinsightrequest",
-      "target": "employerinsightrequest"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "backend/app/api/v1/routes/ai.py",
-      "source_location": "L6",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "employerinsightrequest",
-      "target": "models_employee_profile_employeeprofile"
     },
     {
       "relation": "contains",
@@ -12136,16 +14580,6 @@
       "target": "routes_interactions_searchquery"
     },
     {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/interactions.py",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_interactions_interactioncreate",
-      "target": "basemodel"
-    },
-    {
       "relation": "uses",
       "confidence": "INFERRED",
       "source_file": "backend/app/api/v1/routes/interactions.py",
@@ -12165,306 +14599,6 @@
       "confidence_score": 1.0,
       "source": "routes_interactions_log_interaction",
       "target": "routes_interactions_interactioncreate"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/api/v1/routes/interactions.py",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_interactions_searchquery",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/ai.py",
-      "source_location": "L39",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_ai_categoryspend",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/ai.py",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_ai_conciergerequest",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/ai.py",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_ai_conciergeresponse",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/ai.py",
-      "source_location": "L34",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_ai_employerinsightrequest",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/ai.py",
-      "source_location": "L38",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_ai_employerinsightresponse",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/ai.py",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_ai_generatepackagerequest",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/ai.py",
-      "source_location": "L30",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_ai_recommendationsresponse",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/ai.py",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_ai_recommendedoffer",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/auth.py",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_auth_loginrequest",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/auth.py",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_auth_registerrequest",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/auth.py",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_auth_tokenresponse",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/notification.py",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_notification_notificationout",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/offer.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_offer_offercreate",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/offer.py",
-      "source_location": "L41",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_offer_offerlistresponse",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/offer.py",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_offer_offerout",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/offer.py",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_offer_offerupdate",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/offer.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_offer_providerout",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/package.py",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_package_packagecreate",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/package.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_package_packageitemout",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/package.py",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_package_packageout",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/request.py",
-      "source_location": "L32",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_request_approvalaction",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/request.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_request_benefitrequestcreate",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/request.py",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_request_benefitrequestout",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/user.py",
-      "source_location": "L26",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_user_interestsupdate",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/user.py",
-      "source_location": "L30",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_user_tasteprofile",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/user.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_user_userout",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/user.py",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_user_userupdate",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/wallet.py",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_wallet_wallethistoryitem",
-      "target": "basemodel"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/schemas/wallet.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "schemas_wallet_walletout",
-      "target": "basemodel"
     },
     {
       "relation": "references",
@@ -14363,17 +16497,6 @@
       "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "backend/app/seed/seed_demo.py",
-      "source_location": "L192",
-      "weight": 1.0,
-      "source": "seed_seed_demo_seed",
-      "target": "core_security_hash_password"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
       "source_file": "backend/app/services/auth_service.py",
       "source_location": "L18",
       "weight": 1.0,
@@ -14445,17 +16568,6 @@
       "weight": 1.0,
       "source": "services_auth_service_login_user",
       "target": "core_security_create_access_token"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "backend/app/seed/seed_demo.py",
-      "source_location": "L139",
-      "weight": 1.0,
-      "source": "seed_seed_demo_seed",
-      "target": "timedelta"
     },
     {
       "relation": "calls",
@@ -14570,156 +16682,6 @@
       "confidence_score": 0.5,
       "source": "datetime",
       "target": "models_challenge_challenge"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/challenge.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_challenge_challenge",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/challenge.py",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_challenge_challengeprogress",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/company.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_company_company",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/employee_profile.py",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_employee_profile_employeeprofile",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/interaction.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_interaction_userinteraction",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/notification.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_notification_notification",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/offer.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_offer_offer",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/package.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_package_package",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/package.py",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_package_packageitem",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/payment.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_payment_payment",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/provider.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_provider_provider",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/redemption.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_redemption_redemption",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/request.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_request_benefitrequest",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/saved_offer.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_saved_offer_savedoffer",
-      "target": "base"
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/models/user.py",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "models_user_user",
-      "target": "base"
     },
     {
       "relation": "uses",
@@ -16159,37 +18121,6 @@
       "confidence_score": 1.0,
       "source": "schemas_wallet",
       "target": "schemas_wallet_walletout"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/seed/seed_demo.py",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "seed_seed_demo",
-      "target": "datetime"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/seed/seed_demo.py",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "seed_seed_demo",
-      "target": "seed_seed_demo_seed"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/seed/seed_demo.py",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "seed_seed_demo_rationale_1",
-      "target": "seed_seed_demo"
     },
     {
       "relation": "contains",
@@ -23784,5 +25715,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4c5cd32ee4ba87b54b0fad97b26d3d0a12e8dbd0"
+  "built_at_commit": "1862fe46c6e3f9c69446806d7cf3540eaf02f2b8"
 }

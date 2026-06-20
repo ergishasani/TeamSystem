@@ -1,43 +1,52 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Eye, EyeOff } from 'lucide-react-native';
 import type { Wallet } from '@/types';
+import { colors, fonts, radius, spacing } from '@/lib/theme';
 
 interface Props {
   wallet: Wallet;
+  onRequestPerk?: () => void;
 }
 
-export function WalletCard({ wallet }: Props) {
-  const percent = wallet.monthly_budget > 0
-    ? Math.round((wallet.remaining_amount / wallet.monthly_budget) * 100)
-    : 0;
+export function WalletCard({ wallet, onRequestPerk }: Props) {
+  const [hidden, setHidden] = useState(false);
+
+  const balance = wallet.remaining_amount.toLocaleString();
+  const used = wallet.used_amount.toLocaleString();
+  const budget = wallet.monthly_budget.toLocaleString();
 
   return (
     <View style={styles.card}>
+      {/* Top: label + eye toggle */}
       <View style={styles.topRow}>
-        <View>
-          <Text style={styles.label}>Available Balance</Text>
-          <Text style={styles.balance}>{wallet.remaining_amount.toLocaleString()}</Text>
-          <Text style={styles.currency}>{wallet.currency} / month</Text>
-        </View>
-        <View style={styles.xpBox}>
-          <Text style={styles.xpLevel}>Lv.{wallet.level}</Text>
-          <Text style={styles.xpVal}>{wallet.xp} XP</Text>
-          {wallet.streak_count > 0 && <Text style={styles.streak}>🔥 {wallet.streak_count}</Text>}
-        </View>
+        <Text style={styles.label}>Your balance</Text>
+        <TouchableOpacity style={styles.eyeBtn} onPress={() => setHidden((h) => !h)} activeOpacity={0.7}>
+          {hidden
+            ? <EyeOff size={18} color={colors.labelSecondary} strokeWidth={1.5} />
+            : <Eye size={18} color={colors.labelSecondary} strokeWidth={1.5} />
+          }
+        </TouchableOpacity>
       </View>
 
-      <View style={styles.barBg}>
-        <View style={[styles.barFill, { width: `${percent}%` }]} />
-      </View>
+      {/* Balance */}
+      <Text style={styles.balance}>
+        {hidden ? '••••• ALL' : `${balance} ${wallet.currency}`}
+      </Text>
 
-      <View style={styles.bottomRow}>
-        <View>
-          <Text style={styles.subLabel}>Used</Text>
-          <Text style={styles.subVal}>{wallet.used_amount.toLocaleString()} {wallet.currency}</Text>
-        </View>
-        <View style={{ alignItems: 'flex-end' }}>
-          <Text style={styles.subLabel}>Pending</Text>
-          <Text style={[styles.subVal, { color: '#F59E0B' }]}>{wallet.pending_amount.toLocaleString()} {wallet.currency}</Text>
-        </View>
+      {/* CTA */}
+      <TouchableOpacity style={styles.cta} onPress={onRequestPerk} activeOpacity={0.82}>
+        <Text style={styles.ctaText}>Request a perk</Text>
+      </TouchableOpacity>
+
+      {/* Footer: used + budget */}
+      <View style={styles.footRow}>
+        <Text style={styles.footLabel}>
+          Used <Text style={styles.footBold}>{used} {wallet.currency}</Text>
+        </Text>
+        <Text style={styles.footLabel}>
+          Budget <Text style={styles.footBold}>{budget} {wallet.currency}</Text>
+        </Text>
       </View>
     </View>
   );
@@ -45,24 +54,61 @@ export function WalletCard({ wallet }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#1E1E1E',
-    borderRadius: 20,
-    padding: 20,
-    marginHorizontal: 20,
-    borderWidth: 1,
-    borderColor: '#2A2A2A',
+    backgroundColor: colors.white,
+    borderRadius: radius['2xl'],
+    padding: spacing.cardPad,
+    marginHorizontal: spacing.screenX,
   },
-  topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 },
-  label: { color: '#A1A1AA', fontSize: 13 },
-  balance: { fontSize: 36, fontWeight: '900', color: '#22C55E', marginTop: 4 },
-  currency: { color: '#A1A1AA', fontSize: 13 },
-  xpBox: { alignItems: 'flex-end' },
-  xpLevel: { color: '#FFFFFF', fontWeight: '800', fontSize: 16 },
-  xpVal: { color: '#22C55E', fontSize: 13, fontWeight: '600' },
-  streak: { color: '#F59E0B', fontSize: 13, marginTop: 4 },
-  barBg: { height: 6, backgroundColor: '#2A2A2A', borderRadius: 3, marginBottom: 16 },
-  barFill: { height: 6, backgroundColor: '#22C55E', borderRadius: 3 },
-  bottomRow: { flexDirection: 'row', justifyContent: 'space-between' },
-  subLabel: { color: '#A1A1AA', fontSize: 12 },
-  subVal: { color: '#FFFFFF', fontWeight: '700', fontSize: 14, marginTop: 2 },
+  topRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  label: {
+    fontSize: 14,
+    fontFamily: fonts.medium,
+    color: colors.labelSecondary,
+  },
+  eyeBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: radius.pill,
+    backgroundColor: colors.surface2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  balance: {
+    fontSize: 48,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+    letterSpacing: -2,
+    marginBottom: 24,
+  },
+  cta: {
+    backgroundColor: colors.ink,
+    borderRadius: radius.pill,
+    height: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  ctaText: {
+    color: colors.white,
+    fontSize: 17,
+    fontFamily: fonts.semiBold,
+  },
+  footRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  footLabel: {
+    fontSize: 13,
+    fontFamily: fonts.regular,
+    color: colors.labelSecondary,
+  },
+  footBold: {
+    fontFamily: fonts.bold,
+    color: colors.ink,
+  },
 });

@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Sparkles, ChevronRight } from 'lucide-react-native';
 import type { RecommendedOffer } from '@/types';
+import { colors, fonts, radius } from '@/lib/theme';
 
 interface Props {
   recommendation: RecommendedOffer;
@@ -15,30 +17,37 @@ export function AIRecommendationCard({ recommendation }: Props) {
       activeOpacity={0.8}
     >
       <View style={styles.top}>
-        <Text style={styles.title}>{recommendation.title}</Text>
-        <Text style={styles.price}>{recommendation.price.toLocaleString()} {recommendation.currency}</Text>
+        <View style={styles.aiTag}>
+          <Sparkles size={11} color={colors.ink} strokeWidth={2} />
+          <Text style={styles.aiTagText}>{recommendation.category}</Text>
+        </View>
+        <ChevronRight size={16} color={colors.labelTertiary} strokeWidth={1.5} />
       </View>
-      <View style={styles.badge}>
-        <Text style={styles.badgeText}>{recommendation.category}</Text>
-      </View>
-      <Text style={styles.reason}>🤖 {recommendation.reason}</Text>
+      <Text style={styles.title} numberOfLines={2}>{recommendation.title}</Text>
+      <Text style={styles.reason} numberOfLines={2}>{recommendation.reason}</Text>
+      <Text style={styles.price}>{recommendation.price.toLocaleString()} <Text style={styles.currency}>{recommendation.currency}</Text></Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#22C55E10',
-    borderRadius: 14,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: '#22C55E30',
+    backgroundColor: colors.white,
+    borderRadius: radius['2xl'],
+    padding: 18,
     marginBottom: 10,
+    borderWidth: 1,
+    borderColor: colors.lime + '60',
   },
-  top: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 },
-  title: { color: '#FFFFFF', fontWeight: '700', fontSize: 15, flex: 1 },
-  price: { color: '#22C55E', fontWeight: '800', fontSize: 16 },
-  badge: { alignSelf: 'flex-start', backgroundColor: '#22C55E20', borderRadius: 20, paddingHorizontal: 10, paddingVertical: 3, marginBottom: 8 },
-  badgeText: { color: '#22C55E', fontSize: 12, fontWeight: '600', textTransform: 'capitalize' },
-  reason: { color: '#A1A1AA', fontSize: 13, lineHeight: 18 },
+  top: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 },
+  aiTag: {
+    flexDirection: 'row', alignItems: 'center', gap: 4,
+    backgroundColor: colors.lime, borderRadius: radius.pill,
+    paddingHorizontal: 8, paddingVertical: 4,
+  },
+  aiTagText: { fontSize: 11, fontFamily: fonts.bold, color: colors.ink, textTransform: 'capitalize' },
+  title: { color: colors.ink, fontFamily: fonts.semiBold, fontSize: 16, marginBottom: 6, lineHeight: 22 },
+  reason: { color: colors.labelSecondary, fontSize: 13, fontFamily: fonts.regular, lineHeight: 18, marginBottom: 12 },
+  price: { fontSize: 18, fontFamily: fonts.bold, color: colors.ink },
+  currency: { fontSize: 13, fontFamily: fonts.medium, color: colors.labelTertiary },
 });

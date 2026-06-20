@@ -25,11 +25,13 @@ from app.models.employee_profile import EmployeeProfile
 from app.models.provider import Provider
 from app.models.offer import Offer
 from app.models.package import Package, PackageItem
-from app.models.challenge import Challenge
+from app.models.challenge import Challenge, ChallengeProgress
 from app.models.user_interest import UserInterest
 from app.models.daily_deal import DailyDeal
 from app.models.shake import ShakeCredit
 from app.models.collaboration import ProviderCollaboration, CollaborationItem
+from app.models.card import Card
+from app.models.notification import Notification
 
 
 def seed():
@@ -38,9 +40,22 @@ def seed():
 
     db = SessionLocal()
     try:
-        # Skip if data already exists
+        # Skip if data already exists, but always ensure a daily deal exists
         if db.query(Company).first():
-            print("Demo data already exists. Skipping.")
+            print("Demo data already exists. Checking daily deal...")
+            if not db.query(DailyDeal).filter(DailyDeal.is_active == True).first():
+                offer = db.query(Offer).filter(Offer.status == "active").first()
+                if offer:
+                    db.add(DailyDeal(
+                        offer_id=offer.id,
+                        deal_date=datetime.now(timezone.utc).date(),
+                        deal_price=float(offer.price) * 0.75,
+                        quantity_limit=30,
+                        quantity_claimed=0,
+                        is_active=True,
+                    ))
+                    db.commit()
+                    print(f"  Created missing daily deal for offer: {offer.title}")
             return
 
         print("Seeding companies...")
@@ -230,6 +245,37 @@ def seed():
         )
         db.add(employer)
 
+        # Extra colleagues
+        colleagues_data = [
+            {"full_name": "Erion Krasniqi", "email": "erion@tiranatech.al", "department": "Engineering"},
+            {"full_name": "Mira Leka",      "email": "mira@tiranatech.al",  "department": "Design"},
+            {"full_name": "Besnik Pula",    "email": "besnik@tiranatech.al","department": "Sales"},
+            {"full_name": "Klea Demiri",    "email": "klea@tiranatech.al",  "department": "People"},
+            {"full_name": "Driton Mehmeti", "email": "driton@tiranatech.al","department": "Engineering"},
+        ]
+        db.flush()
+        for c_data in colleagues_data:
+            u = User(
+                full_name=c_data["full_name"],
+                email=c_data["email"],
+                hashed_password=hash_password("password123"),
+                role="employee",
+                company_id=company.id,
+                language="sq",
+                country="AL",
+                currency="ALL",
+            )
+            db.add(u)
+            db.flush()
+            db.add(EmployeeProfile(
+                user_id=u.id,
+                department=c_data["department"],
+                monthly_budget=15000,
+                used_amount=0,
+                pending_amount=0,
+                remaining_amount=15000,
+            ))
+
         print("Seeding challenges...")
         db.add(Challenge(
             title="Wellness Week",
@@ -252,6 +298,20 @@ def seed():
             ends_at=datetime.now(timezone.utc) + timedelta(days=60),
         ))
 
+        print("Seeding challenge progress...")
+        db.flush()
+        challenges_seeded = db.query(Challenge).all()
+        progress_pcts = [0.6, 0.5]  # 60%, 50% for first two challenges
+        for i, ch in enumerate(challenges_seeded):
+            pct = progress_pcts[i] if i < len(progress_pcts) else 0.33
+            prog_val = float(ch.goal or 3) * pct
+            db.add(ChallengeProgress(
+                challenge_id=ch.id,
+                user_id=employee.id,
+                progress=prog_val,
+                completed=False,
+            ))
+
         print("Seeding interests for demo employee...")
         for cat in ["Wellness", "Food", "Travel", "Fitness", "Learning"]:
             db.add(UserInterest(user_id=employee.id, category=cat))
@@ -269,6 +329,10 @@ def seed():
 
         print("Seeding shake credits...")
         db.add(ShakeCredit(user_id=employee.id, credits=5))
+
+        print("Seeding demo cards...")
+        db.add(Card(user_id=employee.id, card_type="credit", brand="Visa", last_four="4242", expiry="08/27", is_primary=True))
+        db.add(Card(user_id=employee.id, card_type="credit", brand="Mastercard", last_four="8821", expiry="01/26", is_primary=False))
 
         print("Seeding provider collaboration...")
         db.flush()
@@ -294,6 +358,19 @@ def seed():
             provider_id=provider_map["Healthy Bowl Tirana"].id,
             price_share=1500,
         ))
+
+        # Demo notifications for employee
+        from datetime import timedelta
+        now = datetime.now(timezone.utc)
+        demo_notifs = [
+            Notification(user_id=employee.id, title="New AI Pick for you", message="Reset & Recover bundle matches your stress pattern this week.", type="ai_pick", read=False, created_at=now - timedelta(minutes=2)),
+            Notification(user_id=employee.id, title="Deal of the Day", message="Chef's Tasting at Mullixhiu — 28% off, 8h left.", type="deal", read=False, created_at=now - timedelta(hours=1)),
+            Notification(user_id=employee.id, title="Request approved", message="Your Deep-Tissue Massage is ready to redeem.", type="request_approved", read=True, created_at=now - timedelta(hours=3)),
+            Notification(user_id=employee.id, title="Shake reward unlocked", message="+1 benefit credit added to your wallet.", type="shake_reward", read=True, created_at=now - timedelta(days=1)),
+            Notification(user_id=employee.id, title="Wallet 70% used", message="4,200 ALL remaining this month.", type="wallet_alert", read=True, created_at=now - timedelta(days=2)),
+        ]
+        for n in demo_notifs:
+            db.add(n)
 
         db.commit()
         print("\nDemo data seeded successfully!")

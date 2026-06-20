@@ -16,6 +16,7 @@ from app.models.swipe import SwipeInteraction
 from app.models.daily_deal import DailyDeal
 from app.models.collaboration import ProviderCollaboration, CollaborationItem
 from app.models.shake import ShakeCredit, ShakeAttempt
+from app.models.card import Card
 
 __all__ = [
     "User", "Company", "EmployeeProfile", "Provider", "Offer",
@@ -23,4 +24,5 @@ __all__ = [
     "Challenge", "ChallengeProgress", "UserInteraction", "SavedOffer",
     "Notification", "UserInterest", "SwipeInteraction", "DailyDeal",
     "ProviderCollaboration", "CollaborationItem", "ShakeCredit", "ShakeAttempt",
+    "Card",
 ]

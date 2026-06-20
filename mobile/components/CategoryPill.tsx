@@ -1,4 +1,5 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { colors, fonts, radius } from '@/lib/theme';
 
 interface Props {
   label: string;
@@ -18,14 +19,14 @@ export function CategoryPill({ label, active, onPress }: Props) {
 
 const styles = StyleSheet.create({
   pill: {
-    borderRadius: 20,
+    borderRadius: radius.pill,
     paddingHorizontal: 14,
-    paddingVertical: 7,
-    backgroundColor: '#1E1E1E',
+    paddingVertical: 8,
+    backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: '#2A2A2A',
+    borderColor: colors.separator,
   },
-  active: { backgroundColor: '#22C55E', borderColor: '#22C55E' },
-  label: { color: '#A1A1AA', fontSize: 13, fontWeight: '600' },
-  activeLabel: { color: '#111111' },
+  active: { backgroundColor: colors.ink, borderColor: colors.ink },
+  label: { color: colors.labelSecondary, fontSize: 13, fontFamily: fonts.semiBold },
+  activeLabel: { color: colors.white },
 });

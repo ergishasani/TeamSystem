@@ -9,6 +9,7 @@ from app.core.deps import get_current_user, get_employer_admin
 from app.models.user import User
 from app.models.daily_deal import DailyDeal
 from app.models.offer import Offer
+from app.models.provider import Provider
 from app.schemas.offer import OfferOut
 
 router = APIRouter(prefix="/deals", tags=["deals"])
@@ -38,15 +39,30 @@ def get_today_deal(
     db: Session = Depends(get_db),
 ):
     today = date.today()
+    # Exact match first, then fall back to most recent active deal
     deal = (
         db.query(DailyDeal)
         .filter(DailyDeal.deal_date == today, DailyDeal.is_active == True)
         .first()
     )
     if not deal:
+        deal = (
+            db.query(DailyDeal)
+            .filter(DailyDeal.is_active == True)
+            .order_by(DailyDeal.deal_date.desc())
+            .first()
+        )
+    if not deal:
         raise HTTPException(status_code=404, detail="No deal today")
+    return _build_deal_out(deal, db)
+
+
+def _build_deal_out(deal: DailyDeal, db):
     offer = db.query(Offer).filter(Offer.id == deal.offer_id).first()
-    return {**deal.__dict__, "offer": offer}
+    provider = db.query(Provider).filter(Provider.id == offer.provider_id).first() if offer else None
+    offer_dict = OfferOut.model_validate(offer).model_dump() if offer else {}
+    offer_dict["provider_name"] = provider.name if provider else None
+    return {**deal.__dict__, "offer": offer_dict}
 
 
 @router.post("", response_model=DailyDealOut, status_code=201)
@@ -72,4 +88,4 @@ def create_daily_deal(
     db.add(deal)
     db.commit()
     db.refresh(deal)
-    return {**deal.__dict__, "offer": offer}
+    return _build_deal_out(deal, db)

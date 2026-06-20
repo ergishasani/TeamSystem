@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class BenefitRequestCreate(BaseModel):
     package_id: Optional[int] = None
     offer_id: Optional[int] = None
+    collaboration_id: Optional[int] = None
     request_type: str = "package"
     ai_reason: Optional[str] = None
 
@@ -16,10 +17,12 @@ class BenefitRequestOut(BaseModel):
     company_id: int
     package_id: Optional[int] = None
     offer_id: Optional[int] = None
+    collaboration_id: Optional[int] = None
     request_type: str
     total_amount: float
     currency: str
     status: str
+    title: Optional[str] = None
     ai_reason: Optional[str] = None
     submitted_at: datetime
     approved_at: Optional[datetime] = None

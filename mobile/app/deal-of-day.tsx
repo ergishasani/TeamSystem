@@ -1,160 +1,460 @@
-import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert, ActivityIndicator } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Clock, MapPin, Users } from 'lucide-react-native';
-import { dealsApi, requestsApi } from '@/lib/api';
-import { PrimaryButton } from '@/components/PrimaryButton';
-import { ScreenHeader } from '@/components/ScreenHeader';
-import { LoadingState } from '@/components/LoadingState';
+import { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
+import { useRouter } from "expo-router";
+import {
+  ChevronLeft,
+  Clock,
+  Flame,
+  Users,
+  UtensilsCrossed,
+  Leaf,
+  Dumbbell,
+  Plane,
+  BookOpen,
+  Heart,
+  Tag,
+} from "lucide-react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { dealsApi, requestsApi } from "@/lib/api";
+import { LoadingState } from "@/components/LoadingState";
+import { EmptyState } from "@/components/EmptyState";
+import { colors, fonts, radius, spacing } from "@/lib/theme";
 
-const CATEGORY_COLORS: Record<string, string> = {
-  wellness: '#8B5CF6', fitness: '#F59E0B', food: '#EF4444',
-  travel: '#3B82F6', learning: '#06B6D4', health: '#22C55E',
+const CATEGORY_ICONS: Record<string, React.ComponentType<any>> = {
+  food: UtensilsCrossed,
+  wellness: Leaf,
+  fitness: Dumbbell,
+  travel: Plane,
+  learning: BookOpen,
+  health: Heart,
 };
 
 export default function DealOfDayScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const [deal, setDeal] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [requesting, setRequesting] = useState(false);
 
   useEffect(() => {
-    dealsApi.today()
+    dealsApi
+      .today()
       .then((res) => setDeal(res.data))
       .catch(() => setDeal(null))
       .finally(() => setLoading(false));
   }, []);
 
-  const handleRequest = async () => {
-    if (!deal) return;
-    Alert.alert(
-      "Today's Deal",
-      `Request "${deal.offer.title}" for ${(deal.deal_price ?? deal.offer.price).toLocaleString()} ALL?`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Request',
-          onPress: async () => {
-            setRequesting(true);
-            try {
-              const res = await requestsApi.create({ offer_id: deal.offer_id, request_type: 'single_offer' });
-              Alert.alert('Submitted!', 'Your request is pending approval.', [
-                { text: 'View', onPress: () => router.push(`/requests/${res.data.id}`) },
-              ]);
-            } catch (err: any) {
-              Alert.alert('Error', err?.response?.data?.detail || 'Request failed');
-            } finally {
-              setRequesting(false);
-            }
-          },
-        },
-      ]
-    );
+  const handleClaim = async () => {
+    if (!deal || requesting) return;
+    setRequesting(true);
+    try {
+      const res = await requestsApi.create({
+        offer_id: deal.offer_id,
+        request_type: "single_offer",
+      });
+      router.push(`/requests/${res.data.id}` as any);
+    } catch (err: any) {
+      Alert.alert(
+        "Could not claim",
+        err?.response?.data?.detail ?? "Something went wrong. Try again.",
+      );
+    } finally {
+      setRequesting(false);
+    }
   };
 
   if (loading) return <LoadingState />;
 
   if (!deal) {
     return (
-      <View style={styles.container}>
-        <ScreenHeader title="Today's Drop" onBack={() => router.back()} />
-        <View style={styles.empty}>
-          <Text style={styles.emptyEmoji}>📭</Text>
-          <Text style={styles.emptyText}>No deal today. Check back tomorrow!</Text>
+      <View style={[styles.container, { paddingTop: insets.top }]}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            style={styles.backBtn}
+            onPress={() => router.back()}
+            activeOpacity={0.7}
+          >
+            <ChevronLeft size={22} color={colors.ink} strokeWidth={2} />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Today's Drop</Text>
+          <View style={{ width: 44 }} />
         </View>
+        <EmptyState
+          title="No deal today"
+          message="Check back tomorrow for a fresh drop."
+        />
       </View>
     );
   }
 
   const offer = deal.offer;
-  const color = CATEGORY_COLORS[offer.category] || '#22C55E';
-  const dealPrice = deal.deal_price ?? offer.price;
-  const originalPrice = Number(offer.price);
-  const hasDiscount = dealPrice < originalPrice;
-  const remaining = deal.quantity_limit ? deal.quantity_limit - deal.quantity_claimed : null;
+  const dealPrice = Number(deal.deal_price ?? offer.price);
+  const origPrice = Number(offer.price);
+  const hasDiscount = deal.deal_price && dealPrice < origPrice;
+  const savings = origPrice - dealPrice;
+  const hoursLeft = Math.max(1, 23 - new Date().getHours());
+  const remaining =
+    deal.quantity_limit != null
+      ? deal.quantity_limit - deal.quantity_claimed
+      : null;
+  const claimed =
+    deal.quantity_limit != null
+      ? Math.round((deal.quantity_claimed / deal.quantity_limit) * 100)
+      : null;
+  const DealIcon = CATEGORY_ICONS[offer?.category] ?? Tag;
 
   return (
-    <View style={styles.container}>
-      <ScreenHeader title="Today's Drop 🔥" onBack={() => router.back()} />
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={[styles.banner, { backgroundColor: color + '25' }]}>
-          <Text style={styles.bannerLabel}>DEAL OF THE DAY</Text>
-          <Text style={styles.bannerEmoji}>🌟</Text>
+    <View style={[styles.container, { paddingTop: insets.top }]}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.backBtn}
+          onPress={() => router.back()}
+          activeOpacity={0.7}
+        >
+          <ChevronLeft size={22} color={colors.ink} strokeWidth={2} />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Today's Drop</Text>
+        <View style={{ width: 44 }} />
+      </View>
+
+      <ScrollView
+        contentContainerStyle={[
+          styles.content,
+          { paddingBottom: insets.bottom + 110 },
+        ]}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Orange hero card */}
+        <View style={styles.heroCard}>
+          <View style={styles.heroBadge}>
+            <Text style={styles.heroBadgeText}>Deal of the Day</Text>
+          </View>
+
+          <Text style={styles.heroTitle}>{offer.title}</Text>
+          {offer.provider_name && (
+            <Text style={styles.heroProvider}>{offer.provider_name}</Text>
+          )}
+
+          <View style={styles.heroPriceRow}>
+            <View style={{ flex: 1 }}>
+              <View style={styles.priceInline}>
+                <Text style={styles.heroPrice}>
+                  {dealPrice.toLocaleString()} ALL
+                </Text>
+                {hasDiscount && (
+                  <Text style={styles.heroOrigPrice}>
+                    {origPrice.toLocaleString()} ALL
+                  </Text>
+                )}
+              </View>
+              {hasDiscount && (
+                <View style={[styles.savingsBadge, { marginTop: 10 }]}>
+                  <Text style={styles.savingsText}>
+                    Save {savings.toLocaleString()} ALL
+                  </Text>
+                </View>
+              )}
+            </View>
+            <View style={styles.heroIconWrap} pointerEvents="none">
+              <DealIcon size={80} color="rgba(0,0,0,0.12)" strokeWidth={1.25} />
+            </View>
+          </View>
         </View>
 
-        <View style={styles.body}>
-          <View style={[styles.badge, { backgroundColor: color + '20' }]}>
-            <Text style={[styles.badgeText, { color }]}>{offer.category}</Text>
+        {/* Stats row */}
+        <View style={styles.statsRow}>
+          <View style={styles.statCard}>
+            <Clock size={18} color={colors.labelSecondary} strokeWidth={1.5} />
+            <Text style={styles.statValue}>{hoursLeft}h</Text>
+            <Text style={styles.statLabel}>EXPIRES IN</Text>
           </View>
-          <Text style={styles.offerTitle}>{offer.title}</Text>
-
-          <View style={styles.priceRow}>
-            <Text style={styles.dealPrice}>{Number(dealPrice).toLocaleString()} ALL</Text>
-            {hasDiscount && (
-              <Text style={styles.originalPrice}>{originalPrice.toLocaleString()} ALL</Text>
-            )}
-          </View>
-
-          {hasDiscount && (
-            <View style={styles.savingsBadge}>
-              <Text style={styles.savingsText}>
-                You save {(originalPrice - Number(dealPrice)).toLocaleString()} ALL
-              </Text>
-            </View>
-          )}
-
-          {offer.description ? <Text style={styles.description}>{offer.description}</Text> : null}
-
-          <View style={styles.metaRow}>
-            <MapPin size={14} color="#A1A1AA" />
-            <Text style={styles.metaText}>{offer.city}</Text>
-          </View>
-
           {remaining !== null && (
-            <View style={styles.metaRow}>
-              <Users size={14} color="#A1A1AA" />
-              <Text style={styles.metaText}>{remaining} spots remaining</Text>
+            <View style={styles.statCard}>
+              <Flame
+                size={18}
+                color={colors.labelSecondary}
+                strokeWidth={1.5}
+              />
+              <Text style={styles.statValue}>
+                {remaining}/{deal.quantity_limit}
+              </Text>
+              <Text style={styles.statLabel}>REMAINING</Text>
             </View>
           )}
+          {claimed !== null && (
+            <View style={styles.statCard}>
+              <Users
+                size={18}
+                color={colors.labelSecondary}
+                strokeWidth={1.5}
+              />
+              <Text style={styles.statValue}>{claimed}%</Text>
+              <Text style={styles.statLabel}>CLAIMED</Text>
+            </View>
+          )}
+        </View>
 
-          <View style={styles.metaRow}>
-            <Clock size={14} color="#F59E0B" />
-            <Text style={[styles.metaText, { color: '#F59E0B' }]}>Available today only</Text>
-          </View>
+        {/* Details card */}
+        <View style={styles.detailsCard}>
+          <Text style={styles.detailCategory}>
+            {offer.category?.toUpperCase()}
+          </Text>
+          {offer.description && (
+            <Text style={styles.detailDesc}>{offer.description}</Text>
+          )}
+          {(offer.city || offer.valid_until) && (
+            <Text style={styles.detailMeta}>
+              {[
+                offer.city,
+                offer.valid_until &&
+                  `Valid until ${new Date(offer.valid_until).toLocaleDateString("en-GB", { day: "numeric", month: "numeric", year: "numeric" })}`,
+              ]
+                .filter(Boolean)
+                .join(" · ")}
+            </Text>
+          )}
+        </View>
+
+        {/* How drops work */}
+        <Text style={styles.howTitle}>How drops work</Text>
+        <View style={styles.howCard}>
+          {[
+            "One curated offer per day at a deep discount.",
+            "Limited quantity & countdown — first come, first served.",
+            "Approval is instant if it fits your monthly budget.",
+          ].map((text, i) => (
+            <View key={i} style={[styles.howRow, i > 0 && styles.howRowBorder]}>
+              <View style={styles.howNum}>
+                <Text style={styles.howNumText}>{i + 1}</Text>
+              </View>
+              <Text style={styles.howText}>{text}</Text>
+            </View>
+          ))}
         </View>
       </ScrollView>
 
-      <View style={styles.footer}>
-        <PrimaryButton
-          title={`Claim Deal · ${Number(dealPrice).toLocaleString()} ALL`}
-          onPress={handleRequest}
-          loading={requesting}
-        />
+      {/* Footer */}
+      <View style={[styles.footer, { paddingBottom: insets.bottom + 16 }]}>
+        <TouchableOpacity
+          style={styles.viewBtn}
+          onPress={() => router.push(`/offers/${deal.offer_id}` as any)}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.viewBtnText}>View offer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.claimBtn, requesting && { opacity: 0.6 }]}
+          onPress={handleClaim}
+          activeOpacity={0.85}
+          disabled={requesting}
+        >
+          <Text style={styles.claimBtnText}>
+            {requesting ? "Requesting..." : "Claim drop"}
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#111111' },
-  content: { paddingBottom: 120 },
-  banner: { height: 200, justifyContent: 'center', alignItems: 'center' },
-  bannerLabel: { color: '#FFFFFF', fontWeight: '900', fontSize: 13, letterSpacing: 3, opacity: 0.6 },
-  bannerEmoji: { fontSize: 72, marginTop: 8 },
-  body: { padding: 20 },
-  badge: { alignSelf: 'flex-start', borderRadius: 20, paddingHorizontal: 12, paddingVertical: 4, marginBottom: 12 },
-  badgeText: { fontSize: 12, fontWeight: '700', textTransform: 'capitalize' },
-  offerTitle: { fontSize: 24, fontWeight: '800', color: '#FFFFFF', marginBottom: 12 },
-  priceRow: { flexDirection: 'row', alignItems: 'baseline', gap: 12, marginBottom: 8 },
-  dealPrice: { fontSize: 32, fontWeight: '900', color: '#22C55E' },
-  originalPrice: { fontSize: 18, color: '#6B7280', textDecorationLine: 'line-through' },
-  savingsBadge: { backgroundColor: '#22C55E20', borderRadius: 8, paddingHorizontal: 12, paddingVertical: 6, alignSelf: 'flex-start', marginBottom: 16 },
-  savingsText: { color: '#22C55E', fontWeight: '700', fontSize: 13 },
-  description: { color: '#A1A1AA', fontSize: 15, lineHeight: 24, marginBottom: 16 },
-  metaRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 8 },
-  metaText: { color: '#A1A1AA', fontSize: 14 },
-  footer: { position: 'absolute', bottom: 0, left: 0, right: 0, padding: 20, backgroundColor: '#111111', borderTopWidth: 1, borderTopColor: '#2A2A2A' },
-  empty: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  emptyEmoji: { fontSize: 56, marginBottom: 16 },
-  emptyText: { color: '#A1A1AA', fontSize: 16 },
+  container: { flex: 1, backgroundColor: colors.paper },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: spacing.screenX,
+    paddingVertical: 12,
+  },
+  backBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: colors.white,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  headerTitle: { fontSize: 17, fontFamily: fonts.bold, color: colors.ink },
+
+  content: { paddingHorizontal: spacing.screenX, paddingTop: 4, gap: 16 },
+
+  heroCard: {
+    backgroundColor: "#FFAB40",
+    borderRadius: radius["2xl"],
+    padding: 22,
+    gap: 10,
+    overflow: "hidden",
+  },
+  heroBadge: {
+    backgroundColor: colors.ink,
+    borderRadius: radius.pill,
+    paddingHorizontal: 14,
+    paddingVertical: 7,
+    alignSelf: "flex-start",
+  },
+  heroBadgeText: {
+    fontSize: 13,
+    fontFamily: fonts.semiBold,
+    color: colors.white,
+  },
+  heroTitle: {
+    fontSize: 28,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+    letterSpacing: -0.5,
+    lineHeight: 34,
+  },
+  heroProvider: {
+    fontSize: 14,
+    fontFamily: fonts.regular,
+    color: "rgba(0,0,0,0.55)",
+  },
+  heroPriceRow: { flexDirection: "row", alignItems: "flex-end", marginTop: 4 },
+  heroIconWrap: { justifyContent: "flex-end", paddingBottom: 4 },
+  priceInline: { flexDirection: "row", alignItems: "baseline", gap: 10 },
+  heroPrice: {
+    fontSize: 30,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+    letterSpacing: -1,
+  },
+  heroOrigPrice: {
+    fontSize: 15,
+    fontFamily: fonts.regular,
+    color: "rgba(0,0,0,0.4)",
+    textDecorationLine: "line-through",
+  },
+  savingsBadge: {
+    backgroundColor: colors.lime,
+    borderRadius: radius.pill,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    alignSelf: "flex-start",
+  },
+  savingsText: { fontSize: 13, fontFamily: fonts.bold, color: colors.ink },
+
+  statsRow: { flexDirection: "row", gap: 10 },
+  statCard: {
+    flex: 1,
+    backgroundColor: colors.white,
+    borderRadius: radius.xl,
+    padding: 14,
+    gap: 4,
+    alignItems: "flex-start",
+  },
+  statValue: {
+    fontSize: 22,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+    letterSpacing: -0.5,
+  },
+  statLabel: {
+    fontSize: 10,
+    fontFamily: fonts.semiBold,
+    color: colors.labelTertiary,
+    letterSpacing: 0.5,
+  },
+
+  detailsCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius["2xl"],
+    padding: 20,
+    gap: 10,
+  },
+  detailCategory: {
+    fontSize: 11,
+    fontFamily: fonts.semiBold,
+    color: colors.labelTertiary,
+    letterSpacing: 1.2,
+  },
+  detailDesc: {
+    fontSize: 15,
+    fontFamily: fonts.regular,
+    color: colors.labelSecondary,
+    lineHeight: 24,
+  },
+  detailMeta: {
+    fontSize: 13,
+    fontFamily: fonts.regular,
+    color: colors.labelSecondary,
+  },
+
+  howTitle: {
+    fontSize: 20,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+    letterSpacing: -0.3,
+    marginTop: 4,
+  },
+  howCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius["2xl"],
+    overflow: "hidden",
+  },
+  howRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    paddingHorizontal: 18,
+    paddingVertical: 16,
+    gap: 14,
+  },
+  howRowBorder: { borderTopWidth: 1, borderTopColor: colors.paper },
+  howNum: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: colors.ink,
+    justifyContent: "center",
+    alignItems: "center",
+    flexShrink: 0,
+    marginTop: 1,
+  },
+  howNumText: { fontSize: 13, fontFamily: fonts.bold, color: colors.white },
+  howText: {
+    flex: 1,
+    fontSize: 14,
+    fontFamily: fonts.regular,
+    color: colors.labelSecondary,
+    lineHeight: 22,
+  },
+
+  footer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    gap: 10,
+    paddingHorizontal: spacing.screenX,
+    paddingTop: 16,
+    backgroundColor: colors.paper,
+  },
+  viewBtn: {
+    flex: 1,
+    height: 56,
+    borderRadius: radius.pill,
+    backgroundColor: colors.white,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1.5,
+    borderColor: colors.surface3,
+  },
+  viewBtnText: { fontSize: 16, fontFamily: fonts.semiBold, color: colors.ink },
+  claimBtn: {
+    flex: 2,
+    height: 56,
+    borderRadius: radius.pill,
+    backgroundColor: colors.lime,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  claimBtnText: { fontSize: 16, fontFamily: fonts.bold, color: colors.ink },
 });

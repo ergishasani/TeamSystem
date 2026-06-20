@@ -1,15 +1,16 @@
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import { ChevronRight, Leaf, Dumbbell, UtensilsCrossed, Plane, BookOpen, Heart } from 'lucide-react-native';
 import type { Offer } from '@/types';
+import { colors, fonts, radius, spacing, categoryColor } from '@/lib/theme';
 
-const CATEGORY_COLORS: Record<string, string> = {
-  wellness: '#8B5CF6', fitness: '#F59E0B', food: '#EF4444',
-  travel: '#3B82F6', learning: '#06B6D4', health: '#22C55E',
-};
-
-const CATEGORY_ICONS: Record<string, string> = {
-  wellness: '🧘', fitness: '💪', food: '🥗',
-  travel: '✈️', learning: '📚', health: '🦷',
+const CATEGORY_ICONS: Record<string, React.ComponentType<any>> = {
+  wellness: Leaf,
+  fitness: Dumbbell,
+  food: UtensilsCrossed,
+  travel: Plane,
+  learning: BookOpen,
+  health: Heart,
 };
 
 interface Props {
@@ -19,67 +20,173 @@ interface Props {
 
 export function OfferCard({ offer, compact }: Props) {
   const router = useRouter();
-  const color = CATEGORY_COLORS[offer.category] || '#22C55E';
-  const icon = CATEGORY_ICONS[offer.category] || '🎁';
+  const catColor = categoryColor(offer.category);
+  const Icon = CATEGORY_ICONS[offer.category] ?? Leaf;
 
   if (compact) {
     return (
-      <TouchableOpacity style={[styles.compact, { borderColor: color + '40' }]} onPress={() => router.push(`/offers/${offer.id}`)}>
-        <View style={[styles.compactIcon, { backgroundColor: color + '20' }]}>
-          <Text style={styles.iconText}>{icon}</Text>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() => router.push(`/offers/${offer.id}`)}
+        activeOpacity={0.85}
+      >
+        {/* Colored image area */}
+        <View style={[styles.imageArea, { backgroundColor: catColor }]}>
+          <View style={styles.catPill}>
+            <Text style={styles.catPillText}>
+              {offer.category.charAt(0).toUpperCase() + offer.category.slice(1)}
+            </Text>
+          </View>
+          <View style={styles.bigIcon}>
+            <Icon size={72} color="rgba(0,0,0,0.2)" strokeWidth={1.25} />
+          </View>
         </View>
-        <Text style={styles.compactTitle} numberOfLines={2}>{offer.title}</Text>
-        <Text style={[styles.compactPrice, { color }]}>{offer.price.toLocaleString()}</Text>
-        <Text style={styles.compactCurrency}>{offer.currency}</Text>
+
+        {/* Content */}
+        <View style={styles.content}>
+          <Text style={styles.title} numberOfLines={1}>{offer.title}</Text>
+          {offer.provider_name ? (
+            <Text style={styles.provider} numberOfLines={1}>{offer.provider_name}</Text>
+          ) : null}
+          <View style={styles.priceRow}>
+            <Text style={styles.price}>
+              {offer.price.toLocaleString()} {offer.currency}
+            </Text>
+            {offer.is_limited_drop && (
+              <View style={styles.limitedBadge}>
+                <Text style={styles.limitedText}>Limited</Text>
+              </View>
+            )}
+          </View>
+        </View>
       </TouchableOpacity>
     );
   }
 
+  // List row
   return (
-    <TouchableOpacity style={styles.card} onPress={() => router.push(`/offers/${offer.id}`)} activeOpacity={0.8}>
-      <View style={[styles.colorBar, { backgroundColor: color }]} />
-      <View style={styles.body}>
-        <View style={styles.topRow}>
-          <View style={[styles.badge, { backgroundColor: color + '20' }]}>
-            <Text style={[styles.badgeText, { color }]}>{icon} {offer.category}</Text>
-          </View>
-          {offer.is_limited_drop && <Text style={styles.limited}>⚡ Drop</Text>}
-        </View>
-        <Text style={styles.title} numberOfLines={2}>{offer.title}</Text>
-        <View style={styles.bottomRow}>
-          <Text style={[styles.price, { color }]}>{offer.price.toLocaleString()} {offer.currency}</Text>
-          <Text style={styles.city}>{offer.city}</Text>
-        </View>
+    <TouchableOpacity style={styles.row} onPress={() => router.push(`/offers/${offer.id}`)} activeOpacity={0.8}>
+      <View style={[styles.rowIcon, { backgroundColor: catColor + '28' }]}>
+        <Icon size={20} color={catColor} strokeWidth={1.75} />
       </View>
+      <View style={styles.rowBody}>
+        <View style={styles.rowTop}>
+          <Text style={styles.rowTitle} numberOfLines={1}>{offer.title}</Text>
+          {offer.is_limited_drop && (
+            <View style={styles.limitedBadgeSm}>
+              <Text style={styles.limitedTextSm}>Limited</Text>
+            </View>
+          )}
+        </View>
+        <Text style={styles.rowMeta}>
+          {offer.provider_name ?? offer.category} · {offer.city}
+        </Text>
+      </View>
+      <View style={styles.rowRight}>
+        <Text style={styles.rowPrice}>{offer.price.toLocaleString()}</Text>
+        <Text style={styles.rowCurrency}>{offer.currency}</Text>
+      </View>
+      <ChevronRight size={16} color={colors.labelTertiary} strokeWidth={1.5} />
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
+  // Compact card
   card: {
-    backgroundColor: '#1E1E1E',
-    borderRadius: 16,
-    marginBottom: 12,
-    flexDirection: 'row',
-    overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: '#2A2A2A',
+    width: 240,
+    backgroundColor: colors.white,
+    borderRadius: 24,
+    padding: 8,
   },
-  colorBar: { width: 4 },
-  body: { flex: 1, padding: 16 },
-  topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 },
-  badge: { borderRadius: 20, paddingHorizontal: 10, paddingVertical: 3 },
-  badgeText: { fontSize: 12, fontWeight: '600', textTransform: 'capitalize' },
-  limited: { color: '#F59E0B', fontSize: 12, fontWeight: '700' },
-  title: { color: '#FFFFFF', fontSize: 16, fontWeight: '700', marginBottom: 10 },
-  bottomRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  price: { fontSize: 17, fontWeight: '800' },
-  city: { color: '#A1A1AA', fontSize: 12 },
-  // Compact
-  compact: { width: 140, backgroundColor: '#1E1E1E', borderRadius: 16, padding: 14, borderWidth: 1 },
-  compactIcon: { width: 40, height: 40, borderRadius: 12, justifyContent: 'center', alignItems: 'center', marginBottom: 10 },
-  iconText: { fontSize: 20 },
-  compactTitle: { color: '#FFFFFF', fontSize: 13, fontWeight: '700', marginBottom: 8, lineHeight: 18 },
-  compactPrice: { fontSize: 16, fontWeight: '900' },
-  compactCurrency: { color: '#A1A1AA', fontSize: 11 },
+  imageArea: {
+    aspectRatio: 16 / 9,
+    borderRadius: 16,
+    overflow: 'hidden',
+    justifyContent: 'flex-end',
+    padding: 12,
+  },
+  catPill: {
+    position: 'absolute',
+    top: 12,
+    right: 12,
+    backgroundColor: colors.ink,
+    borderRadius: radius.pill,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+  },
+  catPillText: {
+    color: colors.white,
+    fontSize: 14,
+    fontFamily: fonts.semiBold,
+  },
+  bigIcon: {
+    alignSelf: 'flex-start',
+  },
+  content: {
+    paddingHorizontal: 6,
+    paddingTop: 12,
+    paddingBottom: 4,
+    gap: 3,
+  },
+  title: {
+    fontSize: 17,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+    letterSpacing: -0.3,
+  },
+  provider: {
+    fontSize: 13,
+    fontFamily: fonts.regular,
+    color: colors.labelSecondary,
+  },
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 6,
+  },
+  price: {
+    fontSize: 17,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+  },
+  limitedBadge: {
+    backgroundColor: colors.lime,
+    borderRadius: radius.pill,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+  },
+  limitedText: {
+    fontSize: 13,
+    fontFamily: fonts.semiBold,
+    color: colors.ink,
+  },
+
+  // Row (full)
+  row: {
+    backgroundColor: colors.white,
+    borderRadius: radius.lg,
+    marginBottom: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: spacing.cardPad,
+    paddingVertical: spacing.rowY,
+    gap: 12,
+  },
+  rowIcon: { width: 44, height: 44, borderRadius: radius.md, justifyContent: 'center', alignItems: 'center' },
+  rowBody: { flex: 1, gap: 3 },
+  rowTop: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  rowTitle: { color: colors.ink, fontSize: 15, fontFamily: fonts.semiBold, flex: 1 },
+  rowMeta: { color: colors.labelSecondary, fontSize: 12, fontFamily: fonts.medium, textTransform: 'capitalize' },
+  rowRight: { alignItems: 'flex-end', marginRight: 4 },
+  rowPrice: { color: colors.ink, fontSize: 15, fontFamily: fonts.bold },
+  rowCurrency: { color: colors.labelTertiary, fontSize: 11, fontFamily: fonts.medium },
+  limitedBadgeSm: {
+    backgroundColor: colors.lime,
+    borderRadius: radius.pill,
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+  },
+  limitedTextSm: { fontSize: 10, fontFamily: fonts.bold, color: colors.ink },
 });

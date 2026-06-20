@@ -8,6 +8,7 @@ from app.models.offer import Offer
 from app.models.interaction import UserInteraction
 from app.models.saved_offer import SavedOffer
 from app.models.user import User
+from app.models.provider import Provider
 from app.schemas.offer import OfferOut, OfferListResponse
 from app.services.recommendation_service import get_ranked_offers
 
@@ -37,7 +38,27 @@ def list_offers(
 
     total = q.count()
     items = q.order_by(Offer.created_at.desc()).offset(offset).limit(limit).all()
-    return OfferListResponse(items=items, total=total)
+
+    provider_map: dict[int, str] = {}
+    for offer in items:
+        if offer.provider_id not in provider_map:
+            p = db.query(Provider.name).filter(Provider.id == offer.provider_id).first()
+            provider_map[offer.provider_id] = p[0] if p else ""
+
+    out = []
+    for offer in items:
+        d = OfferOut.model_validate(offer).model_dump()
+        d["provider_name"] = provider_map.get(offer.provider_id, "")
+        out.append(OfferOut(**d))
+
+    return OfferListResponse(items=out, total=total)
+
+
+def _offer_with_provider(offer: Offer, db: Session) -> OfferOut:
+    p = db.query(Provider.name).filter(Provider.id == offer.provider_id).first()
+    d = OfferOut.model_validate(offer).model_dump()
+    d["provider_name"] = p[0] if p else ""
+    return OfferOut(**d)
 
 
 @router.get("/{offer_id}", response_model=OfferOut)
@@ -45,7 +66,7 @@ def get_offer(offer_id: int, db: Session = Depends(get_db), current_user: User =
     offer = db.query(Offer).filter(Offer.id == offer_id).first()
     if not offer:
         raise HTTPException(status_code=404, detail="Offer not found")
-    return offer
+    return _offer_with_provider(offer, db)
 
 
 @router.post("/{offer_id}/save", status_code=200)

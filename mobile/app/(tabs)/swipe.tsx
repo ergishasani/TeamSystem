@@ -1,28 +1,30 @@
-import { useEffect, useState, useRef } from 'react';
+﻿import { useEffect, useState, useRef } from 'react';
 import {
   View, Text, StyleSheet, Animated, PanResponder,
   TouchableOpacity, ActivityIndicator, Dimensions,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Heart, X, Info } from 'lucide-react-native';
+import { Heart, X, Inbox } from 'lucide-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { swipeApi } from '@/lib/api';
+import { PrimaryButton } from '@/components/PrimaryButton';
+import { colors, fonts, radius, spacing } from '@/lib/theme';
 import type { Offer } from '@/types';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.35;
 
-const CATEGORY_COLORS: Record<string, string> = {
-  wellness: '#8B5CF6', fitness: '#F59E0B', food: '#EF4444',
-  travel: '#3B82F6', learning: '#06B6D4', health: '#22C55E',
+const CATEGORY_EMOJI: Record<string, string> = {
+  wellness: 'ðŸ§˜', fitness: 'ðŸ‹ï¸', food: 'ðŸ½ï¸',
+  travel: 'âœˆï¸', learning: 'ðŸ“š', health: 'â¤ï¸',
 };
 
-const CATEGORY_EMOJI: Record<string, string> = {
-  wellness: '🧘', fitness: '🏋️', food: '🍽️',
-  travel: '✈️', learning: '📚', health: '❤️',
-};
+const categoryColor = (cat: string): string =>
+  (colors.categories as Record<string, string>)[cat] ?? colors.lime;
 
 export default function SwipeScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const [deck, setDeck] = useState<Offer[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -83,124 +85,319 @@ export default function SwipeScreen() {
     Animated.timing(position, { toValue: { x: toX, y: 0 }, duration: 250, useNativeDriver: false }).start(() => recordSwipe(direction));
   };
 
-  if (loading) return <View style={styles.center}><ActivityIndicator color="#22C55E" size="large" /></View>;
+  if (loading) {
+    return (
+      <View style={[styles.center, { paddingTop: insets.top }]}>
+        <ActivityIndicator color={colors.ink} size="large" />
+      </View>
+    );
+  }
 
   if (done || currentIndex >= deck.length) {
     return (
-      <View style={styles.center}>
-        <Text style={styles.doneEmoji}>🎉</Text>
-        <Text style={styles.doneTitle}>You've seen everything!</Text>
+      <View style={[styles.center, { paddingTop: insets.top }]}>
+        <View style={styles.emptyCircle}>
+          <Inbox size={40} color={colors.ink} strokeWidth={1.5} />
+        </View>
+        <Text style={styles.doneTitle}>All caught up!</Text>
         <Text style={styles.doneSub}>New offers drop daily. Check back soon.</Text>
-        <TouchableOpacity style={styles.doneBtn} onPress={() => router.push('/(tabs)/explore')}>
-          <Text style={styles.doneBtnText}>Browse All Offers</Text>
-        </TouchableOpacity>
+        <PrimaryButton
+          variant="lime"
+          title="Browse All Offers"
+          onPress={() => router.push('/(tabs)/explore')}
+          style={styles.doneBtn}
+        />
       </View>
     );
   }
 
   const offer = deck[currentIndex];
-  const color = CATEGORY_COLORS[offer.category] || '#22C55E';
-  const emoji = CATEGORY_EMOJI[offer.category] || '🎁';
+  const catColor = categoryColor(offer.category);
+  const emoji = CATEGORY_EMOJI[offer.category] || 'ðŸŽ';
+  const nextOffer = deck[currentIndex + 1];
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Deal Swipe</Text>
-      <Text style={styles.sub}>Swipe right to save · left to skip</Text>
+    <View style={[styles.container, { paddingTop: insets.top }]}>
+      {/* Header */}
+      <View style={styles.headerRow}>
+        <Text style={styles.header}>Discover</Text>
+        <Text style={styles.countBadge}>{deck.length - currentIndex} left</Text>
+      </View>
+      <Text style={styles.sub}>Swipe right to save Â· left to skip</Text>
 
+      {/* Card stack */}
       <View style={styles.cardArea}>
         {/* Next card (behind) */}
-        {deck[currentIndex + 1] && (
+        {nextOffer && (
           <View style={[styles.card, styles.cardBehind]}>
-            <View style={[styles.cardBanner, { backgroundColor: (CATEGORY_COLORS[deck[currentIndex + 1].category] || '#22C55E') + '30' }]} />
+            <View style={[styles.iconArea, { backgroundColor: categoryColor(nextOffer.category) + '30' }]} />
           </View>
         )}
 
         {/* Current card */}
         <Animated.View
-          style={[styles.card, { transform: [{ translateX: position.x }, { translateY: position.y }, { rotate }] }]}
+          style={[
+            styles.card,
+            { transform: [{ translateX: position.x }, { translateY: position.y }, { rotate }] },
+          ]}
           {...panResponder.panHandlers}
         >
+          {/* LIKE badge */}
           <Animated.View style={[styles.likeBadge, { opacity: likeOpacity }]}>
-            <Text style={styles.likeText}>LIKE 💚</Text>
+            <Text style={styles.likeText}>LIKE</Text>
           </Animated.View>
+          {/* PASS badge */}
           <Animated.View style={[styles.nopeBadge, { opacity: nopeOpacity }]}>
-            <Text style={styles.nopeText}>SKIP 👋</Text>
+            <Text style={styles.nopeText}>PASS</Text>
           </Animated.View>
 
-          <View style={[styles.cardBanner, { backgroundColor: color + '30' }]}>
-            <Text style={styles.cardEmoji}>{emoji}</Text>
+          {/* Category icon area */}
+          <View style={[styles.iconArea, { backgroundColor: catColor + '25' }]}>
+            <View style={[styles.iconCircle, { backgroundColor: catColor }]}>
+              <Text style={styles.cardEmoji}>{emoji}</Text>
+            </View>
           </View>
 
+          {/* Card body */}
           <View style={styles.cardBody}>
-            <View style={[styles.badge, { backgroundColor: color + '20' }]}>
-              <Text style={[styles.badgeText, { color }]}>{offer.category}</Text>
+            <View style={[styles.categoryPill, { backgroundColor: catColor + '20' }]}>
+              <Text style={[styles.categoryPillText, { color: catColor === colors.lime ? colors.ink : catColor }]}>
+                {offer.category}
+              </Text>
             </View>
             <Text style={styles.cardTitle}>{offer.title}</Text>
             <Text style={styles.cardPrice}>{Number(offer.price).toLocaleString()} {offer.currency}</Text>
-            {offer.description ? <Text style={styles.cardDesc} numberOfLines={3}>{offer.description}</Text> : null}
-            <Text style={styles.cardCity}>📍 {offer.city}</Text>
+            {offer.description ? (
+              <Text style={styles.cardDesc} numberOfLines={3}>{offer.description}</Text>
+            ) : null}
+            <Text style={styles.cardCity}>{offer.city}</Text>
           </View>
         </Animated.View>
       </View>
 
+      {/* Action buttons */}
       <View style={styles.buttons}>
-        <TouchableOpacity style={[styles.btn, styles.btnNope]} onPress={() => forceSwipe('dislike')}>
-          <X size={28} color="#EF4444" />
+        <TouchableOpacity style={styles.btnCircleX} onPress={() => forceSwipe('dislike')} activeOpacity={0.8}>
+          <X size={28} color={colors.labelSecondary} strokeWidth={2} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.infoBtn} onPress={() => router.push(`/offers/${offer.id}`)}>
-          <Info size={20} color="#A1A1AA" />
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, styles.btnLike]} onPress={() => forceSwipe('like')}>
-          <Heart size={28} color="#22C55E" />
+        <TouchableOpacity style={styles.btnCircleHeart} onPress={() => forceSwipe('like')} activeOpacity={0.8}>
+          <Heart size={28} color={colors.ink} strokeWidth={2} fill={colors.ink} />
         </TouchableOpacity>
       </View>
-
-      <Text style={styles.count}>{deck.length - currentIndex} offers left</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#111111', paddingTop: 60 },
-  center: { flex: 1, backgroundColor: '#111111', justifyContent: 'center', alignItems: 'center', padding: 24 },
-  header: { fontSize: 26, fontWeight: '800', color: '#FFFFFF', paddingHorizontal: 20 },
-  sub: { color: '#A1A1AA', fontSize: 13, paddingHorizontal: 20, marginTop: 4, marginBottom: 16 },
-  cardArea: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  container: {
+    flex: 1,
+    backgroundColor: colors.paper,
+    paddingHorizontal: spacing.screenX,
+    paddingBottom: 24,
+  },
+  center: {
+    flex: 1,
+    backgroundColor: colors.paper,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: spacing.screenX,
+  },
+  headerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 16,
+    marginBottom: 4,
+  },
+  header: {
+    fontSize: 32,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+  },
+  countBadge: {
+    fontSize: 13,
+    fontFamily: fonts.medium,
+    color: colors.labelSecondary,
+    backgroundColor: colors.white,
+    borderRadius: radius.pill,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+  },
+  sub: {
+    fontSize: 13,
+    fontFamily: fonts.regular,
+    color: colors.labelSecondary,
+    marginBottom: 20,
+  },
+  cardArea: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   card: {
-    width: SCREEN_WIDTH - 40,
-    backgroundColor: '#1E1E1E',
-    borderRadius: 24,
+    width: SCREEN_WIDTH - spacing.screenX * 2,
+    backgroundColor: colors.white,
+    borderRadius: radius['3xl'],
     overflow: 'hidden',
     position: 'absolute',
-    shadowColor: '#000',
+    shadowColor: colors.ink,
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.4,
-    shadowRadius: 16,
-    elevation: 8,
+    shadowOpacity: 0.08,
+    shadowRadius: 24,
+    elevation: 6,
   },
-  cardBehind: { top: 10, transform: [{ scale: 0.96 }] },
-  cardBanner: { height: 200, justifyContent: 'center', alignItems: 'center' },
-  cardEmoji: { fontSize: 64 },
-  cardBody: { padding: 20 },
-  badge: { alignSelf: 'flex-start', borderRadius: 20, paddingHorizontal: 10, paddingVertical: 3, marginBottom: 10 },
-  badgeText: { fontSize: 11, fontWeight: '700', textTransform: 'capitalize' },
-  cardTitle: { fontSize: 22, fontWeight: '800', color: '#FFFFFF', marginBottom: 6 },
-  cardPrice: { fontSize: 26, fontWeight: '900', color: '#22C55E', marginBottom: 10 },
-  cardDesc: { color: '#A1A1AA', fontSize: 14, lineHeight: 20, marginBottom: 10 },
-  cardCity: { color: '#A1A1AA', fontSize: 13 },
-  likeBadge: { position: 'absolute', top: 24, left: 20, zIndex: 10, backgroundColor: '#22C55E20', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 6, borderWidth: 2, borderColor: '#22C55E' },
-  likeText: { color: '#22C55E', fontWeight: '900', fontSize: 18 },
-  nopeBadge: { position: 'absolute', top: 24, right: 20, zIndex: 10, backgroundColor: '#EF444420', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 6, borderWidth: 2, borderColor: '#EF4444' },
-  nopeText: { color: '#EF4444', fontWeight: '900', fontSize: 18 },
-  buttons: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 20, paddingVertical: 24 },
-  btn: { width: 64, height: 64, borderRadius: 32, justifyContent: 'center', alignItems: 'center', borderWidth: 2 },
-  btnNope: { borderColor: '#EF4444', backgroundColor: '#EF444415' },
-  btnLike: { borderColor: '#22C55E', backgroundColor: '#22C55E15' },
-  infoBtn: { width: 44, height: 44, borderRadius: 22, justifyContent: 'center', alignItems: 'center', backgroundColor: '#2A2A2A' },
-  count: { color: '#A1A1AA', textAlign: 'center', fontSize: 12, paddingBottom: 16 },
-  doneEmoji: { fontSize: 64, marginBottom: 16 },
-  doneTitle: { fontSize: 22, fontWeight: '800', color: '#FFFFFF', marginBottom: 8 },
-  doneSub: { color: '#A1A1AA', textAlign: 'center', marginBottom: 24 },
-  doneBtn: { backgroundColor: '#22C55E', borderRadius: 14, paddingHorizontal: 28, paddingVertical: 14 },
-  doneBtnText: { color: '#111', fontWeight: '700', fontSize: 15 },
+  cardBehind: {
+    top: 12,
+    transform: [{ scale: 0.96 }],
+  },
+  iconArea: {
+    height: 220,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconCircle: {
+    width: 100,
+    height: 100,
+    borderRadius: radius.pill,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cardEmoji: {
+    fontSize: 48,
+  },
+  cardBody: {
+    padding: spacing.cardPad,
+    paddingTop: 18,
+    paddingBottom: 24,
+  },
+  categoryPill: {
+    alignSelf: 'flex-start',
+    borderRadius: radius.pill,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    marginBottom: 10,
+  },
+  categoryPillText: {
+    fontSize: 12,
+    fontFamily: fonts.semiBold,
+    textTransform: 'capitalize',
+  },
+  cardTitle: {
+    fontSize: 22,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+    marginBottom: 6,
+  },
+  cardPrice: {
+    fontSize: 26,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+    marginBottom: 10,
+  },
+  cardDesc: {
+    fontFamily: fonts.regular,
+    color: colors.labelSecondary,
+    fontSize: 14,
+    lineHeight: 20,
+    marginBottom: 10,
+  },
+  cardCity: {
+    fontFamily: fonts.medium,
+    color: colors.labelSecondary,
+    fontSize: 13,
+  },
+  likeBadge: {
+    position: 'absolute',
+    top: 24,
+    left: 20,
+    zIndex: 10,
+    backgroundColor: colors.lime,
+    borderRadius: radius.md,
+    paddingHorizontal: 16,
+    paddingVertical: 7,
+  },
+  likeText: {
+    color: colors.ink,
+    fontFamily: fonts.bold,
+    fontSize: 17,
+    letterSpacing: 1,
+  },
+  nopeBadge: {
+    position: 'absolute',
+    top: 24,
+    right: 20,
+    zIndex: 10,
+    backgroundColor: colors.white,
+    borderRadius: radius.md,
+    paddingHorizontal: 16,
+    paddingVertical: 7,
+    borderWidth: 1,
+    borderColor: 'rgba(32,32,32,0.10)',
+  },
+  nopeText: {
+    color: colors.ink,
+    fontFamily: fonts.bold,
+    fontSize: 17,
+    letterSpacing: 1,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 32,
+    paddingVertical: 20,
+  },
+  btnCircleX: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: 'rgba(32,32,32,0.10)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: colors.ink,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
+  },
+  btnCircleHeart: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: colors.lime,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: colors.lime,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
+    elevation: 3,
+  },
+  emptyCircle: {
+    width: 100,
+    height: 100,
+    borderRadius: radius.pill,
+    backgroundColor: colors.lime,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  doneTitle: {
+    fontSize: 24,
+    fontFamily: fonts.bold,
+    color: colors.ink,
+    marginBottom: 8,
+  },
+  doneSub: {
+    fontFamily: fonts.regular,
+    color: colors.labelSecondary,
+    textAlign: 'center',
+    fontSize: 15,
+    marginBottom: 32,
+  },
+  doneBtn: {
+    width: '100%',
+  },
 });

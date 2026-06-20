@@ -33,8 +33,8 @@ def save_interests(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    if len(body.interests) != 5:
-        raise HTTPException(status_code=400, detail="Exactly 5 interests required")
+    if len(body.interests) == 0:
+        raise HTTPException(status_code=400, detail="Select at least one interest")
     invalid = [i for i in body.interests if i not in VALID_CATEGORIES]
     if invalid:
         raise HTTPException(status_code=400, detail=f"Invalid categories: {invalid}")

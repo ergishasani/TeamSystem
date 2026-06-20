@@ -8,6 +8,10 @@ class PackageItemOut(BaseModel):
     offer_id: int
     provider_id: int
     price_share: float
+    category: str = "wellness"
+    offer_title: Optional[str] = None
+    provider_name: Optional[str] = None
+    valid_until: Optional[datetime] = None
 
     model_config = {"from_attributes": True}
 

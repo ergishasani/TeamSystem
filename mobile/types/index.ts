@@ -10,6 +10,9 @@ export interface User {
   language: string;
   country: string;
   currency: string;
+  phone?: string | null;
+  address?: string | null;
+  avatar_url?: string | null;
   created_at: string;
 }
 
@@ -37,6 +40,7 @@ export interface Provider {
 export interface Offer {
   id: number;
   provider_id: number;
+  provider_name: string | null;
   title: string;
   description: string | null;
   category: string;
@@ -58,6 +62,10 @@ export interface PackageItem {
   offer_id: number;
   provider_id: number;
   price_share: number;
+  category: string;
+  offer_title: string | null;
+  provider_name: string | null;
+  valid_until: string | null;
 }
 
 export interface Package {
@@ -86,6 +94,7 @@ export interface BenefitRequest {
   total_amount: number;
   currency: string;
   status: RequestStatus;
+  title: string | null;
   ai_reason: string | null;
   submitted_at: string;
   approved_at: string | null;
@@ -134,8 +143,28 @@ export interface Challenge {
   type: string;
   goal: number | null;
   reward: number;
-  starts_at: string | null;
-  ends_at: string | null;
+  progress: number;
+  completed: boolean;
+}
+
+export interface Card {
+  id: number;
+  card_type: 'debit' | 'credit';
+  brand?: string;
+  last_four: string;
+  expiry?: string | null;
+  is_primary?: boolean;
+  created_at: string;
+}
+
+export interface AiPick {
+  offer_id: number;
+  title: string;
+  category: string;
+  price: number;
+  currency: string;
+  provider_name: string | null;
+  reason: string;
 }
 
 export interface AIConciergeResponse {

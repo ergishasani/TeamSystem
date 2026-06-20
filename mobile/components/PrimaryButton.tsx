@@ -1,40 +1,53 @@
 import { TouchableOpacity, Text, StyleSheet, ActivityIndicator, ViewStyle } from 'react-native';
+import { colors, fonts, radius } from '@/lib/theme';
+
+type Variant = 'filled' | 'lime' | 'bordered' | 'danger' | 'primary' | 'outline';
 
 interface Props {
   title: string;
   onPress: () => void;
   loading?: boolean;
-  variant?: 'primary' | 'outline' | 'danger';
+  variant?: Variant;
   style?: ViewStyle;
   disabled?: boolean;
 }
 
-export function PrimaryButton({ title, onPress, loading, variant = 'primary', style, disabled }: Props) {
+const VARIANT_MAP: Record<string, 'filled' | 'lime' | 'bordered' | 'danger'> = {
+  primary: 'filled', outline: 'bordered', filled: 'filled', lime: 'lime', bordered: 'bordered', danger: 'danger',
+};
+
+export function PrimaryButton({ title, onPress, loading, variant = 'filled', style, disabled }: Props) {
+  const v = VARIANT_MAP[variant] ?? 'filled';
   const isDisabled = loading || disabled;
   return (
     <TouchableOpacity
-      style={[styles.base, styles[variant], isDisabled && styles.disabled, style]}
+      style={[styles.base, styles[v], isDisabled && styles.disabled, style]}
       onPress={onPress}
       disabled={isDisabled}
-      activeOpacity={0.8}
+      activeOpacity={0.75}
     >
       {loading ? (
-        <ActivityIndicator color={variant === 'primary' ? '#111' : '#22C55E'} size="small" />
+        <ActivityIndicator
+          color={v === 'lime' ? colors.ink : v === 'filled' ? colors.white : colors.ink}
+          size="small"
+        />
       ) : (
-        <Text style={[styles.label, styles[`${variant}Label` as keyof typeof styles]]}>{title}</Text>
+        <Text style={[styles.label, styles[`${v}Label` as keyof typeof styles]]}>{title}</Text>
       )}
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  base: { borderRadius: 14, paddingVertical: 16, alignItems: 'center', justifyContent: 'center' },
-  primary: { backgroundColor: '#22C55E' },
-  outline: { backgroundColor: 'transparent', borderWidth: 1.5, borderColor: '#22C55E' },
-  danger: { backgroundColor: '#EF444420', borderWidth: 1, borderColor: '#EF4444' },
-  disabled: { opacity: 0.5 },
-  label: { fontSize: 16, fontWeight: '700' },
-  primaryLabel: { color: '#111111' },
-  outlineLabel: { color: '#22C55E' },
-  dangerLabel: { color: '#EF4444' },
+  base: { borderRadius: radius.pill, height: 52, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 24 },
+  filled: { backgroundColor: colors.ink },
+  lime: { backgroundColor: colors.lime },
+  bordered: { backgroundColor: colors.white, borderWidth: 1, borderColor: 'rgba(32,32,32,0.10)' },
+  danger: { backgroundColor: colors.destructive + '18', borderWidth: 1, borderColor: colors.destructive },
+  disabled: { opacity: 0.4 },
+  label: { fontSize: 16, fontFamily: fonts.semiBold },
+  filledLabel: { color: colors.white },
+  limeLabel: { color: colors.ink },
+  borderedLabel: { color: colors.ink },
+  dangerLabel: { color: colors.destructive },
 });

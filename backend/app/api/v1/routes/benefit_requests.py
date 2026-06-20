@@ -10,6 +10,7 @@ from app.models.employee_profile import EmployeeProfile
 from app.models.package import Package
 from app.models.offer import Offer
 from app.models.company import Company
+from app.models.collaboration import ProviderCollaboration
 from app.schemas.request import BenefitRequestCreate, BenefitRequestOut
 from app.services.approval_service import approve_request
 
@@ -25,7 +26,7 @@ def create_request(
     if not current_user.company_id:
         raise HTTPException(status_code=400, detail="User has no company assigned")
 
-    # Calculate amount from package or offer
+    # Calculate amount from package, offer, or collaboration
     total_amount = 0.0
     if data.package_id:
         pkg = db.query(Package).filter(Package.id == data.package_id).first()
@@ -37,8 +38,13 @@ def create_request(
         if not offer:
             raise HTTPException(status_code=404, detail="Offer not found")
         total_amount = float(offer.price)
+    elif data.collaboration_id:
+        collab = db.query(ProviderCollaboration).filter(ProviderCollaboration.id == data.collaboration_id).first()
+        if not collab:
+            raise HTTPException(status_code=404, detail="Collaboration not found")
+        total_amount = float(collab.total_price)
     else:
-        raise HTTPException(status_code=400, detail="Must provide package_id or offer_id")
+        raise HTTPException(status_code=400, detail="Must provide package_id, offer_id, or collaboration_id")
 
     # Reserve budget as pending
     profile = db.query(EmployeeProfile).filter(EmployeeProfile.user_id == current_user.id).first()
@@ -53,6 +59,7 @@ def create_request(
         company_id=current_user.company_id,
         package_id=data.package_id,
         offer_id=data.offer_id,
+        collaboration_id=data.collaboration_id,
         request_type=data.request_type,
         total_amount=total_amount,
         currency=current_user.currency,
@@ -73,14 +80,28 @@ def create_request(
     return req
 
 
+def _enrich(req: BenefitRequest, db: Session) -> BenefitRequestOut:
+    title: str | None = None
+    if req.offer_id:
+        row = db.query(Offer.title).filter(Offer.id == req.offer_id).first()
+        title = row[0] if row else None
+    elif req.package_id:
+        row = db.query(Package.title).filter(Package.id == req.package_id).first()
+        title = row[0] if row else None
+    d = BenefitRequestOut.model_validate(req).model_dump()
+    d["title"] = title
+    return BenefitRequestOut(**d)
+
+
 @router.get("/me", response_model=List[BenefitRequestOut])
 def my_requests(current_user=Depends(get_employee), db: Session = Depends(get_db)):
-    return (
+    reqs = (
         db.query(BenefitRequest)
         .filter(BenefitRequest.employee_id == current_user.id)
         .order_by(BenefitRequest.submitted_at.desc())
         .all()
     )
+    return [_enrich(r, db) for r in reqs]
 
 
 @router.get("/{request_id}", response_model=BenefitRequestOut)
@@ -91,7 +112,7 @@ def get_request(request_id: int, current_user=Depends(get_employee), db: Session
     ).first()
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
-    return req
+    return _enrich(req, db)
 
 
 @router.patch("/{request_id}/cancel", response_model=BenefitRequestOut)

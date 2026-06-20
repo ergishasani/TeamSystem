@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 950 nodes · 1387 edges · 101 communities (95 shown, 6 thin omitted)
-- Extraction: 81% EXTRACTED · 19% INFERRED · 0% AMBIGUOUS · INFERRED: 269 edges (avg confidence: 0.58)
+- 1008 nodes · 1517 edges · 103 communities (97 shown, 6 thin omitted)
+- Extraction: 80% EXTRACTED · 20% INFERRED · 0% AMBIGUOUS · INFERRED: 304 edges (avg confidence: 0.58)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4c5cd32e`
+- Built from commit: `1862fe46`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -93,6 +93,7 @@
 - [[_COMMUNITY_Community 98|Community 98]]
 - [[_COMMUNITY_Community 99|Community 99]]
 - [[_COMMUNITY_Community 100|Community 100]]
+- [[_COMMUNITY_Community 101|Community 101]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `EmployeeProfile` - 37 edges
@@ -121,15 +122,15 @@
 ## Import Cycles
 - 1-file cycle: `backend/app/services/challenge_service.py -> backend/app/services/challenge_service.py`
 
-## Communities (101 total, 6 thin omitted)
+## Communities (103 total, 6 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.07
 Nodes (27): CATEGORY_COLORS, styles, styles, styles, styles, LoadingState(), styles, PrimaryButton() (+19 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.18
-Nodes (17): Session, Session, User, UserInteraction, SavedOffer, InteractionCreate, log_interaction(), search_offers() (+9 more)
+Cohesion: 0.14
+Nodes (19): Session, Session, User, Offer, Session, UserInteraction, SavedOffer, InteractionCreate (+11 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.15
@@ -140,8 +141,8 @@ Cohesion: 0.07
 Nodes (40): auth(), Return a function that logs in and yields Authorization headers., End-to-end test of the core demo flow: employee submits a request → budget reser, _submit_single_offer_request(), test_auto_approval_below_threshold(), test_cancel_pending_request(), test_employee_cannot_access_approvals(), test_full_approval_creates_payment_and_redemption() (+32 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.08
-Nodes (32): Session, User, BaseModel, get_me(), get_taste_profile(), update_interests(), update_me(), CategorySpend (+24 more)
+Cohesion: 0.06
+Nodes (51): Session, User, Session, User, Session, User, BaseModel, CollaborationItem (+43 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.12
@@ -152,32 +153,32 @@ Cohesion: 0.06
 Nodes (30): dependencies, axios, expo, expo-linking, expo-router, expo-secure-store, expo-status-bar, @expo/vector-icons (+22 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.06
-Nodes (26): RegisterRequest, Session, RegisterRequest, Session, User, create_access_token(), decode_token(), hash_password() (+18 more)
+Cohesion: 0.07
+Nodes (24): RegisterRequest, Session, RegisterRequest, Session, User, create_access_token(), decode_token(), hash_password() (+16 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.11
-Nodes (16): Collab, CollabItem, Offer, Deal, Offer, aiApi, aiFilterApi, apiClient (+8 more)
+Cohesion: 0.17
+Nodes (10): Collab, CollabItem, Offer, Deal, Offer, apiClient, collaborationsApi, dealsApi (+2 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.09
 Nodes (22): backgroundColor, foregroundImage, adaptiveIcon, expo, android, assetBundlePatterns, icon, ios (+14 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.15
-Nodes (20): Session, ConciergeRequest, EmployerInsightRequest, GeneratePackageRequest, concierge(), employer_insights_route(), generate_package(), my_recommendations() (+12 more)
+Cohesion: 0.49
+Nodes (9): Session, User, _get_or_create_credits(), _pick_prize(), play_shake(), shake_status(), ShakeResultOut, ShakeStatusOut (+1 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.13
-Nodes (8): _ConciergeTools, OpenAI-powered benefits concierge with tool calling.  The LLM is given a set of, Executes tool calls against the DB, scoped to one employee., Tests for the OpenAI concierge tool layer and the LLM/rule-based orchestration., test_tool_build_package_totals_offers(), test_tool_search_offers(), test_tool_search_offers_respects_max_price(), test_tool_wallet_balance()
+Cohesion: 0.29
+Nodes (6): aiApi, aiFilterApi, Message, Mode, styles, AIConciergeResponse
 
 ### Community 12 - "Community 12"
 Cohesion: 0.12
 Nodes (15): 10. Environment, 11. What to Build / Polish Next, 12. Running, 1. Tech Stack, 2. Directory Layout, 3. Navigation & Auth Gate, 4. Screens, 5. Components (`components/`) (+7 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.25
-Nodes (10): Offer, Session, Challenge, datetime, Challenge, ChallengeProgress, Provider, advance_challenges() (+2 more)
+Cohesion: 0.15
+Nodes (14): Offer, Session, Base, Challenge, datetime, Challenge, ChallengeProgress, Provider (+6 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.15
@@ -196,8 +197,8 @@ Cohesion: 0.08
 Nodes (23): dependencies, axios, lucide-react, react, react-dom, react-router-dom, zustand, devDependencies (+15 more)
 
 ### Community 20 - "Community 20"
-Cohesion: 0.16
-Nodes (10): CategoryPill(), Props, styles, CATEGORY_COLORS, CATEGORY_ICONS, OfferCard(), Props, styles (+2 more)
+Cohesion: 0.13
+Nodes (13): CategoryPill(), Props, styles, EmptyState(), Props, styles, CATEGORY_COLORS, CATEGORY_ICONS (+5 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.29
@@ -208,8 +209,8 @@ Cohesion: 0.19
 Nodes (7): Badge(), Props, statusBadge(), Variant, variantClasses, providerApi, ProviderDashboard
 
 ### Community 39 - "Community 39"
-Cohesion: 0.15
-Nodes (12): BenefitRequest, Company, Offer, Package, PackageItem, Payment, Provider, Redemption (+4 more)
+Cohesion: 0.12
+Nodes (15): Props, styles, BenefitRequest, Company, Offer, Package, PackageItem, Payment (+7 more)
 
 ### Community 40 - "Community 40"
 Cohesion: 0.10
@@ -236,8 +237,8 @@ Cohesion: 0.25
 Nodes (8): 7. Business Logic, AI concierge — `app/services/ai_service.py` + `llm_concierge.py`, Approval flow — `app/services/approval_service.py`, Challenge progress — `app/services/challenge_service.py`, Employer insights — `app/services/insights_service.py`, Notifications — `app/services/notification_service.py`, Recommendation scoring — `app/services/recommendation_service.py`, Submit flow — `app/api/v1/routes/benefit_requests.py`
 
 ### Community 46 - "Community 46"
-Cohesion: 0.30
-Nodes (12): Session, Session, EmployerInsightResponse, Package, PackageItem, Package, PackageCreate, PackageOut (+4 more)
+Cohesion: 0.22
+Nodes (17): BenefitRequest, Session, BenefitRequest, Session, BenefitRequestCreate, EmployerInsightResponse, Offer, Package (+9 more)
 
 ### Community 47 - "Community 47"
 Cohesion: 0.67
@@ -248,24 +249,24 @@ Cohesion: 0.24
 Nodes (5): Layout(), Props, Role, LoginPage(), App()
 
 ### Community 50 - "Community 50"
-Cohesion: 0.16
-Nodes (17): ApprovalAction, Session, BenefitRequest, Session, Base, Payment, Redemption, approve() (+9 more)
+Cohesion: 0.33
+Nodes (9): ApprovalAction, Session, Payment, approve(), employer_dashboard(), employer_employees(), employer_payments(), list_approvals() (+1 more)
 
 ### Community 51 - "Community 51"
 Cohesion: 0.13
 Nodes (14): Architecture notes, Auth flow, Available scripts, CORS, Demo accounts, Environment variables, Manual backend setup (without Docker), Perka Webapp — Admin Management Portal (+6 more)
 
 ### Community 52 - "Community 52"
-Cohesion: 0.14
-Nodes (13): ChallengeCard(), Props, styles, EmptyState(), Props, styles, PackageCard(), Props (+5 more)
+Cohesion: 0.19
+Nodes (10): ChallengeCard(), Props, styles, PackageCard(), Props, styles, challengesApi, CATEGORY_COLORS (+2 more)
 
 ### Community 53 - "Community 53"
 Cohesion: 0.18
 Nodes (4): Props, Props, employerApi, EmployerDashboard
 
 ### Community 54 - "Community 54"
-Cohesion: 0.17
-Nodes (20): ConciergeResponse, Session, User, ConciergeResponse, Offer, Session, User, Offer (+12 more)
+Cohesion: 0.05
+Nodes (54): Session, Session, User, Session, User, ConciergeResponse, Session, User (+46 more)
 
 ### Community 56 - "Community 56"
 Cohesion: 0.33
@@ -376,16 +377,16 @@ Cohesion: 0.40
 Nodes (4): CATEGORIES, emptyForm(), OfferForm, OffersPage()
 
 ### Community 92 - "Community 92"
-Cohesion: 0.27
-Nodes (13): Session, OfferCreate, OfferUpdate, confirm_redemption(), create_offer(), provider_dashboard(), provider_offers(), provider_payments() (+5 more)
+Cohesion: 0.24
+Nodes (15): Session, Redemption, OfferCreate, OfferUpdate, confirm_redemption(), create_offer(), provider_dashboard(), provider_offers() (+7 more)
 
 ### Community 93 - "Community 93"
-Cohesion: 0.43
-Nodes (6): Session, BenefitRequestCreate, cancel_request(), create_request(), get_request(), my_requests()
+Cohesion: 0.29
+Nodes (8): Session, cancel_request(), create_request(), get_request(), my_requests(), approve_request(), _generate_qr(), Handles the employer approval flow:   1. Mark request as approved   2. Deduct em
 
 ### Community 94 - "Community 94"
-Cohesion: 0.23
-Nodes (9): Session, Session, User, BenefitRequest, BenefitRequest, get_redemption(), my_redemptions(), get_wallet() (+1 more)
+Cohesion: 0.67
+Nodes (3): Session, get_redemption(), my_redemptions()
 
 ### Community 95 - "Community 95"
 Cohesion: 0.60
@@ -396,8 +397,8 @@ Cohesion: 0.31
 Nodes (7): Session, User, get_current_user(), get_employee(), get_employer_admin(), get_provider_admin(), HTTPAuthorizationCredentials
 
 ### Community 97 - "Community 97"
-Cohesion: 0.50
-Nodes (3): Props, styles, RecommendedOffer
+Cohesion: 0.62
+Nodes (6): Session, Package, _build_package_out(), create_package(), get_package(), list_packages()
 
 ### Community 98 - "Community 98"
 Cohesion: 0.29
@@ -411,6 +412,10 @@ Nodes (5): swipeApi, CATEGORY_COLORS, CATEGORY_EMOJI, styles, { width: SCREEN_WI
 Cohesion: 0.33
 Nodes (4): ALL_INTERESTS, ICONS, styles, onboardingApi
 
+### Community 101 - "Community 101"
+Cohesion: 0.43
+Nodes (6): Session, User, get_swipe_deck(), Returns offers the user hasn't swiped yet., swipe_offer(), SwipeIn
+
 ## Knowledge Gaps
 - **367 isolated node(s):** `ALL_INTERESTS`, `ICONS`, `styles`, `styles`, `Mode` (+362 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -419,17 +424,17 @@ Nodes (4): ALL_INTERESTS, ICONS, styles, onboardingApi
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `datetime` connect `Community 13` to `Community 1`, `Community 3`, `Community 4`, `Community 7`, `Community 43`, `Community 46`, `Community 50`, `Community 54`, `Community 92`, `Community 93`, `Community 94`?**
-  _High betweenness centrality (0.042) - this node is a cross-community bridge._
-- **Why does `auth()` connect `Community 3` to `Community 10`, `Community 7`?**
-  _High betweenness centrality (0.031) - this node is a cross-community bridge._
-- **Why does `Offer` connect `Community 54` to `Community 1`, `Community 11`, `Community 13`, `Community 46`, `Community 50`, `Community 92`, `Community 93`, `Community 94`?**
-  _High betweenness centrality (0.023) - this node is a cross-community bridge._
+- **Why does `datetime` connect `Community 13` to `Community 1`, `Community 3`, `Community 4`, `Community 7`, `Community 10`, `Community 43`, `Community 46`, `Community 54`, `Community 92`, `Community 93`?**
+  _High betweenness centrality (0.047) - this node is a cross-community bridge._
+- **Why does `EmployeeProfile` connect `Community 54` to `Community 1`, `Community 7`, `Community 13`, `Community 46`, `Community 93`?**
+  _High betweenness centrality (0.036) - this node is a cross-community bridge._
+- **Why does `Offer` connect `Community 46` to `Community 1`, `Community 97`, `Community 13`, `Community 54`, `Community 92`, `Community 93`?**
+  _High betweenness centrality (0.028) - this node is a cross-community bridge._
 - **Are the 35 inferred relationships involving `EmployeeProfile` (e.g. with `Session` and `Session`) actually correct?**
   _`EmployeeProfile` has 35 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 4 inferred relationships involving `datetime` (e.g. with `Challenge` and `ChallengeProgress`) actually correct?**
+  _`datetime` has 4 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 32 inferred relationships involving `auth()` (e.g. with `test_concierge_endpoint()` and `test_recommendations_endpoint()`) actually correct?**
   _`auth()` has 32 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 31 inferred relationships involving `Offer` (e.g. with `Session` and `Session`) actually correct?**
   _`Offer` has 31 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 30 inferred relationships involving `User` (e.g. with `ApprovalAction` and `Session`) actually correct?**
-  _`User` has 30 INFERRED edges - model-reasoned connections that need verification._

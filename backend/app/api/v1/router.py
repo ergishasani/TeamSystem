@@ -20,6 +20,7 @@ from app.api.v1.routes import (
     deals,
     collaborations,
     shake,
+    cards,
 )
 
 api_router = APIRouter(prefix="/api/v1")
@@ -43,3 +44,4 @@ api_router.include_router(onboarding.router)
 api_router.include_router(deals.router)
 api_router.include_router(collaborations.router)
 api_router.include_router(shake.router)
+api_router.include_router(cards.router)

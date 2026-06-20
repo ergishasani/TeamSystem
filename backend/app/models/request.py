@@ -11,7 +11,8 @@ class BenefitRequest(Base):
     company_id = Column(Integer, ForeignKey("companies.id"), nullable=False)
     package_id = Column(Integer, ForeignKey("packages.id"), nullable=True)
     offer_id = Column(Integer, ForeignKey("offers.id"), nullable=True)
-    # package | single_offer
+    collaboration_id = Column(Integer, ForeignKey("provider_collaborations.id"), nullable=True)
+    # package | single_offer | collab
     request_type = Column(String, nullable=False, default="package")
     total_amount = Column(Numeric(12, 2), nullable=False)
     currency = Column(String(3), default="ALL")

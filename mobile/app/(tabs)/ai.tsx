@@ -1,85 +1,144 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
   ScrollView, KeyboardAvoidingView, Platform, ActivityIndicator,
 } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Send, Filter } from 'lucide-react-native';
-import { aiApi, aiFilterApi } from '@/lib/api';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ArrowUp, Sparkles } from 'lucide-react-native';
+import { aiApi, usersApi } from '@/lib/api';
 import { OfferCard } from '@/components/OfferCard';
+import { colors, fonts, radius, spacing } from '@/lib/theme';
 import type { AIConciergeResponse, Offer } from '@/types';
 
-type Mode = 'concierge' | 'filter';
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 interface Message {
   id: string;
   role: 'user' | 'ai';
   text: string;
-  response?: AIConciergeResponse;
+  categories?: string[];
+  packageTitle?: string;
   offers?: Offer[];
 }
 
+const CATEGORIES = ['WELLNESS', 'FITNESS', 'FOOD', 'TRAVEL', 'LEARNING'];
+
+const QUICK_PROMPTS = [
+  "I'm burnt out",
+  'I want to get fit',
+  'Plan a weekend escape',
+  'Surprise me with a food pick',
+  'Find a learning offer',
+];
+
+// ─── Bubble components ────────────────────────────────────────────────────────
+
+function AIBubble({ msg, onCategoryPress }: { msg: Message; onCategoryPress?: (cat: string) => void }) {
+  return (
+    <View style={styles.aiBubble}>
+      <Text style={styles.aiBubbleText}>{msg.text}</Text>
+      {msg.categories && msg.categories.length > 0 && (
+        <View style={styles.catRow}>
+          {msg.categories.map((c) => (
+            <TouchableOpacity
+              key={c}
+              style={styles.catChip}
+              onPress={() => onCategoryPress?.(c)}
+              activeOpacity={0.7}
+            >
+              <Text style={styles.catChipText}>{c.toUpperCase()}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
+      {msg.packageTitle && (
+        <View style={styles.packageChip}>
+          <Sparkles size={11} color={colors.ink} strokeWidth={2} />
+          <Text style={styles.packageChipText}>Suggested: {msg.packageTitle}</Text>
+        </View>
+      )}
+      {msg.offers && msg.offers.length > 0 && (
+        <View style={styles.offersWrap}>
+          {msg.offers.map((o) => <OfferCard key={o.id} offer={o} />)}
+        </View>
+      )}
+    </View>
+  );
+}
+
+function UserBubble({ msg }: { msg: Message }) {
+  return (
+    <View style={styles.userBubbleWrap}>
+      <View style={styles.userBubble}>
+        <Text style={styles.userBubbleText}>{msg.text}</Text>
+      </View>
+    </View>
+  );
+}
+
+// ─── Screen ───────────────────────────────────────────────────────────────────
+
 export default function AIScreen() {
-  const router = useRouter();
-  const [mode, setMode] = useState<Mode>('concierge');
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '0',
-      role: 'ai',
-      text: "Hi! I'm Perka AI. Tell me how you're feeling or what you'd like to do, and I'll suggest the perfect benefits package for you. 🎯",
-    },
-  ]);
-  const [filterMessages, setFilterMessages] = useState<Message[]>([
-    {
-      id: '0',
-      role: 'ai',
-      text: "Tell me what you're looking for and I'll find matching offers instantly! Try: 'Show me wellness offers under 5,000 ALL' 🔍",
-    },
-  ]);
+  const insets = useSafeAreaInsets();
+  const scrollRef = useRef<ScrollView>(null);
+  const [userName, setUserName] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const scrollRef = useRef<ScrollView>(null);
 
-  const activeMessages = mode === 'concierge' ? messages : filterMessages;
-  const setActiveMessages = mode === 'concierge' ? setMessages : setFilterMessages;
+  useEffect(() => {
+    usersApi.me()
+      .then((res) => {
+        const name: string = res.data.full_name ?? '';
+        const first = name.split(' ')[0];
+        setUserName(first);
+        setMessages([
+          {
+            id: '0',
+            role: 'ai',
+            text: `Hi ${first} — I'm your Perka concierge. Tell me how you're feeling this week and I'll find perks that match.`,
+            categories: ['wellness', 'fitness', 'food', 'travel', 'learning'],
+          },
+        ]);
+      })
+      .catch(() => {
+        setMessages([
+          {
+            id: '0',
+            role: 'ai',
+            text: "Hi — I'm your Perka concierge. Tell me how you're feeling this week and I'll find perks that match.",
+            categories: ['wellness', 'fitness', 'food', 'travel', 'learning'],
+          },
+        ]);
+      });
+  }, []);
 
-  const send = async () => {
-    const text = input.trim();
-    if (!text || loading) return;
+  const send = async (text?: string) => {
+    const msg = (text ?? input).trim();
+    if (!msg || loading) return;
 
-    const userMsg: Message = { id: Date.now().toString(), role: 'user', text };
-    setActiveMessages((prev) => [...prev, userMsg]);
+    const userMsg: Message = { id: Date.now().toString(), role: 'user', text: msg };
+    setMessages((prev) => [...prev, userMsg]);
     setInput('');
     setLoading(true);
 
+    setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 80);
+
     try {
-      if (mode === 'filter') {
-        const res = await aiFilterApi.filterOffers(text);
-        const offers: Offer[] = res.data.items ?? [];
-        const aiMsg: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'ai',
-          text: offers.length > 0
-            ? `Found ${offers.length} offer${offers.length !== 1 ? 's' : ''} matching your request:`
-            : 'No offers found for that search. Try different keywords!',
-          offers,
-        };
-        setActiveMessages((prev) => [...prev, aiMsg]);
-      } else {
-        const res = await aiApi.concierge(text);
-        const data: AIConciergeResponse = res.data;
-        const aiMsg: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'ai',
-          text: data.reply,
-          response: data,
-        };
-        setActiveMessages((prev) => [...prev, aiMsg]);
-      }
+      const res = await aiApi.concierge(msg);
+      const data: AIConciergeResponse = res.data;
+      const aiMsg: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'ai',
+        text: data.reply,
+        categories: data.suggested_categories ?? [],
+        packageTitle: data.suggested_package_title ?? undefined,
+      };
+      setMessages((prev) => [...prev, aiMsg]);
     } catch {
-      setActiveMessages((prev) => [
+      setMessages((prev) => [
         ...prev,
-        { id: (Date.now() + 1).toString(), role: 'ai', text: 'Sorry, I had trouble connecting. Please try again.' },
+        { id: (Date.now() + 1).toString(), role: 'ai', text: "Sorry, I couldn't connect right now. Try again in a moment." },
       ]);
     } finally {
       setLoading(false);
@@ -88,110 +147,184 @@ export default function AIScreen() {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <View style={styles.header}>
-        <Text style={styles.title}>AI Concierge</Text>
-        <Text style={styles.subtitle}>Powered by Perka Intelligence</Text>
-        <View style={styles.modeRow}>
-          <TouchableOpacity
-            style={[styles.modeBtn, mode === 'concierge' && styles.modeBtnActive]}
-            onPress={() => setMode('concierge')}
-          >
-            <Text style={[styles.modeBtnText, mode === 'concierge' && styles.modeBtnTextActive]}>🤖 Concierge</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.modeBtn, mode === 'filter' && styles.modeBtnActive]}
-            onPress={() => setMode('filter')}
-          >
-            <Text style={[styles.modeBtnText, mode === 'filter' && styles.modeBtnTextActive]}>🔍 Filter Offers</Text>
-          </TouchableOpacity>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={0}
+    >
+      {/* Header */}
+      <View style={[styles.header, { paddingTop: insets.top + 12 }]}>
+        <View style={styles.headerIcon}>
+          <Sparkles size={22} color={colors.ink} strokeWidth={2} />
+        </View>
+        <View>
+          <Text style={styles.headerTitle}>AI Concierge</Text>
+          <Text style={styles.headerSub}>POWERED BY PERKA</Text>
         </View>
       </View>
 
-      <ScrollView ref={scrollRef} style={styles.chat} contentContainerStyle={styles.chatContent}>
-        {activeMessages.map((msg) => (
-          <View key={msg.id}>
-            <View style={[styles.bubble, msg.role === 'user' ? styles.userBubble : styles.aiBubble]}>
-              <Text style={[styles.bubbleText, msg.role === 'user' && styles.userText]}>{msg.text}</Text>
-              {(msg.response?.suggested_categories?.length ?? 0) > 0 && (
-                <View style={styles.tags}>
-                  {msg.response?.suggested_categories?.map((cat) => (
-                    <View key={cat} style={styles.tag}>
-                      <Text style={styles.tagText}>{cat}</Text>
-                    </View>
-                  ))}
-                </View>
-              )}
-              {msg.response?.suggested_package_title && (
-                <Text style={styles.packageHint}>✨ Package: {msg.response.suggested_package_title}</Text>
-              )}
-            </View>
-            {msg.offers && msg.offers.length > 0 && (
-              <View style={styles.offersContainer}>
-                {msg.offers.map((offer) => (
-                  <OfferCard key={offer.id} offer={offer} />
-                ))}
-              </View>
-            )}
-          </View>
-        ))}
+      {/* Messages */}
+      <ScrollView
+        ref={scrollRef}
+        style={styles.chat}
+        contentContainerStyle={[styles.chatContent, { paddingBottom: 12 }]}
+        keyboardDismissMode="interactive"
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+        onContentSizeChange={() => scrollRef.current?.scrollToEnd({ animated: false })}
+      >
+        {messages.map((msg) =>
+          msg.role === 'ai'
+            ? <AIBubble key={msg.id} msg={msg} onCategoryPress={(cat) => send(`Show me ${cat} offers`)} />
+            : <UserBubble key={msg.id} msg={msg} />
+        )}
+
         {loading && (
           <View style={styles.aiBubble}>
-            <ActivityIndicator size="small" color="#22C55E" />
+            <View style={styles.typingDots}>
+              <ActivityIndicator size="small" color={colors.labelSecondary} />
+            </View>
           </View>
         )}
       </ScrollView>
 
-      <View style={styles.inputRow}>
+      {/* Quick prompts */}
+      <View style={styles.quickWrap}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.quickRow}
+          keyboardShouldPersistTaps="always"
+        >
+          {QUICK_PROMPTS.map((p) => (
+            <TouchableOpacity
+              key={p}
+              style={styles.quickChip}
+              onPress={() => {
+                setInput('');
+                send(p);
+              }}
+              activeOpacity={0.7}
+            >
+              <Text style={styles.quickChipText}>{p}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
+
+      {/* Input bar */}
+      <View style={[styles.inputBar, { paddingBottom: Math.max(insets.bottom, 8) + 6 }]}>
         <TextInput
           style={styles.input}
-          placeholder={mode === 'filter' ? 'e.g. wellness under 5000 ALL...' : 'Ask me anything about your benefits...'}
-          placeholderTextColor="#555"
+          placeholder="Message Concierge..."
+          placeholderTextColor={colors.labelTertiary}
           value={input}
           onChangeText={setInput}
-          onSubmitEditing={send}
+          onSubmitEditing={() => send()}
           returnKeyType="send"
+          multiline={false}
+          blurOnSubmit={false}
         />
-        <TouchableOpacity style={styles.sendBtn} onPress={send} disabled={loading}>
-          <Send size={20} color="#111" />
+        <TouchableOpacity
+          style={[styles.sendBtn, (!input.trim() || loading) && styles.sendBtnDisabled]}
+          onPress={() => send()}
+          disabled={!input.trim() || loading}
+          activeOpacity={0.75}
+        >
+          <ArrowUp size={18} color={colors.white} strokeWidth={2.5} />
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
 }
 
+// ─── Styles ───────────────────────────────────────────────────────────────────
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#111111' },
-  header: { paddingTop: 60, paddingHorizontal: 20, paddingBottom: 12 },
-  title: { fontSize: 26, fontWeight: '800', color: '#FFFFFF' },
-  subtitle: { color: '#A1A1AA', fontSize: 13, marginTop: 4, marginBottom: 12 },
-  modeRow: { flexDirection: 'row', gap: 8 },
-  modeBtn: { borderRadius: 20, paddingHorizontal: 14, paddingVertical: 8, backgroundColor: '#1E1E1E', borderWidth: 1, borderColor: '#2A2A2A' },
-  modeBtnActive: { backgroundColor: '#22C55E20', borderColor: '#22C55E' },
-  modeBtnText: { color: '#A1A1AA', fontWeight: '600', fontSize: 13 },
-  modeBtnTextActive: { color: '#22C55E' },
+  container: { flex: 1, backgroundColor: colors.paper },
+
+  header: {
+    flexDirection: 'row', alignItems: 'center', gap: 14,
+    paddingHorizontal: spacing.screenX, paddingBottom: 14,
+    backgroundColor: colors.paper,
+  },
+  headerIcon: {
+    width: 52, height: 52, borderRadius: 26,
+    backgroundColor: colors.lime,
+    justifyContent: 'center', alignItems: 'center',
+  },
+  headerTitle: { fontSize: 22, fontFamily: fonts.bold, color: colors.ink, letterSpacing: -0.4 },
+  headerSub: { fontSize: 11, fontFamily: fonts.semiBold, color: colors.labelTertiary, letterSpacing: 1, marginTop: 1 },
+
   chat: { flex: 1 },
-  chatContent: { padding: 20, gap: 12, paddingBottom: 20 },
-  bubble: { maxWidth: '85%', borderRadius: 16, padding: 14 },
-  aiBubble: { alignSelf: 'flex-start', backgroundColor: '#1E1E1E', borderBottomLeftRadius: 4 },
-  userBubble: { alignSelf: 'flex-end', backgroundColor: '#22C55E', borderBottomRightRadius: 4 },
-  bubbleText: { color: '#FFFFFF', fontSize: 15, lineHeight: 22 },
-  userText: { color: '#111111', fontWeight: '600' },
-  tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 10 },
-  tag: { backgroundColor: '#2A2A2A', borderRadius: 20, paddingHorizontal: 10, paddingVertical: 4 },
-  tagText: { color: '#22C55E', fontSize: 12, fontWeight: '600' },
-  packageHint: { color: '#22C55E', fontSize: 13, marginTop: 8, fontWeight: '600' },
-  offersContainer: { marginTop: 8, gap: 8 },
-  inputRow: {
-    flexDirection: 'row', padding: 16, gap: 10,
-    borderTopWidth: 1, borderTopColor: '#2A2A2A', backgroundColor: '#111111',
+  chatContent: { paddingHorizontal: spacing.screenX, gap: 10, paddingTop: 4 },
+
+  // AI bubble
+  aiBubble: {
+    backgroundColor: colors.white,
+    borderRadius: radius['2xl'],
+    padding: 18,
+    alignSelf: 'flex-start',
+    maxWidth: '90%',
+    gap: 12,
+  },
+  aiBubbleText: { fontSize: 16, fontFamily: fonts.regular, color: colors.ink, lineHeight: 24 },
+
+  catRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  catChip: {
+    borderRadius: radius.pill, borderWidth: 1.5, borderColor: colors.ink,
+    paddingHorizontal: 12, paddingVertical: 6,
+  },
+  catChipText: { fontSize: 12, fontFamily: fonts.bold, color: colors.ink, letterSpacing: 0.5 },
+
+  packageChip: {
+    flexDirection: 'row', alignItems: 'center', gap: 5,
+    backgroundColor: colors.lime, borderRadius: radius.pill,
+    alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 5,
+  },
+  packageChipText: { fontSize: 12, fontFamily: fonts.semiBold, color: colors.ink },
+
+  offersWrap: { gap: 8, width: '100%' },
+
+  // User bubble
+  userBubbleWrap: { alignItems: 'flex-end' },
+  userBubble: {
+    backgroundColor: colors.white,
+    borderRadius: radius['2xl'],
+    paddingHorizontal: 18, paddingVertical: 14,
+    maxWidth: '80%',
+  },
+  userBubbleText: { fontSize: 16, fontFamily: fonts.semiBold, color: colors.ink, lineHeight: 22 },
+
+  typingDots: { paddingVertical: 4 },
+
+  // Quick prompts
+  quickWrap: { backgroundColor: colors.paper, paddingTop: 6, paddingBottom: 2 },
+  quickRow: { paddingHorizontal: spacing.screenX, gap: 8, paddingVertical: 2 },
+  quickChip: {
+    backgroundColor: colors.white, borderRadius: radius.pill,
+    paddingHorizontal: 16, paddingVertical: 11,
+    shadowColor: colors.ink, shadowOpacity: 0.04,
+    shadowOffset: { width: 0, height: 1 }, shadowRadius: 4, elevation: 1,
+  },
+  quickChipText: { fontSize: 14, fontFamily: fonts.semiBold, color: colors.ink },
+
+  // Input bar
+  inputBar: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    paddingHorizontal: spacing.screenX, paddingTop: 10,
+    backgroundColor: colors.paper,
   },
   input: {
-    flex: 1, backgroundColor: '#1E1E1E', borderRadius: 12, padding: 14,
-    color: '#FFFFFF', fontSize: 15, borderWidth: 1, borderColor: '#2A2A2A',
+    flex: 1, height: 50,
+    backgroundColor: colors.white, borderRadius: radius.pill,
+    paddingHorizontal: 20, fontSize: 16,
+    fontFamily: fonts.regular, color: colors.ink,
   },
   sendBtn: {
-    backgroundColor: '#22C55E', width: 48, height: 48,
-    borderRadius: 12, justifyContent: 'center', alignItems: 'center',
+    width: 50, height: 50, borderRadius: 25,
+    backgroundColor: colors.labelSecondary,
+    justifyContent: 'center', alignItems: 'center',
   },
+  sendBtnDisabled: { opacity: 0.4 },
 });

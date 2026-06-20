@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Star } from 'lucide-react-native';
+import { Star, ChevronRight } from 'lucide-react-native';
 import type { Provider } from '@/types';
+import { colors, fonts, radius } from '@/lib/theme';
 
 interface Props {
   provider: Provider;
@@ -18,30 +19,33 @@ export function ProviderMiniCard({ provider, onPress }: Props) {
         <Text style={styles.category}>{provider.category} · {provider.city}</Text>
       </View>
       <View style={styles.rating}>
-        <Star size={12} color="#F59E0B" fill="#F59E0B" />
+        <Star size={12} color={colors.warning} fill={colors.warning} />
         <Text style={styles.ratingText}>{provider.rating}</Text>
       </View>
+      <ChevronRight size={14} color={colors.labelTertiary} strokeWidth={1.5} />
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#1E1E1E',
-    borderRadius: 14,
+    backgroundColor: colors.white,
+    borderRadius: radius.lg,
     padding: 14,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    borderWidth: 1,
-    borderColor: '#2A2A2A',
     marginBottom: 8,
   },
-  avatar: { width: 42, height: 42, borderRadius: 12, backgroundColor: '#22C55E20', justifyContent: 'center', alignItems: 'center' },
-  avatarText: { color: '#22C55E', fontWeight: '800', fontSize: 18 },
+  avatar: {
+    width: 44, height: 44, borderRadius: radius.md,
+    backgroundColor: colors.lime,
+    justifyContent: 'center', alignItems: 'center',
+  },
+  avatarText: { color: colors.ink, fontFamily: fonts.bold, fontSize: 18 },
   body: { flex: 1 },
-  name: { color: '#FFFFFF', fontWeight: '700', fontSize: 15 },
-  category: { color: '#A1A1AA', fontSize: 12, marginTop: 2, textTransform: 'capitalize' },
-  rating: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  ratingText: { color: '#F59E0B', fontWeight: '700', fontSize: 13 },
+  name: { color: colors.ink, fontFamily: fonts.semiBold, fontSize: 15 },
+  category: { color: colors.labelSecondary, fontSize: 12, fontFamily: fonts.medium, marginTop: 3, textTransform: 'capitalize' },
+  rating: { flexDirection: 'row', alignItems: 'center', gap: 3 },
+  ratingText: { color: colors.ink, fontFamily: fonts.semiBold, fontSize: 13 },
 });

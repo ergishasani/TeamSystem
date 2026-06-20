@@ -45,6 +45,7 @@ class ProviderOut(BaseModel):
     logo_url: Optional[str] = None
     rating: float
     status: str
+    offer_count: int = 0
 
     model_config = {"from_attributes": True}
 
@@ -52,6 +53,7 @@ class ProviderOut(BaseModel):
 class OfferOut(BaseModel):
     id: int
     provider_id: int
+    provider_name: Optional[str] = None
     title: str
     description: Optional[str] = None
     category: str

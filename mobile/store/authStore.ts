@@ -11,6 +11,7 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   hydrate: () => Promise<void>;
+  setUser: (user: User) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -52,4 +53,6 @@ export const useAuthStore = create<AuthState>((set) => ({
     await SecureStore.deleteItemAsync('auth_token');
     set({ token: null, user: null });
   },
+
+  setUser: (user: User) => set({ user }),
 }));

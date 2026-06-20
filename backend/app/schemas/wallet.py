@@ -16,6 +16,7 @@ class WalletOut(BaseModel):
 
 class WalletHistoryItem(BaseModel):
     id: int
+    title: Optional[str] = None
     request_type: str
     total_amount: float
     currency: str

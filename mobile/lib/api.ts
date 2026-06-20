@@ -18,6 +18,30 @@ apiClient.interceptors.request.use(async (config) => {
   return config;
 });
 
+// Auto-logout on 401
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response?.status === 401) {
+      await SecureStore.deleteItemAsync('auth_token');
+      const { useAuthStore } = await import('@/store/authStore');
+      useAuthStore.getState().logout();
+    }
+    return Promise.reject(error);
+  },
+);
+
+// ─── Users ────────────────────────────────────────────────────────────────────
+
+export const usersApi = {
+  me: () => apiClient.get('/users/me'),
+  update: (data: { full_name?: string; phone?: string; address?: string; avatar_url?: string; language?: string }) =>
+    apiClient.patch('/users/me', data),
+  colleagues: (q?: string) => apiClient.get('/users/colleagues', { params: q ? { q } : undefined }),
+  leaderboard: () => apiClient.get('/users/leaderboard'),
+  myStats: () => apiClient.get('/users/me/stats'),
+};
+
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 
 export const authApi = {
@@ -35,6 +59,8 @@ export const authApi = {
 export const walletApi = {
   getWallet: () => apiClient.get('/wallet/me'),
   getHistory: () => apiClient.get('/wallet/me/history'),
+  topUp: (amount: number) => apiClient.post('/wallet/me/topup', { amount }),
+  transfer: (to_email: string, amount: number) => apiClient.post('/wallet/me/transfer', { to_email, amount }),
 };
 
 // ─── Offers ───────────────────────────────────────────────────────────────────
@@ -66,6 +92,8 @@ export const packagesApi = {
 // ─── AI ───────────────────────────────────────────────────────────────────────
 
 export const aiApi = {
+  pick: () => apiClient.get('/ai/pick'),
+
   concierge: (message: string, budget?: number) =>
     apiClient.post('/ai/concierge', { message, budget }),
 
@@ -78,7 +106,7 @@ export const aiApi = {
 // ─── Benefit Requests ─────────────────────────────────────────────────────────
 
 export const requestsApi = {
-  create: (data: { package_id?: number; offer_id?: number; request_type?: string; ai_reason?: string }) =>
+  create: (data: { package_id?: number; offer_id?: number; collaboration_id?: number; request_type?: string; ai_reason?: string }) =>
     apiClient.post('/benefit-requests', data),
 
   myRequests: () => apiClient.get('/benefit-requests/me'),
@@ -93,6 +121,7 @@ export const requestsApi = {
 export const redemptionsApi = {
   myRedemptions: () => apiClient.get('/redemptions/me'),
   getById: (id: number) => apiClient.get(`/redemptions/${id}`),
+  byRequest: (requestId: number) => apiClient.get(`/redemptions/by-request/${requestId}`),
 };
 
 // ─── Challenges ───────────────────────────────────────────────────────────────
@@ -106,7 +135,7 @@ export const challengesApi = {
 // ─── Providers ────────────────────────────────────────────────────────────────
 
 export const providersApi = {
-  list: () => apiClient.get('/providers'),
+  list: (params?: { category?: string; q?: string }) => apiClient.get('/providers', { params }),
   getById: (id: number) => apiClient.get(`/providers/${id}`),
 };
 
@@ -115,6 +144,16 @@ export const providersApi = {
 export const onboardingApi = {
   saveInterests: (interests: string[]) => apiClient.post('/onboarding/interests', { interests }),
   getInterests: () => apiClient.get('/onboarding/interests'),
+};
+
+// ─── Cards ────────────────────────────────────────────────────────────────────
+
+export const cardsApi = {
+  list: () => apiClient.get('/cards'),
+  add: (data: { card_type: string; brand: string; last_four: string; expiry: string; is_primary: boolean }) =>
+    apiClient.post('/cards', data),
+  setPrimary: (id: number) => apiClient.patch(`/cards/${id}/primary`),
+  remove: (id: number) => apiClient.delete(`/cards/${id}`),
 };
 
 // ─── Swipe ────────────────────────────────────────────────────────────────────
@@ -140,6 +179,14 @@ export const collaborationsApi = {
   getById: (id: number) => apiClient.get(`/collaborations/${id}`),
   create: (data: { title: string; description?: string; items: { offer_id: number; price_share: number }[] }) =>
     apiClient.post('/collaborations', data),
+};
+
+// ─── Notifications ────────────────────────────────────────────────────────────
+
+export const notificationsApi = {
+  list: () => apiClient.get('/notifications/me'),
+  markRead: (id: number) => apiClient.patch(`/notifications/${id}/read`),
+  markAllRead: () => apiClient.post('/notifications/me/read-all'),
 };
 
 // ─── Shake ────────────────────────────────────────────────────────────────────

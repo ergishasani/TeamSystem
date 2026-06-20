@@ -15,7 +15,9 @@ from app.schemas.ai import (
 )
 from app.schemas.offer import OfferListResponse
 from app.services.ai_service import concierge as concierge_service, get_recommendations
+from app.services.recommendation_service import get_ranked_offers
 from app.services.insights_service import employer_insights
+from app.models.provider import Provider
 
 router = APIRouter(prefix="/ai", tags=["ai"])
 
@@ -40,6 +42,48 @@ def generate_package(
     profile = db.query(EmployeeProfile).filter(EmployeeProfile.user_id == current_user.id).first()
     budget = data.budget or (float(profile.remaining_amount) if profile else None)
     return concierge_service(db, current_user, data.message, budget)
+
+
+_PICK_REASONS: dict[str, str] = {
+    "wellness": "Your profile leans toward calm, restorative experiences. This offer matches your wellness goals perfectly.",
+    "fitness": "You've shown strong interest in fitness. This pick will help you stay on track with your active lifestyle.",
+    "food": "Your taste profile favors culinary experiences. This is one of the top-rated food spots in your city.",
+    "travel": "Adventure is in your profile. This curated experience is built for explorers like you.",
+    "learning": "You have a growth mindset. This offer will help you level up a skill you care about.",
+    "health": "Health is a clear priority in your profile. This offer directly supports your wellbeing.",
+}
+
+
+class AiPickOut(BaseModel):
+    offer_id: int
+    title: str
+    category: str
+    price: float
+    currency: str
+    provider_name: Optional[str]
+    reason: str
+
+    model_config = {"from_attributes": True}
+
+
+@router.get("/pick", response_model=AiPickOut)
+def ai_daily_pick(current_user=Depends(get_employee), db: Session = Depends(get_db)):
+    ranked = get_ranked_offers(db, current_user.id, limit=1)
+    if not ranked:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail="No pick available")
+    offer = ranked[0]
+    provider = db.query(Provider).filter(Provider.id == offer.provider_id).first()
+    reason = _PICK_REASONS.get(offer.category, "Handpicked based on your activity and preferences on Perka.")
+    return AiPickOut(
+        offer_id=offer.id,
+        title=offer.title,
+        category=offer.category,
+        price=float(offer.price),
+        currency=offer.currency,
+        provider_name=provider.name if provider else None,
+        reason=reason,
+    )
 
 
 @router.get("/recommendations/me", response_model=RecommendationsResponse)

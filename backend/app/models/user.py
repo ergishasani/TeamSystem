@@ -17,4 +17,7 @@ class User(Base):
     language = Column(String(5), default="sq")
     country = Column(String(2), default="AL")
     currency = Column(String(3), default="ALL")
+    phone = Column(String, nullable=True)
+    address = Column(String, nullable=True)
+    avatar_url = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))

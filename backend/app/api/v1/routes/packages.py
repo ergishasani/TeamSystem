@@ -6,9 +6,25 @@ from app.core.database import get_db
 from app.core.deps import get_current_user, get_employee
 from app.models.package import Package, PackageItem
 from app.models.offer import Offer
+from app.models.provider import Provider
 from app.schemas.package import PackageOut, PackageCreate, PackageItemOut
 
 router = APIRouter(prefix="/packages", tags=["packages"])
+
+
+def _build_item_out(item: PackageItem, db: Session) -> PackageItemOut:
+    offer = db.query(Offer).filter(Offer.id == item.offer_id).first()
+    provider = db.query(Provider).filter(Provider.id == item.provider_id).first() if offer else None
+    return PackageItemOut(
+        id=item.id,
+        offer_id=item.offer_id,
+        provider_id=item.provider_id,
+        price_share=float(item.price_share),
+        category=offer.category if offer else "wellness",
+        offer_title=offer.title if offer else None,
+        provider_name=provider.name if provider else None,
+        valid_until=offer.valid_until if offer else None,
+    )
 
 
 def _build_package_out(pkg: Package, db: Session) -> PackageOut:
@@ -24,7 +40,10 @@ def _build_package_out(pkg: Package, db: Session) -> PackageOut:
         created_by=pkg.created_by,
         ai_reason=pkg.ai_reason,
         created_at=pkg.created_at,
-        items=[PackageItemOut(id=i.id, offer_id=i.offer_id, provider_id=i.provider_id, price_share=float(i.price_share)) for i in items],
+        items=[
+            _build_item_out(i, db)
+            for i in items
+        ],
     )
 
 

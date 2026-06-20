@@ -13,6 +13,9 @@ class UserOut(BaseModel):
     language: str
     country: str
     currency: str
+    phone: Optional[str] = None
+    address: Optional[str] = None
+    avatar_url: Optional[str] = None
     created_at: datetime
 
     model_config = {"from_attributes": True}
@@ -21,6 +24,9 @@ class UserOut(BaseModel):
 class UserUpdate(BaseModel):
     full_name: Optional[str] = None
     language: Optional[str] = None
+    phone: Optional[str] = None
+    address: Optional[str] = None
+    avatar_url: Optional[str] = None
 
 
 class InterestsUpdate(BaseModel):
