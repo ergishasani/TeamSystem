@@ -109,3 +109,48 @@ export const providersApi = {
   list: () => apiClient.get('/providers'),
   getById: (id: number) => apiClient.get(`/providers/${id}`),
 };
+
+// ─── Onboarding ───────────────────────────────────────────────────────────────
+
+export const onboardingApi = {
+  saveInterests: (interests: string[]) => apiClient.post('/onboarding/interests', { interests }),
+  getInterests: () => apiClient.get('/onboarding/interests'),
+};
+
+// ─── Swipe ────────────────────────────────────────────────────────────────────
+
+export const swipeApi = {
+  getDeck: () => apiClient.get('/offers/swipe/deck'),
+  swipe: (offerId: number, direction: 'like' | 'dislike') =>
+    apiClient.post(`/offers/${offerId}/swipe`, { direction }),
+};
+
+// ─── Daily Deal ───────────────────────────────────────────────────────────────
+
+export const dealsApi = {
+  today: () => apiClient.get('/deals/today'),
+  create: (data: { offer_id: number; deal_date: string; deal_price?: number; quantity_limit?: number }) =>
+    apiClient.post('/deals', data),
+};
+
+// ─── Collaborations ───────────────────────────────────────────────────────────
+
+export const collaborationsApi = {
+  list: () => apiClient.get('/collaborations'),
+  getById: (id: number) => apiClient.get(`/collaborations/${id}`),
+  create: (data: { title: string; description?: string; items: { offer_id: number; price_share: number }[] }) =>
+    apiClient.post('/collaborations', data),
+};
+
+// ─── Shake ────────────────────────────────────────────────────────────────────
+
+export const shakeApi = {
+  status: () => apiClient.get('/shake/status'),
+  play: () => apiClient.post('/shake/play'),
+};
+
+// ─── AI Filter ────────────────────────────────────────────────────────────────
+
+export const aiFilterApi = {
+  filterOffers: (query: string) => apiClient.get('/ai/filter-offers', { params: { q: query } }),
+};

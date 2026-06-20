@@ -24,6 +24,7 @@ export default function RegisterScreen() {
       // Register with company_id=1 (TiranaTech demo)
       await authApi.register({ full_name: fullName, email: email.trim().toLowerCase(), password, role: 'employee', company_id: 1 });
       await login(email.trim().toLowerCase(), password);
+      router.replace('/(auth)/onboarding');
     } catch (err: any) {
       const msg = err?.response?.data?.detail || 'Registration failed.';
       Alert.alert('Error', msg);
