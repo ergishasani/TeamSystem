@@ -32,6 +32,7 @@ class CollabItemOut(BaseModel):
     provider_name: Optional[str] = None
     offer_title: Optional[str] = None
     offer_price: Optional[float] = None
+    offer_category: Optional[str] = None
     model_config = {"from_attributes": True}
 
 
@@ -66,6 +67,7 @@ def _build_collab_out(c: ProviderCollaboration, db: Session) -> dict:
             "provider_name": provider.name if provider else None,
             "offer_title": offer.title if offer else None,
             "offer_price": offer_price,
+            "offer_category": offer.category if offer else None,
         })
 
     bundled = float(c.total_price)
@@ -132,4 +134,27 @@ def get_collaboration(
     collab = db.query(ProviderCollaboration).filter(ProviderCollaboration.id == collab_id).first()
     if not collab:
         raise HTTPException(status_code=404, detail="Collaboration not found")
+    return _build_collab_out(collab, db)
+
+
+class CollabPatch(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    is_active: Optional[bool] = None
+
+
+@router.patch("/{collab_id}", response_model=CollabOut)
+def update_collaboration(
+    collab_id: int,
+    body: CollabPatch,
+    current_user: User = Depends(get_employer_admin),
+    db: Session = Depends(get_db),
+):
+    collab = db.query(ProviderCollaboration).filter(ProviderCollaboration.id == collab_id).first()
+    if not collab:
+        raise HTTPException(status_code=404, detail="Collaboration not found")
+    for field, value in body.model_dump(exclude_unset=True).items():
+        setattr(collab, field, value)
+    db.commit()
+    db.refresh(collab)
     return _build_collab_out(collab, db)

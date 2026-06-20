@@ -21,7 +21,7 @@ def list_offers(
     city: Optional[str] = Query(None),
     max_price: Optional[float] = Query(None),
     search: Optional[str] = Query(None),
-    limit: int = Query(20, le=100),
+    limit: int = Query(20, le=500),
     offset: int = Query(0),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),

@@ -15,6 +15,7 @@ export default {
         'app-danger': '#ef4444',
         'app-warning': '#f59e0b',
         'app-info': '#3b82f6',
+        'app-lime': '#c9f158',
       },
     },
   },

@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean
 from app.core.database import Base
 
 
@@ -21,3 +21,8 @@ class User(Base):
     address = Column(String, nullable=True)
     avatar_url = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+
+    # admin-console permission tag: owner | admin | approver | editor | viewer
+    permission_role = Column(String, nullable=True)
+    two_factor_enabled = Column(Boolean, default=False)
+    last_active_at = Column(DateTime(timezone=True), nullable=True)

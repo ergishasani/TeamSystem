@@ -1,8 +1,8 @@
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 
 from app.core.database import get_db
 from app.core.deps import get_current_user, get_employer_admin
@@ -63,6 +63,53 @@ def _build_deal_out(deal: DailyDeal, db):
     offer_dict = OfferOut.model_validate(offer).model_dump() if offer else {}
     offer_dict["provider_name"] = provider.name if provider else None
     return {**deal.__dict__, "offer": offer_dict}
+
+
+@router.get("/upcoming", response_model=List[DailyDealOut])
+def get_upcoming_deals(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    today = date.today()
+    end = today + timedelta(days=7)
+    deals = (
+        db.query(DailyDeal)
+        .filter(DailyDeal.deal_date > today, DailyDeal.deal_date <= end, DailyDeal.is_active == True)
+        .order_by(DailyDeal.deal_date.asc())
+        .all()
+    )
+    return [_build_deal_out(d, db) for d in deals]
+
+
+@router.patch("/{deal_id}/pause")
+def pause_deal(
+    deal_id: int,
+    current_user: User = Depends(get_employer_admin),
+    db: Session = Depends(get_db),
+):
+    deal = db.query(DailyDeal).filter(DailyDeal.id == deal_id).first()
+    if not deal:
+        raise HTTPException(status_code=404, detail="Deal not found")
+    deal.is_active = False
+    db.commit()
+    return {"message": "Deal paused"}
+
+
+@router.patch("/{deal_id}/boost", response_model=DailyDealOut)
+def boost_deal(
+    deal_id: int,
+    current_user: User = Depends(get_employer_admin),
+    db: Session = Depends(get_db),
+):
+    deal = db.query(DailyDeal).filter(DailyDeal.id == deal_id).first()
+    if not deal:
+        raise HTTPException(status_code=404, detail="Deal not found")
+    offer = db.query(Offer).filter(Offer.id == deal.offer_id).first()
+    current_price = float(deal.deal_price or offer.price)
+    deal.deal_price = round(current_price * 0.80, 2)
+    db.commit()
+    db.refresh(deal)
+    return _build_deal_out(deal, db)
 
 
 @router.post("", response_model=DailyDealOut, status_code=201)

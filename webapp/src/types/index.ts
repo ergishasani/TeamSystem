@@ -1,4 +1,4 @@
-export type UserRole = 'employee' | 'employer_admin' | 'provider_admin';
+export type UserRole = 'employee' | 'employer_admin' | 'provider_admin' | 'platform_admin';
 
 export interface User {
   id: number;

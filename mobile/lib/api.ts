@@ -23,10 +23,7 @@ apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const status = error.response?.status;
-    const detail = error.response?.data?.detail ?? '';
-    const isSessionBroken =
-      status === 401 ||
-      (status === 403 && (detail.includes('Employee access required') || detail.includes('Insufficient permissions')));
+    const isSessionBroken = status === 401 || status === 403;
     if (isSessionBroken) {
       await SecureStore.deleteItemAsync('auth_token');
       const { useAuthStore } = await import('@/store/authStore');

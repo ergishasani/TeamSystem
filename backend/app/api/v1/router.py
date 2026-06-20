@@ -21,6 +21,11 @@ from app.api.v1.routes import (
     collaborations,
     shake,
     cards,
+    analytics,
+    settings,
+    team,
+    broadcasts,
+    campaigns,
 )
 
 api_router = APIRouter(prefix="/api/v1")
@@ -45,3 +50,8 @@ api_router.include_router(deals.router)
 api_router.include_router(collaborations.router)
 api_router.include_router(shake.router)
 api_router.include_router(cards.router)
+api_router.include_router(analytics.router)
+api_router.include_router(settings.router)
+api_router.include_router(team.router)
+api_router.include_router(broadcasts.router)
+api_router.include_router(campaigns.router)

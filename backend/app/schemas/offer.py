@@ -19,6 +19,10 @@ class OfferCreate(BaseModel):
     status: str = "active"
 
 
+class OfferCreateAdmin(OfferCreate):
+    provider_id: int
+
+
 class OfferUpdate(BaseModel):
     title: Optional[str] = None
     category: Optional[str] = None
@@ -48,6 +52,34 @@ class ProviderOut(BaseModel):
     offer_count: int = 0
 
     model_config = {"from_attributes": True}
+
+
+class ProviderAdminOut(ProviderOut):
+    redemption_count: int = 0
+    uptime_pct: int = 100
+    health_status: str = "healthy"  # healthy | watch | down
+
+
+class ProviderCreate(BaseModel):
+    name: str
+    category: str
+    city: str = "Tirana"
+    country: str = "AL"
+    description: Optional[str] = None
+    logo_url: Optional[str] = None
+    rating: float = Field(default=4.5, ge=0, le=5)
+    status: str = "active"
+
+
+class ProviderUpdate(BaseModel):
+    name: Optional[str] = None
+    category: Optional[str] = None
+    city: Optional[str] = None
+    country: Optional[str] = None
+    description: Optional[str] = None
+    logo_url: Optional[str] = None
+    rating: Optional[float] = Field(default=None, ge=0, le=5)
+    status: Optional[str] = None
 
 
 class OfferOut(BaseModel):

@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 
@@ -44,4 +45,6 @@ def login_user(db: Session, email: str, password: str) -> str:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",
         )
+    user.last_active_at = datetime.now(timezone.utc)
+    db.commit()
     return create_access_token(subject=str(user.id))
