@@ -81,7 +81,7 @@ backend/
 | `get_provider_admin` | `role == provider_admin` |
 | `require_role(*roles)` | Any of the listed roles |
 
-Roles: `employee`, `employer_admin`, `provider_admin`, `platform_admin`.
+Roles: `employee`, `employer_admin`, `provider_admin`.
 
 ---
 
@@ -96,7 +96,7 @@ All tables are defined in `app/models/`. Field lists below mirror the ORM models
 | full_name | |
 | email | unique |
 | hashed_password | bcrypt |
-| role | `employee` / `employer_admin` / `provider_admin` / `platform_admin` |
+| role | `employee` / `employer_admin` / `provider_admin` |
 | company_id | FK → Company (nullable) |
 | provider_id | FK → Provider (nullable) |
 | language | default `sq` |

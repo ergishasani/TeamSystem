@@ -160,7 +160,7 @@ webapp/
 ### Role routing
 - `employer_admin` → redirected to `/employer` after login
 - `provider_admin` → redirected to `/provider` after login
-- Any other role (employee, platform_admin) → redirected back to `/login`
+- Any other role (employee) → redirected back to `/login`
 
 ### Vite proxy
 The dev server proxies all `/api/*` requests to `http://localhost:8000`, so no CORS issues during development. For production, point `VITE_API_URL` at the deployed backend and ensure its `BACKEND_CORS_ORIGINS` includes your frontend origin.

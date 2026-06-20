@@ -53,7 +53,6 @@ Complete description of every feature in the platform, how it works end-to-end, 
 | `employee` | Mobile app | Browse offers, submit benefit requests, track wallet, use AI concierge |
 | `employer_admin` | Web admin `/employer` | Approve/reject requests, view employees, see AI insights |
 | `provider_admin` | Web admin `/provider` | Manage offers, confirm redemptions, view payments |
-| `platform_admin` | — (not yet built) | Future: platform-wide management |
 
 ### Endpoints used
 

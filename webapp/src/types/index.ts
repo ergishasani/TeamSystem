@@ -1,4 +1,4 @@
-export type UserRole = 'employee' | 'employer_admin' | 'provider_admin' | 'platform_admin';
+export type UserRole = 'employee' | 'employer_admin' | 'provider_admin';
 
 export interface User {
   id: number;
@@ -129,9 +129,10 @@ export interface ProviderDashboard {
 
 export interface EmployerInsights {
   top_categories: string[];
-  category_spend: Record<string, number>;
+  category_spend: { category: string; total: number }[];
   approval_rate: number;
   avg_spend: number;
+  total_requests: number;
   pending_total: number;
   approved_total: number;
   avg_budget_utilization: number;
