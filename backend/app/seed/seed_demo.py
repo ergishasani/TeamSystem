@@ -26,6 +26,10 @@ from app.models.provider import Provider
 from app.models.offer import Offer
 from app.models.package import Package, PackageItem
 from app.models.challenge import Challenge
+from app.models.user_interest import UserInterest
+from app.models.daily_deal import DailyDeal
+from app.models.shake import ShakeCredit
+from app.models.collaboration import ProviderCollaboration, CollaborationItem
 
 
 def seed():
@@ -246,6 +250,49 @@ def seed():
             reward=300,
             starts_at=datetime.now(timezone.utc),
             ends_at=datetime.now(timezone.utc) + timedelta(days=60),
+        ))
+
+        print("Seeding interests for demo employee...")
+        for cat in ["Wellness", "Food", "Travel", "Fitness", "Learning"]:
+            db.add(UserInterest(user_id=employee.id, category=cat))
+
+        print("Seeding daily deal...")
+        db.flush()
+        db.add(DailyDeal(
+            offer_id=offers[2].id,  # Healthy Dinner Voucher
+            deal_date=datetime.now(timezone.utc).date(),
+            deal_price=900,
+            quantity_limit=30,
+            quantity_claimed=6,
+            is_active=True,
+        ))
+
+        print("Seeding shake credits...")
+        db.add(ShakeCredit(user_id=employee.id, credits=5))
+
+        print("Seeding provider collaboration...")
+        db.flush()
+        collab = ProviderCollaboration(
+            title="Gym Session + Healthy Dinner",
+            description="Combine a FitZone workout with a healthy dinner — the perfect after-work combo.",
+            total_price=3300,
+            currency="ALL",
+            city="Tirana",
+            is_active=True,
+        )
+        db.add(collab)
+        db.flush()
+        db.add(CollaborationItem(
+            collaboration_id=collab.id,
+            offer_id=offers[1].id,  # Pilates Class
+            provider_id=provider_map["FitZone Albania"].id,
+            price_share=1800,
+        ))
+        db.add(CollaborationItem(
+            collaboration_id=collab.id,
+            offer_id=offers[2].id,  # Healthy Dinner Voucher
+            provider_id=provider_map["Healthy Bowl Tirana"].id,
+            price_share=1500,
         ))
 
         db.commit()

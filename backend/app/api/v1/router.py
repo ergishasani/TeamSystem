@@ -15,6 +15,11 @@ from app.api.v1.routes import (
     challenges,
     interactions,
     notifications,
+    onboarding,
+    swipe,
+    deals,
+    collaborations,
+    shake,
 )
 
 api_router = APIRouter(prefix="/api/v1")
@@ -23,6 +28,7 @@ api_router.include_router(auth.router)
 api_router.include_router(users.router)
 api_router.include_router(wallet.router)
 api_router.include_router(offers.router)
+api_router.include_router(swipe.router)
 api_router.include_router(providers.router)
 api_router.include_router(packages.router)
 api_router.include_router(ai.router)
@@ -33,3 +39,7 @@ api_router.include_router(redemptions.router)
 api_router.include_router(challenges.router)
 api_router.include_router(interactions.router)
 api_router.include_router(notifications.router)
+api_router.include_router(onboarding.router)
+api_router.include_router(deals.router)
+api_router.include_router(collaborations.router)
+api_router.include_router(shake.router)

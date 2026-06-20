@@ -11,10 +11,16 @@ from app.models.challenge import Challenge, ChallengeProgress
 from app.models.interaction import UserInteraction
 from app.models.saved_offer import SavedOffer
 from app.models.notification import Notification
+from app.models.user_interest import UserInterest
+from app.models.swipe import SwipeInteraction
+from app.models.daily_deal import DailyDeal
+from app.models.collaboration import ProviderCollaboration, CollaborationItem
+from app.models.shake import ShakeCredit, ShakeAttempt
 
 __all__ = [
     "User", "Company", "EmployeeProfile", "Provider", "Offer",
     "Package", "PackageItem", "BenefitRequest", "Payment", "Redemption",
     "Challenge", "ChallengeProgress", "UserInteraction", "SavedOffer",
-    "Notification",
+    "Notification", "UserInterest", "SwipeInteraction", "DailyDeal",
+    "ProviderCollaboration", "CollaborationItem", "ShakeCredit", "ShakeAttempt",
 ]

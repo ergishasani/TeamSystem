@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "backend/app/api/v1/router.py": {
-    "mtime": 1781903201.840312,
-    "ast_hash": "ab15bbc4cce49a3a3f3514927c76a886",
+    "mtime": 1781912161.6443264,
+    "ast_hash": "1806e34d318f016768fafc8a991b77c0",
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/__init__.py": {
@@ -30,8 +30,8 @@
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/ai.py": {
-    "mtime": 1781903839.205165,
-    "ast_hash": "8a3df9af0dd76d501518e55f21904d63",
+    "mtime": 1781912154.674271,
+    "ast_hash": "a095c44608f8d7caca165f0669fd22c3",
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/auth.py": {
@@ -100,8 +100,8 @@
     "semantic_hash": ""
   },
   "backend/app/core/config.py": {
-    "mtime": 1781903764.0093548,
-    "ast_hash": "1f33b3b637474b81ee38c57fa6115a17",
+    "mtime": 1781909137.5935802,
+    "ast_hash": "bbaf0ef0e0e1810b4ca242a8aef4f44b",
     "semantic_hash": ""
   },
   "backend/app/core/database.py": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "backend/app/models/__init__.py": {
-    "mtime": 1781903176.6990638,
-    "ast_hash": "aa9b22e19e5f1874edafd15b3bba5dc5",
+    "mtime": 1781912057.6524298,
+    "ast_hash": "781e13fd590cc6db57410e2e8cc8b758",
     "semantic_hash": ""
   },
   "backend/app/models/challenge.py": {
@@ -230,8 +230,8 @@
     "semantic_hash": ""
   },
   "backend/app/seed/seed_demo.py": {
-    "mtime": 1781903161.9084358,
-    "ast_hash": "28913b12de6c750feed5fc2abb6eb369",
+    "mtime": 1781912402.7743628,
+    "ast_hash": "092d5839dd1490735795655211c0c1af",
     "semantic_hash": ""
   },
   "backend/app/services/__init__.py": {
@@ -305,8 +305,8 @@
     "semantic_hash": ""
   },
   "mobile/app/(auth)/register.tsx": {
-    "mtime": 1781899132.8670661,
-    "ast_hash": "4a124b188ef29199c7a53c1f64b3f82b",
+    "mtime": 1781912480.9261746,
+    "ast_hash": "24d99cb89939591c906cbe1d1f506211",
     "semantic_hash": ""
   },
   "mobile/app/(auth)/welcome.tsx": {
@@ -315,13 +315,13 @@
     "semantic_hash": ""
   },
   "mobile/app/(tabs)/_layout.tsx": {
-    "mtime": 1781899136.7917602,
-    "ast_hash": "d7eff238f649b7c9be99061b88a7f0f7",
+    "mtime": 1781914887.9618032,
+    "ast_hash": "3c6ff418e15f627e927cbd1ec3e5c449",
     "semantic_hash": ""
   },
   "mobile/app/(tabs)/ai.tsx": {
-    "mtime": 1781901474.8387089,
-    "ast_hash": "39e578e5b516a9a3f7c2b6a5e06bd945",
+    "mtime": 1781914870.500862,
+    "ast_hash": "4feba72988e900d7c8023947c6d56923",
     "semantic_hash": ""
   },
   "mobile/app/(tabs)/explore.tsx": {
@@ -330,8 +330,8 @@
     "semantic_hash": ""
   },
   "mobile/app/(tabs)/index.tsx": {
-    "mtime": 1781899152.139293,
-    "ast_hash": "d292dd9659ea705ac1a4324da6ce96af",
+    "mtime": 1781914918.1291296,
+    "ast_hash": "411fc1503693d073677dcc1bbbb26322",
     "semantic_hash": ""
   },
   "mobile/app/(tabs)/profile.tsx": {
@@ -430,13 +430,13 @@
     "semantic_hash": ""
   },
   "mobile/lib/api.ts": {
-    "mtime": 1781899095.783157,
-    "ast_hash": "6fe6e281e05615d8044b02bf6d4d25ec",
+    "mtime": 1781912445.4615963,
+    "ast_hash": "ecaab779636cac73712e7c9d6cb40c92",
     "semantic_hash": ""
   },
   "mobile/package.json": {
-    "mtime": 1781901509.4044628,
-    "ast_hash": "160825f42290377227fdf440d97c3725",
+    "mtime": 1781909137.6247213,
+    "ast_hash": "b62c6ffe31d1d1ab3e9df95a3a04cc52",
     "semantic_hash": ""
   },
   "mobile/store/authStore.ts": {
@@ -445,8 +445,8 @@
     "semantic_hash": ""
   },
   "mobile/tsconfig.json": {
-    "mtime": 1781906913.5236251,
-    "ast_hash": "e026b6d0c4708a1d361c64febe3e1e91",
+    "mtime": 1781909137.625718,
+    "ast_hash": "27262ff37098a65a899a3bcaa05bf414",
     "semantic_hash": ""
   },
   "mobile/types/index.ts": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   ".github/workflows/mobile.yml": {
-    "mtime": 1781901503.3048534,
-    "ast_hash": "043f351fac0b48fe51080a9931732bbd",
+    "mtime": 1781909137.589573,
+    "ast_hash": "12d2d1219320533e4a5b2df1f14cef50",
     "semantic_hash": ""
   },
   "README.md": {
@@ -620,8 +620,8 @@
     "semantic_hash": ""
   },
   "webapp/src/App.tsx": {
-    "mtime": 1781904850.850382,
-    "ast_hash": "4aef6803758b8e37475f27f45e0f6ac3",
+    "mtime": 1781915014.0735815,
+    "ast_hash": "aa71364ec2ae3fd7a52e3675d27a9b3c",
     "semantic_hash": ""
   },
   "webapp/src/components/Badge.tsx": {
@@ -640,8 +640,8 @@
     "semantic_hash": ""
   },
   "webapp/src/components/Sidebar.tsx": {
-    "mtime": 1781904892.4746575,
-    "ast_hash": "61c6b876ff5b74dfeebfc19ee0ca9558",
+    "mtime": 1781915027.2889287,
+    "ast_hash": "139abb6d57454f8b7c772871328d1454",
     "semantic_hash": ""
   },
   "webapp/src/components/StatCard.tsx": {
@@ -650,8 +650,8 @@
     "semantic_hash": ""
   },
   "webapp/src/lib/api.ts": {
-    "mtime": 1781906501.8641543,
-    "ast_hash": "0b4276d5e9469798332e4b414d28c0c3",
+    "mtime": 1781914950.8216076,
+    "ast_hash": "b47645e2aa072feb14c69e189a2cc75b",
     "semantic_hash": ""
   },
   "webapp/src/main.tsx": {
@@ -660,8 +660,8 @@
     "semantic_hash": ""
   },
   "webapp/src/pages/LoginPage.tsx": {
-    "mtime": 1781904924.9325726,
-    "ast_hash": "943d0d3094416fea99d6cb5cc43af0e3",
+    "mtime": 1781909137.631992,
+    "ast_hash": "3e2a1f65d799bb591926563a5cc200ce",
     "semantic_hash": ""
   },
   "webapp/src/pages/employer/ApprovalsPage.tsx": {
@@ -670,8 +670,8 @@
     "semantic_hash": ""
   },
   "webapp/src/pages/employer/DashboardPage.tsx": {
-    "mtime": 1781904944.7057705,
-    "ast_hash": "986535f055ef26db1c9b948ba12443a6",
+    "mtime": 1781909137.6348128,
+    "ast_hash": "3cad935157aada241e5c31199f4e0b4b",
     "semantic_hash": ""
   },
   "webapp/src/pages/employer/EmployeesPage.tsx": {
@@ -757,6 +757,96 @@
   "FEATURES.md": {
     "mtime": 1781907007.7929852,
     "ast_hash": "370e9bb14ab28bb75ef87e2ac28c7110",
+    "semantic_hash": ""
+  },
+  ".github/workflows/webapp.yml": {
+    "mtime": 1781909137.590572,
+    "ast_hash": "85b603748420d5e10188ddd611f1bd6d",
+    "semantic_hash": ""
+  },
+  "backend/alembic/versions/a1b2c3d4e5f6_add_gamification_features.py": {
+    "mtime": 1781912082.4444535,
+    "ast_hash": "2b5a6750aee07506e6a37e5bcb44495c",
+    "semantic_hash": ""
+  },
+  "backend/app/api/v1/routes/collaborations.py": {
+    "mtime": 1781912122.0273378,
+    "ast_hash": "e8d4d8e999f41be1a58537a19454f437",
+    "semantic_hash": ""
+  },
+  "backend/app/api/v1/routes/deals.py": {
+    "mtime": 1781912113.8732054,
+    "ast_hash": "fbd771f922d0b5d479e6896bca98879e",
+    "semantic_hash": ""
+  },
+  "backend/app/api/v1/routes/onboarding.py": {
+    "mtime": 1781912100.5456429,
+    "ast_hash": "315f80a79add886ccd79841fe4f02f46",
+    "semantic_hash": ""
+  },
+  "backend/app/api/v1/routes/shake.py": {
+    "mtime": 1781912133.2573097,
+    "ast_hash": "051b232d0b293dbf7de00af13df4d498",
+    "semantic_hash": ""
+  },
+  "backend/app/api/v1/routes/swipe.py": {
+    "mtime": 1781912107.0169415,
+    "ast_hash": "dde6551fb8e58aaffb7942d4bd39d889",
+    "semantic_hash": ""
+  },
+  "backend/app/models/collaboration.py": {
+    "mtime": 1781912042.580031,
+    "ast_hash": "b0dbd5b7e761fdf3c837fcf2e3aa099e",
+    "semantic_hash": ""
+  },
+  "backend/app/models/daily_deal.py": {
+    "mtime": 1781912039.096522,
+    "ast_hash": "2f09f844be9eac0ad80f8e263cdfbcae",
+    "semantic_hash": ""
+  },
+  "backend/app/models/shake.py": {
+    "mtime": 1781912045.197259,
+    "ast_hash": "e9d2ac9720fb2f0a590504787cd07cce",
+    "semantic_hash": ""
+  },
+  "backend/app/models/swipe.py": {
+    "mtime": 1781912036.8131316,
+    "ast_hash": "2c1b0d9921a5c0ffbb1625087adae7ce",
+    "semantic_hash": ""
+  },
+  "backend/app/models/user_interest.py": {
+    "mtime": 1781912035.2900796,
+    "ast_hash": "8652b75f0874b481ba275c6622d44c44",
+    "semantic_hash": ""
+  },
+  "mobile/app/(auth)/onboarding.tsx": {
+    "mtime": 1781912472.0173128,
+    "ast_hash": "59ec3f84de60af0b45eb8148ae575a29",
+    "semantic_hash": ""
+  },
+  "mobile/app/(tabs)/shake.tsx": {
+    "mtime": 1781912556.1450162,
+    "ast_hash": "2085c9d58218232ddb8336e83cb36af7",
+    "semantic_hash": ""
+  },
+  "mobile/app/(tabs)/swipe.tsx": {
+    "mtime": 1781912529.3152125,
+    "ast_hash": "7cedebe7e0a1036271c7d44b64b74a06",
+    "semantic_hash": ""
+  },
+  "mobile/app/deal-of-day.tsx": {
+    "mtime": 1781914824.6561596,
+    "ast_hash": "42d81e5afeabf3ee689ef05ed8174992",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/employer/CollaborationsPage.tsx": {
+    "mtime": 1781915001.634522,
+    "ast_hash": "6fedbe965deddb11f4b88654426bf7db",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/employer/DealOfDayPage.tsx": {
+    "mtime": 1781914974.7967997,
+    "ast_hash": "1e5edfa7507bbce11e8c7ff90f0b845a",
     "semantic_hash": ""
   }
 }
