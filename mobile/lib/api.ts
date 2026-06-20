@@ -18,11 +18,16 @@ apiClient.interceptors.request.use(async (config) => {
   return config;
 });
 
-// Auto-logout on 401
+// Auto-logout on 401 or role-mismatch 403 (e.g. stale session after a reseed)
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response?.status === 401) {
+    const status = error.response?.status;
+    const detail = error.response?.data?.detail ?? '';
+    const isSessionBroken =
+      status === 401 ||
+      (status === 403 && (detail.includes('Employee access required') || detail.includes('Insufficient permissions')));
+    if (isSessionBroken) {
       await SecureStore.deleteItemAsync('auth_token');
       const { useAuthStore } = await import('@/store/authStore');
       useAuthStore.getState().logout();

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Bell, Plus, FileText, ArrowDownToLine, ArrowLeftRight, Building2, Phone, MessageCircle, Sparkles, Flame, Leaf, Dumbbell, UtensilsCrossed, Plane, BookOpen, Heart, Tag, Gift, Handshake } from 'lucide-react-native';
+import { Bell, Building2, Phone, MessageCircle, Sparkles, Flame, Leaf, Dumbbell, UtensilsCrossed, Plane, BookOpen, Heart, Tag, Gift, Handshake } from 'lucide-react-native';
 
 const DEAL_CATEGORY_ICONS: Record<string, React.ComponentType<any>> = {
   wellness: Leaf, fitness: Dumbbell, food: UtensilsCrossed,
@@ -22,19 +22,15 @@ const PLAY_CARDS = [
   { icon: Handshake,  label: 'Collabs',     sub: '2-provider bundles',    circleColor: '#BAE6FD', route: '/collabs' },
 ] as const;
 import { useAuthStore } from '@/store/authStore';
-import { walletApi, offersApi, packagesApi, challengesApi, dealsApi, cardsApi, requestsApi, aiApi } from '@/lib/api';
+import { walletApi, offersApi, packagesApi, challengesApi, dealsApi, requestsApi, aiApi } from '@/lib/api';
 import { WalletCard } from '@/components/WalletCard';
 import { PackageCard } from '@/components/PackageCard';
 import { OfferCard } from '@/components/OfferCard';
 import { ChallengeCard } from '@/components/ChallengeCard';
 import { EmptyState } from '@/components/EmptyState';
-import { CardItem } from '@/components/CardItem';
-import { FadeCarousel } from '@/components/FadeCarousel';
-import { AddCardModal } from '@/components/AddCardModal';
-import { ServiceModal, type ServiceMode } from '@/components/ServiceModal';
 import { HomeContentSkeleton } from '@/components/Skeleton';
 import { colors, fonts, radius, spacing } from '@/lib/theme';
-import type { Wallet, Package, Offer, Challenge, Card, AiPick } from '@/types';
+import type { Wallet, Package, Offer, Challenge, AiPick } from '@/types';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -46,34 +42,24 @@ export default function HomeScreen() {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [todayDeal, setTodayDeal] = useState<any>(null);
   const [aiPick, setAiPick] = useState<AiPick | null>(null);
-  const [cards, setCards] = useState<Card[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [serviceMode, setServiceMode] = useState<ServiceMode>(null);
-
   const load = useCallback(async () => {
-    try {
-      const [w, p, o, c, cr, deal, pick] = await Promise.all([
-        walletApi.getWallet(),
-        packagesApi.list(),
-        offersApi.list({ limit: 6 }),
-        challengesApi.list(),
-        cardsApi.list(),
-        dealsApi.today().catch(() => null),
-        aiApi.pick().catch(() => null),
-      ]);
-      setWallet(w.data);
-      setPackages(p.data.slice(0, 3));
-      setOffers(o.data.items?.slice(0, 4) ?? []);
-      setChallenges(c.data.slice(0, 2));
-      setCards(cr.data);
-      if (deal) setTodayDeal(deal.data);
-      if (pick) setAiPick(pick.data);
-    } catch (err) {
-      console.error('Home load error:', err);
-    }
+    const [w, p, o, c, deal, pick] = await Promise.all([
+      walletApi.getWallet(),
+      packagesApi.list(),
+      offersApi.list({ limit: 6 }),
+      challengesApi.list(),
+      dealsApi.today().catch(() => null),
+      aiApi.pick().catch(() => null),
+    ]);
+    setWallet(w.data);
+    setPackages(p.data.slice(0, 3));
+    setOffers(o.data.items?.slice(0, 4) ?? []);
+    setChallenges(c.data.slice(0, 2));
+    if (deal) setTodayDeal(deal.data);
+    if (pick) setAiPick(pick.data);
   }, []);
 
   useEffect(() => {
@@ -85,13 +71,6 @@ export default function HomeScreen() {
     await load();
     setRefreshing(false);
   }, [load]);
-
-  const handleRemoveCard = async (id: number) => {
-    try {
-      await cardsApi.remove(id);
-      setCards((prev) => prev.filter((c) => c.id !== id));
-    } catch {}
-  };
 
   const firstName = user?.full_name?.split(' ')[0] ?? 'there';
 
@@ -256,36 +235,6 @@ export default function HomeScreen() {
           ))}
         </ScrollView>
 
-        {/* Your cards */}
-        <View style={styles.sectionRow}>
-          <Text style={styles.sectionTitle}>Your cards</Text>
-          <TouchableOpacity style={styles.newCardBtn} onPress={() => setModalVisible(true)} activeOpacity={0.7}>
-            <Plus size={15} color={colors.ink} strokeWidth={2.5} />
-            <Text style={styles.newCardBtnText}>New card</Text>
-          </TouchableOpacity>
-        </View>
-        {cards.length === 0 ? (
-          <TouchableOpacity
-            style={styles.emptyCard}
-            onPress={() => setModalVisible(true)}
-            activeOpacity={0.8}
-          >
-            <Plus size={20} color={colors.labelSecondary} strokeWidth={1.75} />
-            <Text style={styles.emptyCardText}>Add your first card</Text>
-          </TouchableOpacity>
-        ) : (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{ marginHorizontal: spacing.screenX }}
-            contentContainerStyle={styles.cardsScroll}
-          >
-            {cards.map((card) => (
-              <CardItem key={card.id} card={card} onRemove={handleRemoveCard} />
-            ))}
-          </ScrollView>
-        )}
-
         {/* Services */}
         <Text style={[styles.sectionTitle, styles.sectionTitleStandalone]}>Services</Text>
         <ScrollView
@@ -295,12 +244,9 @@ export default function HomeScreen() {
           contentContainerStyle={styles.servicesStrip}
         >
           {[
-            { icon: FileText,       label: 'Statements', onPress: () => router.push('/statements' as any) },
-            { icon: ArrowDownToLine,label: 'Top Up',     onPress: () => router.push('/topup' as any) },
-            { icon: ArrowLeftRight, label: 'Transfer',   onPress: () => router.push('/transfer' as any) },
-            { icon: Building2,      label: 'Providers',  onPress: () => router.push('/(tabs)/explore') },
-            { icon: Phone,          label: 'Concierge',  onPress: () => router.push('/concierge' as any) },
-            { icon: MessageCircle,  label: 'Support',    onPress: () => router.push('/help' as any) },
+            { icon: Building2,     label: 'Providers', onPress: () => router.push('/(tabs)/explore') },
+            { icon: Phone,         label: 'Concierge', onPress: () => router.push('/concierge' as any) },
+            { icon: MessageCircle, label: 'Support',   onPress: () => router.push('/help' as any) },
           ].map(({ icon: Icon, label, onPress }) => (
             <TouchableOpacity key={label} style={styles.serviceBtn} onPress={onPress} activeOpacity={0.8}>
               <View style={styles.serviceIconWrap}>
@@ -365,17 +311,6 @@ export default function HomeScreen() {
         </>)}
       </ScrollView>
 
-      <AddCardModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onAdded={(card) => setCards((prev) => [...prev, card])}
-      />
-      <ServiceModal
-        mode={serviceMode}
-        wallet={wallet}
-        onClose={() => setServiceMode(null)}
-        onWalletUpdated={(w) => setWallet(w)}
-      />
     </View>
   );
 }
@@ -437,15 +372,6 @@ const styles = StyleSheet.create({
     borderColor: colors.paper,
   },
 
-  // Section header row (title + action)
-  sectionRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: spacing.screenX,
-    marginTop: 32,
-    marginBottom: 14,
-  },
   sectionTitle: {
     fontSize: 22,
     fontFamily: fonts.bold,
@@ -456,39 +382,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.screenX,
     marginTop: 32,
     marginBottom: 14,
-  },
-  newCardBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
-  newCardBtnText: {
-    fontSize: 15,
-    fontFamily: fonts.semiBold,
-    color: colors.ink,
-  },
-
-  // Cards scroll
-  cardsScroll: {
-    gap: 12,
-    paddingRight: spacing.screenX,
-  },
-  emptyCard: {
-    marginHorizontal: spacing.screenX,
-    height: 100,
-    backgroundColor: colors.white,
-    borderRadius: radius['2xl'],
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 8,
-    borderWidth: 1.5,
-    borderColor: colors.surface3,
-    borderStyle: 'dashed',
-  },
-  emptyCardText: {
-    fontSize: 14,
-    fontFamily: fonts.medium,
-    color: colors.labelSecondary,
   },
   horizontal: {
     gap: 12,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Share, Alert, ActionSheetIOS, Platform } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Share, Alert, ActionSheetIOS, Platform } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
   ChevronLeft, Bookmark, BookmarkCheck, Share2, Phone, MoreHorizontal,
@@ -10,6 +10,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { offersApi, requestsApi } from '@/lib/api';
 import { LoadingState } from '@/components/LoadingState';
 import { colors, fonts, radius, spacing, categoryColor } from '@/lib/theme';
+import { getOfferImage } from '@/lib/offerImages';
 import type { Offer } from '@/types';
 
 const CATEGORY_ICONS: Record<string, React.ComponentType<any>> = {
@@ -105,6 +106,7 @@ export default function OfferDetailScreen() {
 
   const catBg = categoryColor(offer.category);
   const IconComp = CATEGORY_ICONS[offer.category] ?? Tag;
+  const offerImg = getOfferImage(offer.title, offer.category);
   const validDate = offer.valid_until
     ? new Date(offer.valid_until).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
     : null;
@@ -133,12 +135,19 @@ export default function OfferDetailScreen() {
         showsVerticalScrollIndicator={false}
       >
         {/* Hero area */}
-        <View style={[styles.hero, { backgroundColor: catBg + '33' }]}>
-          <View style={styles.heroIconWrap}>
-            <IconComp size={110} color={catBg} strokeWidth={1} />
-          </View>
-          <View style={styles.heroCategoryBadge}>
-            <Text style={styles.heroCategoryText}>
+        <View style={[styles.hero, !offerImg && { backgroundColor: catBg + '33' }]}>
+          {offerImg ? (
+            <>
+              <Image source={offerImg} style={styles.heroPhoto} resizeMode="cover" />
+              <View style={styles.heroScrim} />
+            </>
+          ) : (
+            <View style={styles.heroIconWrap}>
+              <IconComp size={110} color={catBg} strokeWidth={1} />
+            </View>
+          )}
+          <View style={[styles.heroCategoryBadge, !offerImg && styles.heroCategoryBadgeSolid]}>
+            <Text style={[styles.heroCategoryText, !offerImg && { color: colors.white }]}>
               {offer.category.charAt(0).toUpperCase() + offer.category.slice(1)}
             </Text>
           </View>
@@ -248,12 +257,24 @@ const styles = StyleSheet.create({
   content: { gap: 14 },
 
   hero: {
-    marginHorizontal: spacing.screenX,
-    borderRadius: radius['2xl'],
-    height: 220,
+    height: 300,
     overflow: 'hidden',
     justifyContent: 'flex-end',
-    padding: 16,
+  },
+  heroPhoto: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  heroScrim: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.22)',
   },
   heroIconWrap: {
     position: 'absolute',
@@ -262,8 +283,18 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   heroCategoryBadge: {
-    backgroundColor: colors.ink, borderRadius: radius.pill,
-    paddingHorizontal: 14, paddingVertical: 7, alignSelf: 'flex-start',
+    backgroundColor: 'rgba(255,255,255,0.18)',
+    borderRadius: radius.pill,
+    paddingHorizontal: 14,
+    paddingVertical: 7,
+    alignSelf: 'flex-start',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.35)',
+    margin: 20,
+  },
+  heroCategoryBadgeSolid: {
+    backgroundColor: colors.ink,
+    borderWidth: 0,
   },
   heroCategoryText: { fontSize: 13, fontFamily: fonts.semiBold, color: colors.white },
 

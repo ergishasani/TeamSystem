@@ -88,17 +88,6 @@ export function SkeletonRow({ avatar = false }: { avatar?: boolean }) {
   );
 }
 
-export function SkeletonCardItem({ wide }: { wide?: boolean }) {
-  return (
-    <Skeleton
-      width={wide ? undefined : 300}
-      height={wide ? 200 : 158}
-      borderRadius={radius['2xl']}
-      style={wide ? undefined : undefined}
-    />
-  );
-}
-
 // ─── Content-only skeleton layouts (header lives outside ScrollView) ──────────
 
 export function HomeContentSkeleton() {
@@ -161,12 +150,6 @@ export function WalletContentSkeleton() {
   return (
     <View style={{ paddingBottom: 40, gap: 24, paddingHorizontal: spacing.screenX, paddingTop: 8 }}>
       <Skeleton height={160} borderRadius={radius['2xl']} />
-
-      <View style={{ gap: 10 }}>
-        <Skeleton width="30%" height={18} />
-        <Skeleton height={200} borderRadius={radius['2xl']} />
-        <Skeleton height={200} borderRadius={radius['2xl']} />
-      </View>
 
       <View style={{ flexDirection: 'row', gap: 8 }}>
         {[0, 1, 2].map((i) => (

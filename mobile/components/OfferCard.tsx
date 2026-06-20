@@ -1,8 +1,9 @@
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { ChevronRight, Leaf, Dumbbell, UtensilsCrossed, Plane, BookOpen, Heart } from 'lucide-react-native';
 import type { Offer } from '@/types';
 import { colors, fonts, radius, spacing, categoryColor } from '@/lib/theme';
+import { getOfferImage } from '@/lib/offerImages';
 
 const CATEGORY_ICONS: Record<string, React.ComponentType<any>> = {
   wellness: Leaf,
@@ -22,6 +23,7 @@ export function OfferCard({ offer, compact }: Props) {
   const router = useRouter();
   const catColor = categoryColor(offer.category);
   const Icon = CATEGORY_ICONS[offer.category] ?? Leaf;
+  const img = getOfferImage(offer.title, offer.category);
 
   if (compact) {
     return (
@@ -30,16 +32,21 @@ export function OfferCard({ offer, compact }: Props) {
         onPress={() => router.push(`/offers/${offer.id}`)}
         activeOpacity={0.85}
       >
-        {/* Colored image area */}
-        <View style={[styles.imageArea, { backgroundColor: catColor }]}>
+        {/* Image area — real photo or category-colour fallback */}
+        <View style={[styles.imageArea, !img && { backgroundColor: catColor }]}>
+          {img && (
+            <Image source={img} style={styles.imagePhoto} resizeMode="cover" />
+          )}
           <View style={styles.catPill}>
             <Text style={styles.catPillText}>
               {offer.category.charAt(0).toUpperCase() + offer.category.slice(1)}
             </Text>
           </View>
-          <View style={styles.bigIcon}>
-            <Icon size={72} color="rgba(0,0,0,0.2)" strokeWidth={1.25} />
-          </View>
+          {!img && (
+            <View style={styles.bigIcon}>
+              <Icon size={72} color="rgba(0,0,0,0.2)" strokeWidth={1.25} />
+            </View>
+          )}
         </View>
 
         {/* Content */}
@@ -100,11 +107,17 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   imageArea: {
-    aspectRatio: 16 / 9,
+    aspectRatio: 4 / 3,
     borderRadius: 16,
     overflow: 'hidden',
     justifyContent: 'flex-end',
-    padding: 12,
+  },
+  imagePhoto: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
   },
   catPill: {
     position: 'absolute',
@@ -122,6 +135,7 @@ const styles = StyleSheet.create({
   },
   bigIcon: {
     alignSelf: 'flex-start',
+    margin: 12,
   },
   content: {
     paddingHorizontal: 6,

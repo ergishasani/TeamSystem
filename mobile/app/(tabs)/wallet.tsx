@@ -2,13 +2,12 @@
 import { View, Text, StyleSheet, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { Plus, Gift, Package, ChevronRight } from 'lucide-react-native';
-import { walletApi, requestsApi, cardsApi } from '@/lib/api';
+import { Gift, Package, ChevronRight } from 'lucide-react-native';
+import { walletApi, requestsApi } from '@/lib/api';
 import { WalletCard } from '@/components/WalletCard';
-import { CardItem } from '@/components/CardItem';
 import { WalletContentSkeleton } from '@/components/Skeleton';
 import { colors, fonts, radius, spacing } from '@/lib/theme';
-import type { Wallet, BenefitRequest, Card } from '@/types';
+import type { Wallet, BenefitRequest } from '@/types';
 
 type HistoryTab = 'all' | 'active' | 'past';
 
@@ -33,21 +32,18 @@ export default function WalletScreen() {
   const router = useRouter();
   const [wallet, setWallet] = useState<Wallet | null>(null);
   const [requests, setRequests] = useState<BenefitRequest[]>([]);
-  const [cards, setCards] = useState<Card[]>([]);
   const [historyTab, setHistoryTab] = useState<HistoryTab>('all');
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
   const load = useCallback(async () => {
     try {
-      const [w, r, c] = await Promise.all([
+      const [w, r] = await Promise.all([
         walletApi.getWallet(),
         requestsApi.myRequests(),
-        cardsApi.list(),
       ]);
       setWallet(w.data);
       setRequests(r.data);
-      setCards(c.data);
     } catch (err) {
       console.error(err);
     }
@@ -90,35 +86,6 @@ export default function WalletScreen() {
           onRequestPerk={() => router.push('/(tabs)/explore')}
         />
       )}
-
-      {/* Your cards */}
-      <View style={styles.cardsSectionHeader}>
-        <Text style={styles.cardsSectionTitle}>Your cards</Text>
-        <TouchableOpacity
-          style={styles.addCardBtn}
-          onPress={() => router.push('/(tabs)/')}
-          activeOpacity={0.8}
-        >
-          <Plus size={16} color={colors.ink} strokeWidth={2} />
-        </TouchableOpacity>
-      </View>
-      {cards.map((card) => (
-        <TouchableOpacity
-          key={card.id}
-          style={styles.wideCardWrap}
-          onPress={() => router.push(`/cards/${card.id}` as any)}
-          activeOpacity={0.9}
-        >
-          <CardItem
-            card={card}
-            wide
-            onRemove={async (id) => {
-              await cardsApi.remove(id);
-              setCards((prev) => prev.filter((c) => c.id !== id));
-            }}
-          />
-        </TouchableOpacity>
-      ))}
 
       {/* History tabs */}
       <View style={styles.tabTrack}>
@@ -207,33 +174,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.screenX,
     marginBottom: 20,
   },
-  cardsSectionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: spacing.screenX,
-    marginTop: 28,
-    marginBottom: 14,
-  },
-  cardsSectionTitle: {
-    fontSize: 20,
-    fontFamily: fonts.bold,
-    color: colors.ink,
-    letterSpacing: -0.3,
-  },
-  addCardBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: colors.white,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  wideCardWrap: {
-    marginHorizontal: spacing.screenX,
-    marginBottom: 12,
-  },
-
   // History tab control
   tabTrack: {
     flexDirection: 'row',
