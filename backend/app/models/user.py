@@ -10,7 +10,7 @@ class User(Base):
     full_name = Column(String, nullable=False)
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
-    # role: employee | employer_admin | provider_admin | platform_admin
+    # role: employee | employer_admin | provider_admin
     role = Column(String, nullable=False, default="employee")
     company_id = Column(Integer, ForeignKey("companies.id"), nullable=True)
     provider_id = Column(Integer, ForeignKey("providers.id"), nullable=True)

@@ -35,30 +35,20 @@ index labels. Right now this page is silently broken for every employer admin wh
 
 ---
 
-## 2. Resolve the dead `platform_admin` role
+## 2. Resolve the dead `platform_admin` role — ✅ DONE (deleted)
 
-**What's wrong today:** `platform_admin` exists as a role value in both the backend `User`
-model and the webapp's `UserRole` type, but nothing anywhere uses it. The backend has no
-`get_platform_admin` dependency in `core/deps.py` and no route guards for it. The webapp has no
-page, route, or redirect logic for it — a user with this role who logs in just bounces back to
-`/login` with nowhere to go.
+**Decision:** deleted, not built. Nothing referenced it beyond a comment in
+`backend/app/models/user.py` and type unions/docs — no dependency, no route guard, no webapp
+page ever existed for it, so there was no real functionality to preserve.
 
-**What it achieves once fixed:** Either you get a real platform-admin capability (useful for a
-"super admin" managing multiple companies/providers), or you remove dead, misleading code that
-currently suggests a feature exists when it doesn't — confusing for anyone reading the codebase
-later, including future you.
-
-- [ ] Decide: build it, or delete it (this is a product decision — discuss with the group)
-- [ ] **If building:** add `get_platform_admin` dependency in `backend/app/core/deps.py`, add
-      at least one guarded route (e.g. list all companies), add a webapp landing page + route
-      guard in `App.tsx`, add a login redirect case
-- [ ] **If deleting:** remove `platform_admin` from the backend `User.role` enum/values, remove
-      it from the webapp `UserRole` type in `types/index.ts`, check the seed data and any docs
-      (`API_REFERENCE.md` §4) for references and remove those too
+**Changes:** removed `platform_admin` from `backend/app/models/user.py` comment,
+`webapp/src/types/index.ts` and `mobile/types/index.ts` `UserRole`, and references in
+`backend/API_REFERENCE.md`, `webapp/README.md`, `FEATURES.md`. The `role` DB column is a plain
+`String` (no DB-level enum constraint), so no migration was needed.
 
 ---
 
-## 3. Decide the fate of unused employee-facing endpoints in the webapp
+## 3. Decide the fate of unused employee-facing endpoints in the webapp — ✅ DECIDED (admin-only)
 
 **What's wrong today:** The webapp only ever calls 13 of ~35 documented backend endpoints. Every
 employee-scoped endpoint — wallet, browsing offers, saved offers, packages, AI concierge,
@@ -72,40 +62,34 @@ webapp is "Perka Admin" per its own login page copy, and the employee experience
 in `mobile/`) or an oversight. Pinning this down prevents wasted effort — either we stop treating
 it as a gap, or we scope real work to close it.
 
-- [ ] Confirm with the group: is the webapp permanently admin-only (employer_admin +
-      provider_admin), with all employee features intentionally living in `mobile/` only?
-- [ ] **If yes (recommended, matches current webapp framing):** no code change needed — just
-      note this scope decision somewhere (e.g. webapp's README) so it stops looking like a bug
-      to the next person who audits it
-- [ ] **If no:** scope a new set of employee-facing webapp pages (wallet view, offer browsing,
-      AI chat, request history) as a separate, larger plan — don't fold this into quick fixes
+**Decision:** webapp is permanently admin-only (`employer_admin` + `provider_admin`). All
+employee features intentionally live in `mobile/` only — this matches the webapp's own "Perka
+Admin" framing on its login page. No code change needed; this section documents the decision so
+it stops looking like a gap to the next person who audits the repo.
 
 ---
 
-## 4. Surface notifications in the webapp
+## 4. Surface notifications in the webapp — ✅ NOT APPLICABLE (no admin-facing notifications exist)
 
-**What's wrong today:** The backend creates `Notification` rows when a benefit request is
-approved or rejected (`approval_service.py`, part of Task 7 in `backend/PLAN.md`), and exposes
-`GET /notifications/me` and `PATCH /notifications/{id}/read`. The webapp never calls either —
-there's no notification inbox or indicator anywhere in the UI.
+**What's wrong today:** The backend creates `Notification` rows on approve/reject
+(`approval_service.py`), and exposes `GET /notifications/me` / `PATCH /notifications/{id}/read`.
+The webapp never calls either.
 
-**What it achieves once fixed:** Employer admins approving/rejecting requests, and any future
-employee-facing UI, would actually surface "your request was approved/rejected" instead of that
-information existing only in the database with no one able to see it. Right now this whole
-feature is invisible despite being fully built server-side.
+**Why this isn't being built:** Checked `approval_service.py` directly — `create_notification`
+is only ever called with `req.employee_id`. Employer/provider admins are **never** notified of
+anything today; only employees are. Combined with Task 3's decision (webapp stays admin-only,
+employees never log into webapp), there is currently no notification an admin could ever see —
+building a bell/inbox in the webapp right now would be dead UI with no data source.
 
-- [ ] Add a notifications API helper in `webapp/src/lib/api.ts` (`getNotifications`,
-      `markNotificationRead`)
-- [ ] Add a simple notification bell/dropdown in the webapp's shared layout/header
-- [ ] Add the relevant TypeScript type matching `NotificationOut` from the backend schema
-- [ ] Manually verify: approve a request as employer admin, confirm a notification appears
-      somewhere in the webapp UI for the affected user (note: since employees have no webapp
-      login per Task 3 above, this may only be meaningfully testable once that's resolved —
-      flag this dependency when picking up the task)
+**To actually close this gap**, scope it as new work, not a quick fix: add notification triggers
+for admin-relevant events (e.g. `create_notification(employer_admin_user_id, ...)` when an
+employee submits a new pending request; same for `provider_admin` on redemption confirmation),
+*then* add the webapp API helper, type, and bell UI to consume them. Left undone here since it's
+net-new backend behavior, not an alignment fix between existing webapp and backend code.
 
 ---
 
-## 5. Keep webapp docs in sync with backend schemas going forward
+## 5. Keep webapp docs in sync with backend schemas going forward — ✅ DONE
 
 **What's wrong today:** `webapp/PAGES_API_REFERENCE.md` was written by reading the webapp's own
 code/types rather than the backend's actual Pydantic schemas, which is exactly how the Task 1
@@ -116,10 +100,14 @@ wrongly, against what the backend actually returns.
 both docs become friendly to cross-check before writing webapp code, rather than each describing
 their own side in isolation.
 
-- [ ] After fixing Task 1, re-verify every response shape in `webapp/PAGES_API_REFERENCE.md`
-      against the corresponding Pydantic schema in `backend/app/schemas/`
-- [ ] Add a short note at the top of `PAGES_API_REFERENCE.md` pointing to
-      `backend/API_REFERENCE.md` as the source of truth for response shapes
+- [x] Re-verified every response/request shape in `webapp/PAGES_API_REFERENCE.md` against the
+      corresponding Pydantic schemas (`backend/app/schemas/auth.py`, `user.py`, `offer.py`,
+      `request.py`, `ai.py`) and route handlers (`employer.py`, `provider_routes.py`,
+      `auth.py`). Everything matched except `OfferCreate`, which was missing the optional
+      `image_url` / `status` fields — added them.
+- [x] Added a source-of-truth note at the top of `PAGES_API_REFERENCE.md` pointing to
+      `backend/API_REFERENCE.md` and the Pydantic schemas (removed the now-redundant duplicate
+      note that previously lived only in §6)
 
 ---
 

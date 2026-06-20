@@ -4,6 +4,11 @@ All API paths are prefixed with `/api/v1`. The Vite dev-server proxy rewrites `/
 
 **Auth header** — every protected endpoint requires `Authorization: Bearer <jwt>`. The Axios client attaches this automatically from `localStorage.perka_token`.
 
+> **Source of truth:** response/request shapes below are cross-checked against the actual Pydantic
+> schemas in `backend/app/schemas/` and the route handlers in `backend/app/api/v1/routes/` — not
+> just the webapp's own TypeScript types. See `backend/API_REFERENCE.md` for the canonical backend
+> reference. Re-verify against the schemas (not against the webapp's types) when updating this doc.
+
 ---
 
 ## Table of contents
@@ -241,9 +246,6 @@ EmployerInsights {
 }
 ```
 
-> Source of truth for response shapes is `backend/API_REFERENCE.md` / the Pydantic schemas in
-> `backend/app/schemas/`. Cross-check there before updating this doc.
-
 ### Backend logic
 
 `POST /ai/employer-insights` calls `employer_insights(db, company_id)` in `app/services/insights_service.py`. It aggregates all the company's `BenefitRequest` rows — no OpenAI call needed, this is pure DB aggregation.
@@ -325,6 +327,8 @@ OfferCreate {
   quantity_available?: number;
   valid_until?: string;       // ISO date, e.g. "2026-12-31"
   is_limited_drop?: boolean;  // default false
+  image_url?: string;         // not exposed in the create/edit form today
+  status?: string;            // "active" | "inactive", default "active"
 }
 
 // PATCH /provider/offers/{id}
