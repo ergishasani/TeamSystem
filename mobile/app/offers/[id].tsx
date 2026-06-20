@@ -174,7 +174,7 @@ export default function OfferDetailScreen() {
             >
               <Send size={16} color={colors.white} strokeWidth={1.75} />
               <Text style={styles.requestBtnText}>
-                {requesting ? 'Requesting...' : `Request · ${Number(offer.price).toLocaleString()} ${offer.currency}`}
+                {requesting ? 'Purchasing...' : `Purchase · ${Number(offer.price).toLocaleString()} ${offer.currency}`}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconActionBtn} onPress={handlePhone} activeOpacity={0.7}>

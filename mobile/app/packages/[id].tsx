@@ -210,7 +210,7 @@ export default function PackageDetailScreen() {
           activeOpacity={0.88}
         >
           <Text style={styles.submitBtnText}>
-            {requesting ? 'Submitting...' : `Submit Request · ${pkg.total_price.toLocaleString()} ${pkg.currency}`}
+            {requesting ? 'Purchasing...' : `Purchase · ${pkg.total_price.toLocaleString()} ${pkg.currency}`}
           </Text>
         </TouchableOpacity>
       </View>

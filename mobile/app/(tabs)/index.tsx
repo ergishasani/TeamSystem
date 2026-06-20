@@ -105,10 +105,7 @@ export default function HomeScreen() {
 
         {/* Wallet */}
         {wallet && (
-          <WalletCard
-            wallet={wallet}
-            onRequestPerk={() => router.push('/(tabs)/explore')}
-          />
+          <WalletCard wallet={wallet} />
         )}
 
         {/* Your AI Pick Today */}
@@ -148,7 +145,7 @@ export default function HomeScreen() {
                     } catch { /* budget error handled server-side */ }
                   }}
                 >
-                  <Text style={styles.requestBtnText}>Request →</Text>
+                  <Text style={styles.requestBtnText}>Purchase</Text>
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>

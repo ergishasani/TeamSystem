@@ -81,10 +81,7 @@ export default function WalletScreen() {
         <>
 
       {wallet && (
-        <WalletCard
-          wallet={wallet}
-          onRequestPerk={() => router.push('/(tabs)/explore')}
-        />
+        <WalletCard wallet={wallet} />
       )}
 
       {/* History tabs */}

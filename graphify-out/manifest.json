@@ -230,8 +230,8 @@
     "semantic_hash": ""
   },
   "backend/app/seed/seed_demo.py": {
-    "mtime": 1781950848.144393,
-    "ast_hash": "3be4990c921d69c0d64fb677328bef57",
+    "mtime": 1781957580.9110982,
+    "ast_hash": "be0fcfb4dc5eaabe253c77f64041cc6d",
     "semantic_hash": ""
   },
   "backend/app/services/__init__.py": {
@@ -330,8 +330,8 @@
     "semantic_hash": ""
   },
   "mobile/app/(tabs)/index.tsx": {
-    "mtime": 1781954203.6355226,
-    "ast_hash": "437173e9de8456ef3d26c1ba4c0a7b50",
+    "mtime": 1781957779.2070222,
+    "ast_hash": "c685efb31ee284f9557e6a3fade8eb11",
     "semantic_hash": ""
   },
   "mobile/app/(tabs)/profile.tsx": {
@@ -340,8 +340,8 @@
     "semantic_hash": ""
   },
   "mobile/app/(tabs)/wallet.tsx": {
-    "mtime": 1781955717.0963988,
-    "ast_hash": "69cc6695f13ffc1bd57e0bd8f4f6f641",
+    "mtime": 1781957081.3372304,
+    "ast_hash": "87c5fe21db827fd4e6c7290087736c68",
     "semantic_hash": ""
   },
   "mobile/app/_layout.tsx": {
@@ -350,8 +350,8 @@
     "semantic_hash": ""
   },
   "mobile/app/offers/[id].tsx": {
-    "mtime": 1781935877.356845,
-    "ast_hash": "9f5e81a5251456af967e01bd5543652f",
+    "mtime": 1781959030.7249088,
+    "ast_hash": "1d8caa0d9910e7916e5c288a47e0f8c5",
     "semantic_hash": ""
   },
   "mobile/app/packages/[id].tsx": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "mobile/components/OfferCard.tsx": {
-    "mtime": 1781926152.264109,
-    "ast_hash": "092aba75678de97590fdcbfdd0483e8b",
+    "mtime": 1781959069.9686334,
+    "ast_hash": "774130de4075a71c33354d332a102930",
     "semantic_hash": ""
   },
   "mobile/components/PackageCard.tsx": {
@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "mobile/lib/api.ts": {
-    "mtime": 1781953546.1419497,
-    "ast_hash": "c3ce2e9cd2c810a1e27730ddf02a2ad3",
+    "mtime": 1781957742.173404,
+    "ast_hash": "3e88b904413de9ed58b4d64ef96d0b04",
     "semantic_hash": ""
   },
   "mobile/package.json": {
@@ -1005,13 +1005,163 @@
     "semantic_hash": ""
   },
   "mobile/components/Skeleton.tsx": {
-    "mtime": 1781954153.440963,
-    "ast_hash": "1903d73f5b6045e8872b9c292003cefa",
+    "mtime": 1781957093.614951,
+    "ast_hash": "610c1c8868b227a75aa9dfe3abe295f0",
     "semantic_hash": ""
   },
   "mobile/lib/theme.ts": {
     "mtime": 1781921158.9502094,
     "ast_hash": "186b6b49ed62b9bb7f31b5f40103cc10",
+    "semantic_hash": ""
+  },
+  "mobile/lib/offerImages.ts": {
+    "mtime": 1781960976.4501166,
+    "ast_hash": "b7ce3044c6a1cab2eed32ec90e062bf4",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/AI_tools_workshop.jpg": {
+    "mtime": 1781960415.203984,
+    "ast_hash": "ad0ce0f2d9ad8313532fe3d6cbfb89df",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/Eye_examination.jpeg": {
+    "mtime": 1781960390.1582868,
+    "ast_hash": "f6ae8c041d9ea6cbf44bb74f3bde69df",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/Group_yoga_class.jpeg": {
+    "mtime": 1781960910.266251,
+    "ast_hash": "9900ab4226b601dba9e2007a2e34043f",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/Pilates_class.jpeg": {
+    "mtime": 1781960731.8575633,
+    "ast_hash": "678bbc0608daed29b9f22266275ea4dc",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/Rock_climbing_session.jpeg": {
+    "mtime": 1781960703.9905477,
+    "ast_hash": "c08d86a8983a3b3982b0a63aa7e1a69a",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/Skin_care.jpeg": {
+    "mtime": 1781960815.0795643,
+    "ast_hash": "6bfe580d659c2b66d5bccfb83a69c1f9",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/ai_tools.jpeg": {
+    "mtime": 1781958194.576494,
+    "ast_hash": "60f9868dae0a54aed9f01a896ace1f06",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/bovilla.jpeg": {
+    "mtime": 1781957816.643272,
+    "ast_hash": "c11761d93e6e8cd8c90594e0bd50ee6d",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/business_lunch.jpeg": {
+    "mtime": 1781960605.9910371,
+    "ast_hash": "f70b6c524236f3546360900295b15e75",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/chef_tating_menu.jpeg": {
+    "mtime": 1781960584.720515,
+    "ast_hash": "f1e0b87c3ee2b5c4ab7248432b5fcaee",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/dajti.jpeg": {
+    "mtime": 1781959228.9757946,
+    "ast_hash": "64f9ce8c3adddae605e7318f75de8326",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/dental_checkup.jpeg": {
+    "mtime": 1781960267.5129874,
+    "ast_hash": "c1fdb250de0f7f45bd8cac25ac4e4353",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/english_business.jpg": {
+    "mtime": 1781959953.0827599,
+    "ast_hash": "d4a4e3008217b2fdc1e0fdb8c46181af",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/hair_grow_treatment.jpeg": {
+    "mtime": 1781960845.5454085,
+    "ast_hash": "581f50066f8bdba1af0790ab73ebf995",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/healthy_dinner_voucher.jpeg": {
+    "mtime": 1781960666.6684287,
+    "ast_hash": "8f36d01ed327243997091090a753263c",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/hot_stone_massage.jpeg": {
+    "mtime": 1781960871.0346832,
+    "ast_hash": "83b012756d0f725abbbd86c8078931da",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/italian.jpg": {
+    "mtime": 1781960370.9144318,
+    "ast_hash": "d93248b91da8cc0032f87cfd8897c5a5",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/mindefulness.jpeg": {
+    "mtime": 1781960253.619725,
+    "ast_hash": "215f951a81af54c34db08d83bb33036d",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/monthly_coffee_pass.jpeg": {
+    "mtime": 1781960633.0187821,
+    "ast_hash": "a675cf0b23c4b6b235a9454bd179e359",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/nutrition_consultation.jpeg": {
+    "mtime": 1781960288.578902,
+    "ast_hash": "11cc5bb93f49e6f7c4762c262766eb71",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/ohrid_weekend.jpeg": {
+    "mtime": 1781960335.1248555,
+    "ast_hash": "a69feedb16cf98c9594c6a2b103368a4",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/personal_training.jpeg": {
+    "mtime": 1781960720.7784996,
+    "ast_hash": "b9d178d1f36d70cc5bf68fb2cf1c11a7",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/pilates.jpeg": {
+    "mtime": 1781957759.8108244,
+    "ast_hash": "f6c5e0d05792778a51685aa9f60ddb10",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/python.jpg": {
+    "mtime": 1781960005.308159,
+    "ast_hash": "65bc8c53fe2344ce858ea786ea5a5d9b",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/skadar_kayaking.jpeg": {
+    "mtime": 1781959673.0979226,
+    "ast_hash": "c2f98e170c7fd70ad7ff23bf157c8901",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/smoothie_bowl_set.jpeg": {
+    "mtime": 1781960647.4182878,
+    "ast_hash": "d54ee805c58e1d2e1fe6edfd6054a493",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/spa.jpeg": {
+    "mtime": 1781958250.5747192,
+    "ast_hash": "157e0003b59619a7ab5ab3291296495a",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/spa_access_pass.jpeg": {
+    "mtime": 1781960925.9067612,
+    "ast_hash": "4febf9c7afe9cb20896fb9cac2e57e86",
+    "semantic_hash": ""
+  },
+  "mobile/assets/img/therapy_session.jpeg": {
+    "mtime": 1781960241.5880747,
+    "ast_hash": "da173af1a6b337eec9a44e3949417805",
     "semantic_hash": ""
   }
 }

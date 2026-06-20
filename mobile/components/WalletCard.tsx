@@ -6,15 +6,15 @@ import { colors, fonts, radius, spacing } from '@/lib/theme';
 
 interface Props {
   wallet: Wallet;
-  onRequestPerk?: () => void;
 }
 
-export function WalletCard({ wallet, onRequestPerk }: Props) {
+export function WalletCard({ wallet }: Props) {
   const [hidden, setHidden] = useState(false);
 
   const balance = wallet.remaining_amount.toLocaleString();
   const used = wallet.used_amount.toLocaleString();
   const budget = wallet.monthly_budget.toLocaleString();
+  const progress = Math.min(wallet.monthly_budget > 0 ? wallet.used_amount / wallet.monthly_budget : 0, 1);
 
   return (
     <View style={styles.card}>
@@ -34,10 +34,10 @@ export function WalletCard({ wallet, onRequestPerk }: Props) {
         {hidden ? '••••• ALL' : `${balance} ${wallet.currency}`}
       </Text>
 
-      {/* CTA */}
-      <TouchableOpacity style={styles.cta} onPress={onRequestPerk} activeOpacity={0.82}>
-        <Text style={styles.ctaText}>Request a perk</Text>
-      </TouchableOpacity>
+      {/* Budget progress bar */}
+      <View style={styles.barTrack}>
+        <View style={[styles.barFill, { width: `${Math.round(progress * 100)}%` as any }]} />
+      </View>
 
       {/* Footer: used + budget */}
       <View style={styles.footRow}>
@@ -83,20 +83,20 @@ const styles = StyleSheet.create({
     fontFamily: fonts.bold,
     color: colors.ink,
     letterSpacing: -2,
-    marginBottom: 24,
-  },
-  cta: {
-    backgroundColor: colors.ink,
-    borderRadius: radius.pill,
-    height: 56,
-    justifyContent: 'center',
-    alignItems: 'center',
     marginBottom: 20,
   },
-  ctaText: {
-    color: colors.white,
-    fontSize: 17,
-    fontFamily: fonts.semiBold,
+  barTrack: {
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colors.surface2,
+    marginBottom: 12,
+    overflow: 'hidden',
+  },
+  barFill: {
+    height: '100%',
+    borderRadius: 4,
+    backgroundColor: colors.ink,
+    minWidth: 8,
   },
   footRow: {
     flexDirection: 'row',
