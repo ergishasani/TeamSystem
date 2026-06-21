@@ -1,7 +1,8 @@
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
+from pydantic import BaseModel
 
 from app.core.database import get_db
 from app.core.deps import get_employer_admin, get_admin_user
@@ -13,6 +14,8 @@ from app.models.request import BenefitRequest
 from app.models.payment import Payment
 from app.models.company import Company
 from app.models.user import User
+from app.models.employee_profile import EmployeeProfile
+from app.models.notification import Notification
 from app.models.charity import Charity, CharitySuggestion
 from app.schemas.offer import OfferOut, OfferCreateAdmin
 from app.schemas.request import BenefitRequestOut, ApprovalAction
@@ -139,6 +142,66 @@ def company_redemptions(current_user=Depends(get_employer_admin), db: Session = 
     return result
 
 
+# ── Employee directory helpers ────────────────────────────────────────────────
+
+def _employee_or_404(db: Session, company_id: int, user_id: int) -> User:
+    emp = db.query(User).filter(
+        User.id == user_id, User.company_id == company_id, User.role == "employee"
+    ).first()
+    if not emp:
+        raise HTTPException(status_code=404, detail="Employee not found in your company")
+    return emp
+
+
+def _request_ids(db: Session, user_id: int) -> list:
+    return [r.id for r in db.query(BenefitRequest.id).filter(
+        BenefitRequest.employee_id == user_id
+    ).all()]
+
+
+def _wallet_used(db: Session, req_ids: list) -> float:
+    if not req_ids:
+        return 0.0
+    return sum(float(p.amount) for p in db.query(Payment).filter(
+        Payment.request_id.in_(req_ids)
+    ).all())
+
+
+def _wallet_cap(profile: Optional[EmployeeProfile], company_default: float) -> float:
+    """Per-employee budget override when set, otherwise the company default."""
+    if profile and profile.monthly_budget and float(profile.monthly_budget) > 0:
+        return float(profile.monthly_budget)
+    return company_default
+
+
+def _status_for(used: float, pct: int, req_ids: list) -> str:
+    if used == 0 and not req_ids:
+        return "invited"
+    return "near_cap" if pct >= 80 else "active"
+
+
+def _user_row(db: Session, emp: User, company: Optional[Company], company_default: float) -> dict:
+    profile = db.query(EmployeeProfile).filter(EmployeeProfile.user_id == emp.id).first()
+    req_ids = _request_ids(db, emp.id)
+    used = _wallet_used(db, req_ids)
+    cap = _wallet_cap(profile, company_default)
+    pct = round(used / cap * 100) if cap > 0 else 0
+    name = emp.full_name
+    return {
+        "id": emp.id,
+        "full_name": name,
+        "email": emp.email,
+        "initials": "".join(w[0].upper() for w in name.split()[:2]),
+        "company_name": company.name if company else None,
+        "department": profile.department if profile else None,
+        "wallet_used": round(used),
+        "wallet_cap": round(cap),
+        "usage_pct": pct,
+        "status": _status_for(used, pct, req_ids),
+        "joined": emp.created_at.strftime("%Y-%m-%d") if emp.created_at else None,
+    }
+
+
 @router.get("/users")
 def employer_users_wallets(current_user=Depends(get_employer_admin), db: Session = Depends(get_db)):
     company = db.query(Company).filter(Company.id == current_user.company_id).first()
@@ -146,30 +209,100 @@ def employer_users_wallets(current_user=Depends(get_employer_admin), db: Session
     emps = db.query(User).filter(
         User.company_id == current_user.company_id, User.role == "employee"
     ).all()
-    result = []
-    for emp in emps:
-        req_ids = [r.id for r in db.query(BenefitRequest.id).filter(
-            BenefitRequest.employee_id == emp.id
-        ).all()]
-        used = sum(float(p.amount) for p in db.query(Payment).filter(
-            Payment.request_id.in_(req_ids)
-        ).all()) if req_ids else 0.0
-        pct = round(used / budget_per_seat * 100) if budget_per_seat > 0 else 0
-        status = "invited" if (used == 0 and not req_ids) else ("near_cap" if pct >= 80 else "active")
-        name = emp.full_name
-        result.append({
-            "id": emp.id,
-            "full_name": name,
-            "email": emp.email,
-            "initials": "".join(w[0].upper() for w in name.split()[:2]),
-            "company_name": company.name if company else None,
-            "wallet_used": round(used),
-            "wallet_cap": round(budget_per_seat),
-            "usage_pct": pct,
-            "status": status,
-            "joined": emp.created_at.strftime("%Y-%m-%d") if emp.created_at else None,
-        })
-    return result
+    return [_user_row(db, emp, company, budget_per_seat) for emp in emps]
+
+
+@router.get("/users/{user_id}")
+def employer_user_detail(user_id: int, current_user=Depends(get_employer_admin), db: Session = Depends(get_db)):
+    company = db.query(Company).filter(Company.id == current_user.company_id).first()
+    budget_per_seat = float(company.monthly_budget_per_employee) if company else 15000
+    emp = _employee_or_404(db, current_user.company_id, user_id)
+    profile = db.query(EmployeeProfile).filter(EmployeeProfile.user_id == emp.id).first()
+
+    req_ids = _request_ids(db, emp.id)
+    used = _wallet_used(db, req_ids)
+    cap = _wallet_cap(profile, budget_per_seat)
+    pct = round(used / cap * 100) if cap > 0 else 0
+    pending = sum(float(r.total_amount) for r in db.query(BenefitRequest).filter(
+        BenefitRequest.employee_id == emp.id, BenefitRequest.status == "pending"
+    ).all())
+    row = _user_row(db, emp, company, budget_per_seat)
+    row.update({
+        "phone": emp.phone,
+        "avatar_url": emp.avatar_url,
+        "level": profile.level if profile else 1,
+        "xp": profile.xp if profile else 0,
+        "streak": profile.streak_count if profile else 0,
+        "benefit_style": profile.benefit_style if profile else None,
+        "interests": (profile.interests if profile else []) or [],
+        "wallet_pending": round(pending),
+        "wallet_remaining": round(max(0.0, cap - used - pending)),
+        "requests_count": len(req_ids),
+        "last_active": emp.last_active_at.isoformat() if emp.last_active_at else None,
+    })
+    return row
+
+
+class EmployeeUpdate(BaseModel):
+    monthly_budget: Optional[float] = None
+    department: Optional[str] = None
+
+
+@router.patch("/users/{user_id}")
+def employer_update_user(
+    user_id: int,
+    data: EmployeeUpdate,
+    current_user=Depends(get_employer_admin),
+    db: Session = Depends(get_db),
+):
+    company = db.query(Company).filter(Company.id == current_user.company_id).first()
+    budget_per_seat = float(company.monthly_budget_per_employee) if company else 15000
+    emp = _employee_or_404(db, current_user.company_id, user_id)
+    profile = db.query(EmployeeProfile).filter(EmployeeProfile.user_id == emp.id).first()
+    if not profile:
+        profile = EmployeeProfile(user_id=emp.id, monthly_budget=budget_per_seat)
+        db.add(profile)
+        db.flush()
+
+    if data.monthly_budget is not None:
+        if data.monthly_budget < 0:
+            raise HTTPException(status_code=400, detail="Budget cannot be negative")
+        profile.monthly_budget = data.monthly_budget
+        # Keep the wallet internally consistent after a cap change.
+        profile.remaining_amount = max(
+            0, float(data.monthly_budget) - float(profile.used_amount or 0) - float(profile.pending_amount or 0)
+        )
+    if data.department is not None:
+        profile.department = data.department.strip() or None
+
+    db.commit()
+    return employer_user_detail(user_id, current_user, db)
+
+
+class NudgeIn(BaseModel):
+    message: Optional[str] = None
+    title: Optional[str] = None
+
+
+@router.post("/users/{user_id}/nudge", status_code=201)
+def employer_nudge_user(
+    user_id: int,
+    data: NudgeIn,
+    current_user=Depends(get_employer_admin),
+    db: Session = Depends(get_db),
+):
+    emp = _employee_or_404(db, current_user.company_id, user_id)
+    note = Notification(
+        user_id=emp.id,
+        title=(data.title or "A reminder from your admin").strip(),
+        message=(data.message or "Don't forget to make the most of your benefits wallet this month!").strip(),
+        type="info",
+        read=False,
+    )
+    db.add(note)
+    db.commit()
+    db.refresh(note)
+    return {"ok": True, "notification_id": note.id, "sent_to": emp.full_name}
 
 
 @router.get("/wallets")

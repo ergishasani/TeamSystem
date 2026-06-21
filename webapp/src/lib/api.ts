@@ -48,6 +48,11 @@ export const employerApi = {
   allRequests: () => apiClient.get('/employer/requests'),
   redemptions: () => apiClient.get('/employer/redemptions'),
   usersWallets: () => apiClient.get('/employer/users'),
+  userDetail: (id: number) => apiClient.get(`/employer/users/${id}`),
+  updateUser: (id: number, data: Partial<{ monthly_budget: number; department: string }>) =>
+    apiClient.patch(`/employer/users/${id}`, data),
+  nudgeUser: (id: number, data?: { title?: string; message?: string }) =>
+    apiClient.post(`/employer/users/${id}/nudge`, data ?? {}),
   wallets: () => apiClient.get('/employer/wallets'),
 };
 

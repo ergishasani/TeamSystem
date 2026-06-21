@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "backend/app/api/v1/router.py": {
-    "mtime": 1781997679.8524623,
-    "ast_hash": "dd8c9d28a2a9ccc38c2bec7d0e09d84a",
+    "mtime": 1781999445.75908,
+    "ast_hash": "3aeb8e284cddaf6ed7d0c862a1d30e36",
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/__init__.py": {
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/benefit_requests.py": {
-    "mtime": 1781951921.8255837,
-    "ast_hash": "17da8a39256936b82c847c8246221d77",
+    "mtime": 1781999394.6056974,
+    "ast_hash": "985629188dda151a36c1cc0a738d9009",
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/challenges.py": {
@@ -50,8 +50,8 @@
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/employer.py": {
-    "mtime": 1781977576.2949226,
-    "ast_hash": "5ea0d84b7df20c86ba8fe2eb2a17bc80",
+    "mtime": 1781999435.8951,
+    "ast_hash": "f183876e1d82dc0e6fb8939b6aa96bf7",
     "semantic_hash": ""
   },
   "backend/app/api/v1/routes/interactions.py": {
@@ -100,8 +100,8 @@
     "semantic_hash": ""
   },
   "backend/app/core/config.py": {
-    "mtime": 1781909137.5935802,
-    "ast_hash": "bbaf0ef0e0e1810b4ca242a8aef4f44b",
+    "mtime": 1782000505.66462,
+    "ast_hash": "2dd73b0bc1d978079e16610c0cf7daf6",
     "semantic_hash": ""
   },
   "backend/app/core/database.py": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "backend/app/models/__init__.py": {
-    "mtime": 1781997497.3388994,
-    "ast_hash": "cb4e0497fdc1eabfc020e7df87499e38",
+    "mtime": 1781999299.1474257,
+    "ast_hash": "8488b2b07f6db5c15e3fff70531f1eb0",
     "semantic_hash": ""
   },
   "backend/app/models/challenge.py": {
@@ -135,8 +135,8 @@
     "semantic_hash": ""
   },
   "backend/app/models/company.py": {
-    "mtime": 1781996942.2651818,
-    "ast_hash": "0b36a87dfe469a55daa6a8c8c0312fcd",
+    "mtime": 1781999281.9466531,
+    "ast_hash": "e0147e0d5003b58df98936898ea9a1b3",
     "semantic_hash": ""
   },
   "backend/app/models/employee_profile.py": {
@@ -175,8 +175,8 @@
     "semantic_hash": ""
   },
   "backend/app/models/request.py": {
-    "mtime": 1781951894.199656,
-    "ast_hash": "35354076069b5c51ac7d9744cb07dbf7",
+    "mtime": 1781999290.8059676,
+    "ast_hash": "d72a7278c5bf94aff56aef4e92c42ab1",
     "semantic_hash": ""
   },
   "backend/app/models/user.py": {
@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "backend/app/schemas/request.py": {
-    "mtime": 1781951899.925601,
-    "ast_hash": "317b82a433b2fbf902799bd4cfc86265",
+    "mtime": 1781999315.558677,
+    "ast_hash": "e4586921902a48d011eff6169975a11c",
     "semantic_hash": ""
   },
   "backend/app/schemas/user.py": {
@@ -230,8 +230,8 @@
     "semantic_hash": ""
   },
   "backend/app/seed/seed_demo.py": {
-    "mtime": 1781957580.9110982,
-    "ast_hash": "be0fcfb4dc5eaabe253c77f64041cc6d",
+    "mtime": 1781999504.5838273,
+    "ast_hash": "687989afe900cdd512c5f4f11e900abe",
     "semantic_hash": ""
   },
   "backend/app/services/__init__.py": {
@@ -240,13 +240,13 @@
     "semantic_hash": ""
   },
   "backend/app/services/ai_service.py": {
-    "mtime": 1781938724.2363517,
-    "ast_hash": "16978dfb480a38d20c87742aa4b0c02c",
+    "mtime": 1782000548.113444,
+    "ast_hash": "ead475060d81f5e19557493aa8ea30bf",
     "semantic_hash": ""
   },
   "backend/app/services/approval_service.py": {
-    "mtime": 1781903220.8871405,
-    "ast_hash": "785390ea7c58346ad505ab3c02b04670",
+    "mtime": 1781999366.8901749,
+    "ast_hash": "23e496ddfb343ab268183caccda1c93a",
     "semantic_hash": ""
   },
   "backend/app/services/auth_service.py": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "backend/tests/test_auth.py": {
-    "mtime": 1781901272.8652413,
-    "ast_hash": "a247e600dd4f483f3d3dea0eb8e49c59",
+    "mtime": 1782001354.6969678,
+    "ast_hash": "cfe7adb4d18b0cb1b322002e7fac4f57",
     "semantic_hash": ""
   },
   "backend/tests/test_health.py": {
@@ -290,8 +290,8 @@
     "semantic_hash": ""
   },
   "backend/tests/test_offers.py": {
-    "mtime": 1781901281.1499884,
-    "ast_hash": "00accf94d9c288ecc368eccec067d5b1",
+    "mtime": 1782001360.6013439,
+    "ast_hash": "beb08c1e331e9b15ed6680fe7733e43a",
     "semantic_hash": ""
   },
   "mobile/app.json": {
@@ -340,8 +340,8 @@
     "semantic_hash": ""
   },
   "mobile/app/(tabs)/wallet.tsx": {
-    "mtime": 1781961418.1467931,
-    "ast_hash": "e7e0290708bed1cb78bc9b9eabbce535",
+    "mtime": 1781999969.8560681,
+    "ast_hash": "c6fd62a2aff23d0d9978da32e37eab57",
     "semantic_hash": ""
   },
   "mobile/app/_layout.tsx": {
@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "mobile/lib/api.ts": {
-    "mtime": 1781969176.1079237,
-    "ast_hash": "c6e7212b83b6c8fab4a2f3bb08eb4092",
+    "mtime": 1781999892.2271752,
+    "ast_hash": "500db43216a1292e4afe1f7fd584cf8c",
     "semantic_hash": ""
   },
   "mobile/package.json": {
@@ -450,8 +450,8 @@
     "semantic_hash": ""
   },
   "mobile/types/index.ts": {
-    "mtime": 1781971238.892642,
-    "ast_hash": "84284f418df7daecaf17284f1a8ee493",
+    "mtime": 1781999878.3328884,
+    "ast_hash": "2d7129caa1a854241608557ac1e5bd6f",
     "semantic_hash": ""
   },
   ".github/workflows/backend.yml": {
@@ -485,8 +485,8 @@
     "semantic_hash": ""
   },
   "backend/requirements.txt": {
-    "mtime": 1781903773.4788177,
-    "ast_hash": "08d7d4a30273934264e77477a4fa1192",
+    "mtime": 1782001155.2485292,
+    "ast_hash": "0eb817eb1361d2d8d1e2c308e000ffd5",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -620,8 +620,8 @@
     "semantic_hash": ""
   },
   "webapp/src/App.tsx": {
-    "mtime": 1781997912.169213,
-    "ast_hash": "69609151eeffc69dca1151459102a61d",
+    "mtime": 1781999810.080544,
+    "ast_hash": "d5617457bf76e0dae5fa03f86a7aa45c",
     "semantic_hash": ""
   },
   "webapp/src/components/Badge.tsx": {
@@ -650,8 +650,8 @@
     "semantic_hash": ""
   },
   "webapp/src/lib/api.ts": {
-    "mtime": 1781997765.9149342,
-    "ast_hash": "13f66b803bc81a15bf2e2772ae60ac2d",
+    "mtime": 1781999742.8907714,
+    "ast_hash": "86cc99b61ae9b0ce01184ce50089e0cf",
     "semantic_hash": ""
   },
   "webapp/src/main.tsx": {
@@ -1165,8 +1165,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1781997705.4635444,
-    "ast_hash": "d6368cfd0dbb1c55652b781086fc6730",
+    "mtime": 1782001215.8104444,
+    "ast_hash": "24890eee548900f2ddf4fcb5cd93bfed",
     "semantic_hash": ""
   },
   "backend/alembic/versions/a1b2c3d4e5f7_add_company_settings_fields.py": {
@@ -1235,8 +1235,8 @@
     "semantic_hash": ""
   },
   "webapp/src/components/PlatformSidebar.tsx": {
-    "mtime": 1781995712.8500874,
-    "ast_hash": "4b0ad040b5b438d98672f3df088c43cc",
+    "mtime": 1781999820.4356847,
+    "ast_hash": "058e27b2675c449f3855518fb3786881",
     "semantic_hash": ""
   },
   "webapp/src/components/PlatformTopBar.tsx": {
@@ -1352,6 +1352,46 @@
   "WEBAPP_BACKEND_ALIGNMENT_PLAN.md": {
     "mtime": 1781971238.8871875,
     "ast_hash": "0512b72a4723797fab1b335fb10db65a",
+    "semantic_hash": ""
+  },
+  "backend/alembic/versions/c3d4e5f6a7b9_add_charity_donations.py": {
+    "mtime": 1781999474.6407447,
+    "ast_hash": "c45a52ba7878945de57cf89230c6e70e",
+    "semantic_hash": ""
+  },
+  "backend/app/api/v1/routes/charities.py": {
+    "mtime": 1781999377.6533782,
+    "ast_hash": "7baff9bb1d163896a911085bbf4280fb",
+    "semantic_hash": ""
+  },
+  "backend/app/models/charity.py": {
+    "mtime": 1781999268.3418531,
+    "ast_hash": "92fd517744b0ee49c211dfcc1a743345",
+    "semantic_hash": ""
+  },
+  "backend/app/schemas/charity.py": {
+    "mtime": 1781999310.6254902,
+    "ast_hash": "0ac0b34e5a2864485e91ecd3d850108d",
+    "semantic_hash": ""
+  },
+  "backend/app/services/adk_concierge.py": {
+    "mtime": 1782000536.1064131,
+    "ast_hash": "22e545d992d4b810e7a84dc2de04130a",
+    "semantic_hash": ""
+  },
+  "backend/app/services/donation_service.py": {
+    "mtime": 1781999344.686856,
+    "ast_hash": "4ee5da3c81bd96a5b327a435201e1fa4",
+    "semantic_hash": ""
+  },
+  "mobile/app/donate.tsx": {
+    "mtime": 1781999946.6718974,
+    "ast_hash": "3abbd00f6060e97fec2b8a9d3085eae9",
+    "semantic_hash": ""
+  },
+  "webapp/src/pages/platform/DonationsPage.tsx": {
+    "mtime": 1781999799.520502,
+    "ast_hash": "527289584b054a29255a82a5f7eb38e9",
     "semantic_hash": ""
   }
 }
