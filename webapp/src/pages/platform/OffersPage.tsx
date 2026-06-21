@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Tag, TrendingUp, MapPin, Flame, Eye, Pencil, Filter, Download, X, Search, Check } from 'lucide-react';
 import { offersApi, providerApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
+import NewOfferModal from '../../components/platform/NewOfferModal';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -177,13 +179,22 @@ export default function OffersPage() {
   const [showFilter, setShowFilter] = useState(false);
   const [editOffer, setEditOffer] = useState<Offer | null>(null);
   const [toggling, setToggling] = useState<number | null>(null);
+  const [newOfferOpen, setNewOfferOpen] = useState(false);
 
-  useEffect(() => {
+  const load = useCallback(() => {
     offersApi.list({ limit: 200 })
       .then(r => setOffers(r.data.items ?? []))
       .catch(() => setOffers([]))
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => { load(); }, [load]);
+
+  // Top-bar action: create a new offer.
+  usePageAction({
+    label: 'New offer',
+    onClick: () => setNewOfferOpen(true),
+  });
 
   const handleSaved = (updated: Offer) => setOffers(prev => prev.map(o => o.id === updated.id ? { ...o, ...updated } : o));
 
@@ -448,6 +459,9 @@ export default function OffersPage() {
 
       {/* Edit modal */}
       {editOffer && <EditModal offer={editOffer} onClose={() => setEditOffer(null)} onSaved={handleSaved} />}
+
+      {/* New offer modal — refetch on close so a freshly created offer appears */}
+      <NewOfferModal open={newOfferOpen} onClose={() => { setNewOfferOpen(false); load(); }} />
 
       {/* Close filter on outside click */}
       {showFilter && <div className="fixed inset-0 z-10" onClick={() => setShowFilter(false)} />}

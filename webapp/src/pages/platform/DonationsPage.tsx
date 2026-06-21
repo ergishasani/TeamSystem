@@ -3,6 +3,7 @@ import {
   Heart, HandCoins, Users, Clock, Sparkles, Plus, Check, X, Lightbulb, Building2,
 } from 'lucide-react';
 import { donationsApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 interface CharityBreakdown {
   charity_id: number | null;
@@ -72,6 +73,12 @@ export default function DonationsPage() {
   };
 
   useEffect(() => { load(); }, []);
+
+  // Top-bar action: add a new charity.
+  usePageAction({
+    label: 'Add charity',
+    onClick: () => setShowForm(true),
+  });
 
   const handleCreate = async () => {
     if (!form.name.trim()) return;

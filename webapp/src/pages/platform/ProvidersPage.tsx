@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Building2, Activity, MapPin, TrendingUp, Filter, Download, X, Search, Plus } from 'lucide-react';
 import { providersApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -253,6 +254,12 @@ export default function ProvidersPage() {
   }, []);
 
   useEffect(() => { load(); }, [load]);
+
+  // Top-bar action: add a new provider.
+  usePageAction({
+    label: 'New provider',
+    onClick: () => setShowAdd(true),
+  });
 
   const handleCreated = (p: Provider) => setProviders(prev => [...prev, p]);
   const handleSaved = (updated: Provider) => setProviders(prev => prev.map(p => p.id === updated.id ? updated : p));

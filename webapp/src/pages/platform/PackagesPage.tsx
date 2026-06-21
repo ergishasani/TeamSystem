@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Package2, Zap, TrendingUp, Sparkles, Check, ChevronRight, RefreshCw } from 'lucide-react';
 import { packagesApi, offersApi, collaborationsApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -215,6 +216,14 @@ export default function PackagesPage() {
     }
     setGenerating(false);
   }, [offers, packages]);
+
+  // Top-bar action: AI-generate fresh package proposals.
+  usePageAction({
+    label: generating ? 'Generating…' : 'Generate with AI',
+    icon: <Sparkles size={15} strokeWidth={2.5} />,
+    onClick: handleGenerate,
+    disabled: generating || loading,
+  }, [generating, loading, handleGenerate]);
 
   const handleApprove = useCallback(async (proposal: Proposal) => {
     setProposals(prev => prev.map(p => p.key === proposal.key ? { ...p, approving: true } : p));

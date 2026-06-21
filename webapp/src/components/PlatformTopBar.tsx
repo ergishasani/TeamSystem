@@ -3,7 +3,7 @@ import { Search, Plus, Bell, ArrowUpRight } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SearchModal from './platform/SearchModal';
 import NotificationsDropdown from './platform/NotificationsDropdown';
-import NewOfferModal from './platform/NewOfferModal';
+import { usePageActionStore } from '../store/pageActionStore';
 
 // ─── Route meta ───────────────────────────────────────────────────────────────
 
@@ -42,9 +42,9 @@ export default function PlatformTopBar() {
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
-  const [newOfferOpen, setNewOfferOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const bellRef = useRef<HTMLButtonElement>(null);
+  const pageAction = usePageActionStore((s) => s.action);
 
   const meta = ROUTE_MAP[location.pathname] ?? { section: '', title: 'Platform' };
   const isOverview = location.pathname === '/platform';
@@ -89,13 +89,16 @@ export default function PlatformTopBar() {
             </span>
           </button>
 
-          <button
-            onClick={() => setNewOfferOpen(true)}
-            className="flex items-center gap-1.5 bg-[#1a1a1a] hover:bg-[#2e2e2e] text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors whitespace-nowrap"
-          >
-            <Plus size={15} strokeWidth={2.5} />
-            New offer
-          </button>
+          {pageAction && !pageAction.hidden && (
+            <button
+              onClick={pageAction.onClick}
+              disabled={pageAction.disabled}
+              className="flex items-center gap-1.5 bg-[#1a1a1a] hover:bg-[#2e2e2e] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors whitespace-nowrap"
+            >
+              {pageAction.icon ?? <Plus size={15} strokeWidth={2.5} />}
+              {pageAction.label}
+            </button>
+          )}
 
           <div className="relative">
             <button
@@ -125,7 +128,6 @@ export default function PlatformTopBar() {
       </header>
 
       <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
-      <NewOfferModal open={newOfferOpen} onClose={() => setNewOfferOpen(false)} />
     </>
   );
 }

@@ -5,6 +5,8 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { employerApi, aiApi, dealsApi, providersApi, offersApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
+import NewOfferModal from '../../components/platform/NewOfferModal';
 
 // ─── Types ─────────────────────────────────────────────────────────────────
 
@@ -152,6 +154,13 @@ export default function OverviewPage() {
   const [loading, setLoading] = useState(true);
   const [acting, setActing] = useState<Record<number, 'approving' | 'passing'>>({});
   const [nbaDismissed, setNbaDismissed] = useState(false);
+  const [newOfferOpen, setNewOfferOpen] = useState(false);
+
+  // Top-bar action: quick-create a new offer from the operations overview.
+  usePageAction({
+    label: 'New offer',
+    onClick: () => setNewOfferOpen(true),
+  });
 
   useEffect(() => {
     Promise.allSettled([
@@ -617,6 +626,7 @@ export default function OverviewPage() {
         ))}
       </div>
 
+      <NewOfferModal open={newOfferOpen} onClose={() => setNewOfferOpen(false)} />
     </div>
   );
 }

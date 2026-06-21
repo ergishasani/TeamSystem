@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Flame, TrendingUp, Clock, Calendar, ChevronRight, X, Plus } from 'lucide-react';
 import { dealsApi, offersApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -152,6 +153,12 @@ export default function DailyDropPage() {
       setLoading(false);
     });
   }, []);
+
+  // Top-bar action: schedule a new daily drop.
+  usePageAction({
+    label: 'Schedule drop',
+    onClick: () => setScheduleOpen(true),
+  });
 
   const showToast = (msg: string, ok: boolean) => {
     setToast({ msg, ok });

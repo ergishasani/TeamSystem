@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { CalendarDays, TrendingUp, Building2, ChevronRight } from 'lucide-react';
+import { CalendarDays, TrendingUp, Building2, ChevronRight, Download } from 'lucide-react';
 import { employerApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 interface WalletRow {
   company_id: number; company_name: string; seats: number;
@@ -13,6 +14,13 @@ function fmtM(n: number) {
   return n.toLocaleString();
 }
 
+function exportCSV(rows: WalletRow[]) {
+  const csv = [['Company', 'Seats', 'Budget', 'Used', 'Utilization%', 'Currency'],
+    ...rows.map(w => [w.company_name, w.seats, w.budget, w.used, w.utilization_pct + '%', w.currency])
+  ].map(r => r.join(',')).join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'wallets.csv'; a.click();
+}
+
 export default function WalletsPage() {
   const [wallets, setWallets] = useState<WalletRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,6 +31,14 @@ export default function WalletsPage() {
       .catch(() => setWallets([]))
       .finally(() => setLoading(false));
   }, []);
+
+  // Top-bar action: export company wallet utilization.
+  usePageAction({
+    label: 'Export CSV',
+    icon: <Download size={15} strokeWidth={2.5} />,
+    onClick: () => exportCSV(wallets),
+    disabled: loading || wallets.length === 0,
+  }, [wallets, loading]);
 
   const totalBudget = wallets.reduce((s, w) => s + w.budget, 0);
   const totalUsed = wallets.reduce((s, w) => s + w.used, 0);

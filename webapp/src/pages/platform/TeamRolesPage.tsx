@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Crown, ShieldCheck, PenSquare, Eye, Filter, Download, ShieldQuestion } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Crown, ShieldCheck, PenSquare, Eye, Filter, Download, ShieldQuestion, UserPlus, X, Loader2, Check } from 'lucide-react';
 import { teamApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 interface Stats { members: number; admins: number; two_factor_coverage_pct: number; pending_invites: number; }
 interface RoleRow { key: string; label: string; count: number; description: string; }
@@ -28,13 +29,23 @@ export default function TeamRolesPage() {
   const [data, setData] = useState<Overview | null>(null);
   const [loading, setLoading] = useState(true);
   const [roleFilter, setRoleFilter] = useState<string | null>(null);
+  const [inviteOpen, setInviteOpen] = useState(false);
 
-  useEffect(() => {
+  const load = useCallback(() => {
     teamApi.overview()
       .then((r) => setData(r.data as Overview))
       .catch(() => setData(null))
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => { load(); }, [load]);
+
+  // Top-bar action: invite a new teammate.
+  usePageAction({
+    label: 'Invite teammate',
+    icon: <UserPlus size={15} strokeWidth={2.5} />,
+    onClick: () => setInviteOpen(true),
+  });
 
   const updateRole = (id: number, role: string) => {
     if (!data) return;
@@ -195,6 +206,13 @@ export default function TeamRolesPage() {
         </div>
       </div>
 
+      {inviteOpen && (
+        <InviteModal
+          onClose={() => setInviteOpen(false)}
+          onInvited={load}
+        />
+      )}
+
       {/* Permission matrix */}
       <div className="bg-[#0b1416] rounded-2xl p-6">
         <div className="flex items-center justify-between mb-5">
@@ -227,6 +245,77 @@ export default function TeamRolesPage() {
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Invite modal ─────────────────────────────────────────────────────────────
+
+function InviteModal({ onClose, onInvited }: { onClose: () => void; onInvited: () => void }) {
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState('viewer');
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [done, setDone] = useState(false);
+
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
+  const submit = async () => {
+    if (!valid) { setError('Enter a valid email address'); return; }
+    setSaving(true); setError(null);
+    try {
+      await teamApi.createInvite({ email: email.trim(), role });
+      setDone(true);
+      onInvited();
+      setTimeout(onClose, 1100);
+    } catch {
+      setError('Could not send the invite. Please try again.');
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/30" />
+      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md border border-[#f0ece4]" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#f5f2ed]">
+          <h3 className="font-black text-[#1a1a1a]">Invite teammate</h3>
+          <button onClick={onClose} className="text-[#bbb] hover:text-[#888] p-1 rounded-lg hover:bg-[#f5f2ed] transition-colors"><X size={18} /></button>
+        </div>
+
+        {done ? (
+          <div className="flex flex-col items-center justify-center py-12 gap-2">
+            <div className="w-12 h-12 rounded-full bg-[#c9f158] flex items-center justify-center"><Check size={22} className="text-[#1a1a1a]" /></div>
+            <p className="text-[#1a1a1a] font-bold">Invite sent</p>
+            <p className="text-[#aaa] text-sm">{email.trim()}</p>
+          </div>
+        ) : (
+          <div className="p-6 space-y-4">
+            <label className="block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#aaa]">Email address</span>
+              <input type="email" value={email} autoFocus onChange={e => { setEmail(e.target.value); setError(null); }}
+                placeholder="teammate@company.al"
+                className="mt-1.5 w-full bg-[#f8f5f0] border border-[#ede9e2] rounded-xl px-3 py-2.5 text-sm text-[#1a1a1a] placeholder-[#ccc] focus:outline-none focus:border-[#1a1a1a]" />
+            </label>
+            <label className="block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#aaa]">Role</span>
+              <select value={role} onChange={e => setRole(e.target.value)}
+                className="mt-1.5 w-full bg-[#f8f5f0] border border-[#ede9e2] rounded-xl px-3 py-2.5 text-sm text-[#1a1a1a] capitalize focus:outline-none focus:border-[#1a1a1a]">
+                {ROLE_OPTIONS.map(r => <option key={r} value={r}>{r}</option>)}
+              </select>
+            </label>
+            {error && <p className="text-red-500 text-xs font-medium">{error}</p>}
+            <div className="flex gap-2 pt-1">
+              <button onClick={onClose} className="flex-1 border border-[#e5e0d8] text-[#888] py-2.5 rounded-xl text-sm font-medium hover:bg-[#f8f5f0] transition-colors">Cancel</button>
+              <button onClick={submit} disabled={saving || !valid}
+                className="flex-1 flex items-center justify-center gap-2 bg-[#1a1a1a] hover:bg-[#2e2e2e] disabled:opacity-50 text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
+                {saving ? <Loader2 size={15} className="animate-spin" /> : <UserPlus size={15} />}
+                Send invite
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

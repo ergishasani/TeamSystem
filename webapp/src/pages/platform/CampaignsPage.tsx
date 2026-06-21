@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Megaphone, Filter, GitCompareArrows } from 'lucide-react';
+import { Megaphone, Filter, GitCompareArrows, Download } from 'lucide-react';
 import { campaignsApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 interface Stats { live: number; scheduled: number; avg_conversion_pct: number; spend_mtd: number; }
 interface CampaignRow {
@@ -40,6 +41,20 @@ export default function CampaignsPage() {
       .catch(() => setData(null))
       .finally(() => setLoading(false));
   }, []);
+
+  // Top-bar action: export the campaign roster.
+  usePageAction({
+    label: 'Export CSV',
+    icon: <Download size={15} strokeWidth={2.5} />,
+    onClick: () => {
+      const rows = data?.campaigns ?? [];
+      const csv = [['Name', 'Status', 'Audience', 'Reach', 'Conversion%', 'Budget', 'Spend'],
+        ...rows.map(c => [c.name, c.status, c.audience ?? '', c.reach, c.conversion_pct + '%', c.budget, c.spend])
+      ].map(r => r.join(',')).join('\n');
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'campaigns.csv'; a.click();
+    },
+    disabled: loading || !data?.campaigns?.length,
+  }, [data, loading]);
 
   const selectFocal = (id: number) => {
     if (compareMode) {

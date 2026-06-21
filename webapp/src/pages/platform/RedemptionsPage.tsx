@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { QrCode, ShieldCheck, Clock, TrendingUp, Filter, Download } from 'lucide-react';
 import { employerApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 interface Redemption {
   id: number; code: string; offer_title?: string; provider_name?: string;
@@ -38,6 +39,14 @@ export default function RedemptionsPage() {
       .catch(() => setData([]))
       .finally(() => setLoading(false));
   }, []);
+
+  // Top-bar action: export all redemptions.
+  usePageAction({
+    label: 'Export CSV',
+    icon: <Download size={15} strokeWidth={2.5} />,
+    onClick: () => exportCSV(data),
+    disabled: loading || data.length === 0,
+  }, [data, loading]);
 
   const active = data.filter(r => r.status === 'active').length;
   const redeemed = data.filter(r => r.status === 'redeemed').length;

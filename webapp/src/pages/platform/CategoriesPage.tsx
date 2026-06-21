@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { Layers, Star, TrendingDown, CheckCircle2, Plus, Pencil, X, GripVertical } from 'lucide-react';
 import { offersApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -182,6 +183,12 @@ export default function CategoriesPage() {
       .catch(() => setOffers([]))
       .finally(() => setLoading(false));
   }, []);
+
+  // Top-bar action: create a new category.
+  usePageAction({
+    label: 'New category',
+    onClick: () => setShowNew(true),
+  });
 
   const catMap: Record<string, Offer[]> = {};
   offers.forEach(o => { catMap[o.category] = [...(catMap[o.category] ?? []), o]; });

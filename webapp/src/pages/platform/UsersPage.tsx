@@ -4,6 +4,7 @@ import {
   X, Check, Bell, Wallet, Award, Flame, Loader2,
 } from 'lucide-react';
 import { employerApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 interface UserRow {
   id: number; full_name: string; email: string; initials: string;
@@ -112,6 +113,14 @@ export default function UsersPage() {
   });
 
   const activeFilterCount = statusFilter.length + (deptFilter ? 1 : 0);
+
+  // Top-bar action: export the currently filtered directory.
+  usePageAction({
+    label: 'Export CSV',
+    icon: <Download size={15} strokeWidth={2.5} />,
+    onClick: () => exportCSV(filtered),
+    disabled: loading || filtered.length === 0,
+  }, [filtered, loading]);
 
   const toggleStatus = (key: string) =>
     setStatusFilter(prev => prev.includes(key) ? prev.filter(s => s !== key) : [...prev, key]);

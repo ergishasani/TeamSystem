@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Palette, Globe2, ShieldCheck, Plus } from 'lucide-react';
 import { settingsApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 interface BrandColors { primary: string; accent: string; light: string; warn: string; }
 interface Policies {
@@ -100,6 +101,9 @@ export default function SettingsPage() {
   const colorInputRef = useRef<HTMLInputElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
   const [editingColorKey, setEditingColorKey] = useState<keyof BrandColors | null>(null);
+
+  // Settings autosaves each section, so there's no top-bar create action here.
+  usePageAction(null);
 
   useEffect(() => {
     Promise.allSettled([settingsApi.workspace(), settingsApi.workspaces()]).then(([wR, cR]) => {

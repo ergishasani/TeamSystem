@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Bell, Mail, Slack, Filter, Plus, Moon } from 'lucide-react';
 import { broadcastsApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 interface Stats { sent_this_week: number; avg_open_rate_pct: number; unsubscribes: number; scheduled: number; }
 interface BroadcastRow {
@@ -35,6 +36,12 @@ export default function NotificationsPage() {
       .catch(() => setData(null))
       .finally(() => setLoading(false));
   }, []);
+
+  // Top-bar action: start a new notification template.
+  usePageAction({
+    label: 'New template',
+    onClick: () => setNewTemplateOpen(true),
+  });
 
   const saveCadence = (start: string, end: string, muted: boolean) => {
     if (!data) return;

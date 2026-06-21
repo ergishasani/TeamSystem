@@ -4,6 +4,7 @@ import {
   AlertTriangle, TrendingUp, Repeat2,
 } from 'lucide-react';
 import { analyticsApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -70,6 +71,29 @@ export default function AnalyticsPage() {
       .catch(() => setData(null))
       .finally(() => setLoading(false));
   }, []);
+
+  // Top-bar action: export a CSV analytics report (categories + top providers/offers).
+  usePageAction({
+    label: 'Export report',
+    icon: <Download size={15} strokeWidth={2.5} />,
+    onClick: () => {
+      if (!data) return;
+      const lines: string[] = [];
+      lines.push('Top Categories');
+      lines.push('Category,Share%,WoW Delta');
+      data.top_categories.forEach(c => lines.push(`${c.category},${c.share_pct}%,${c.wow_delta}`));
+      lines.push('');
+      lines.push('Top Providers');
+      lines.push('Provider,City,GMV,Redemptions,Rate%');
+      data.top_providers.forEach(p => lines.push(`${p.name},${p.city},${p.gmv},${p.redemptions},${p.rate_pct}%`));
+      lines.push('');
+      lines.push('Top Offers');
+      lines.push('Rank,Title,Provider,Value,Rate%');
+      data.top_offers.forEach(o => lines.push(`${o.rank},"${o.title}",${o.provider_name},${o.value},${o.rate_pct}%`));
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' })); a.download = 'analytics-report.csv'; a.click();
+    },
+    disabled: loading || !data,
+  }, [data, loading]);
 
   if (loading) {
     return (

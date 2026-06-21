@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Clock, CheckCircle2, XCircle, TrendingUp, Filter, Download } from 'lucide-react';
 import { employerApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -75,6 +76,14 @@ export default function RequestsPage() {
       .catch(() => employerApi.approvals().then(r => setReqs(r.data as Req[])).catch(() => {}))
       .finally(() => setLoading(false));
   }, []);
+
+  // Top-bar action: export all requests.
+  usePageAction({
+    label: 'Export CSV',
+    icon: <Download size={15} strokeWidth={2.5} />,
+    onClick: () => exportCSV(reqs),
+    disabled: loading || reqs.length === 0,
+  }, [reqs, loading]);
 
   const handleApprove = useCallback(async (id: number) => {
     setActing(a => ({ ...a, [id]: 'approving' }));

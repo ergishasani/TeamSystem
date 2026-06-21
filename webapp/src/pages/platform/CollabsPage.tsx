@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Layers, TrendingUp, ShieldCheck, ChevronRight, X, Plus, Trash2 } from 'lucide-react';
 import { collaborationsApi, offersApi } from '../../lib/api';
+import { usePageAction } from '../../store/pageActionStore';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -276,6 +277,12 @@ export default function CollabsPage() {
       setLoading(false);
     });
   }, []);
+
+  // Top-bar action: propose a new collab.
+  usePageAction({
+    label: 'New collab',
+    onClick: () => setProposeOpen(true),
+  });
 
   const handleUpdated = useCallback((updated: Collab) =>
     setCollabs(prev => prev.map(c => c.id === updated.id ? updated : c)), []);
