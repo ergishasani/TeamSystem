@@ -229,9 +229,21 @@ def rule_based_concierge(message: str, interests: List[str], budget: Optional[fl
 
 
 def concierge(db: Session, user: User, message: str, budget: Optional[float]) -> ConciergeResponse:
-    """Primary entry point. Uses OpenAI when configured, else rule-based."""
+    """Primary entry point. Engine priority: Google ADK (Gemini) → OpenAI → rule-based.
+
+    Each layer is tried only when its key is configured and falls through to the
+    next on any error, so the endpoint never fails because of the LLM.
+    """
     profile = db.query(EmployeeProfile).filter(EmployeeProfile.user_id == user.id).first()
     interests = profile.interests if profile and profile.interests else []
+
+    if settings.GOOGLE_API_KEY:
+        try:
+            # Imported lazily so the app (and tests) run without google-adk installed.
+            from app.services.adk_concierge import run_adk_concierge
+            return run_adk_concierge(db, user, message, budget)
+        except Exception:  # noqa: BLE001 — never let the AI break the endpoint
+            logger.exception("ADK/Gemini concierge failed; trying next engine")
 
     if settings.OPENAI_API_KEY:
         try:

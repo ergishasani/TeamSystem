@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from sqlalchemy import Column, Integer, String, Numeric, DateTime, JSON, Text
+from sqlalchemy import Column, Integer, String, Numeric, DateTime, JSON, Text, Boolean
 from app.core.database import Base
 
 
@@ -43,3 +43,12 @@ class Company(Base):
     # {"enforce_sso": true, "require_2fa_admins": true, "ip_allowlist": false,
     #  "last_security_review": "2026-06-12"}
     security_prefs = Column(JSON, default=dict)
+
+    # ── Charity donation policies ─────────────────────────────────────────────
+    # Lets employees redirect unused wallet budget to a company-approved charity.
+    allow_charity_donations = Column(Boolean, default=False)
+    # Employer match, e.g. 50 => company adds 50% on top of each donation.
+    donation_match_percent = Column(Integer, default=0)
+    # Donations above this amount need employer approval; null => auto-approve all.
+    donation_approval_required_above = Column(Numeric(12, 2), nullable=True)
+    allow_employee_charity_suggestions = Column(Boolean, default=True)

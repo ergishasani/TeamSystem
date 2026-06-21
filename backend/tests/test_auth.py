@@ -39,7 +39,7 @@ def test_login_wrong_password_fails(client, employee):
 
 
 def test_me_requires_token(client):
-    assert client.get("/api/v1/auth/me").status_code == 403  # missing bearer credentials
+    assert client.get("/api/v1/auth/me").status_code == 401  # missing bearer credentials
 
 
 def test_me_returns_current_user(client, employee, auth):

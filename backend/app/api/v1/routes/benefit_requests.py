@@ -11,10 +11,29 @@ from app.models.package import Package
 from app.models.offer import Offer
 from app.models.company import Company
 from app.models.collaboration import ProviderCollaboration
+from app.models.charity import Charity
 from app.schemas.request import BenefitRequestCreate, BenefitRequestOut
+from app.schemas.charity import DonationCreate
 from app.services.approval_service import approve_request
+from app.services.donation_service import create_donation_request
 
 router = APIRouter(prefix="/benefit-requests", tags=["benefit_requests"])
+
+
+@router.post("/donation", response_model=BenefitRequestOut, status_code=201)
+def create_donation(
+    data: DonationCreate,
+    current_user=Depends(get_employee),
+    db: Session = Depends(get_db),
+):
+    """Create a charity donation funded by the employee's remaining wallet balance."""
+    req = create_donation_request(
+        db, current_user, data.charity_id,
+        amount=data.amount,
+        percent_of_remaining=data.percent_of_remaining,
+        donate_full_remaining=data.donate_full_remaining,
+    )
+    return _enrich(req, db)
 
 
 @router.post("", response_model=BenefitRequestOut, status_code=201)
@@ -82,7 +101,10 @@ def create_request(
 
 def _enrich(req: BenefitRequest, db: Session) -> BenefitRequestOut:
     title: str | None = None
-    if req.offer_id:
+    if req.request_type == "donation" and req.charity_id:
+        row = db.query(Charity.name).filter(Charity.id == req.charity_id).first()
+        title = row[0] if row else "Charity donation"
+    elif req.offer_id:
         row = db.query(Offer.title).filter(Offer.id == req.offer_id).first()
         title = row[0] if row else None
     elif req.package_id:

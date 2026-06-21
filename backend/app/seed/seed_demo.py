@@ -31,6 +31,7 @@ from app.models.shake import ShakeCredit, ShakeAttempt
 from app.models.collaboration import ProviderCollaboration, CollaborationItem
 from app.models.card import Card
 from app.models.notification import Notification
+from app.models.charity import Charity, CharitySuggestion
 from app.models.request import BenefitRequest
 from app.models.redemption import Redemption
 from app.models.saved_offer import SavedOffer
@@ -48,7 +49,8 @@ def wipe(db):
         "users, employee_profiles, user_interests, challenges, challenge_progress, "
         "daily_deals, shake_credits, shake_attempts, provider_collaborations, "
         "collaboration_items, benefit_requests, redemptions, saved_offers, "
-        "swipe_interactions, user_interactions, payments, cards, notifications "
+        "swipe_interactions, user_interactions, payments, cards, notifications, "
+        "charities, charity_suggestions "
         "RESTART IDENTITY CASCADE"
     ))
     db.commit()
@@ -90,6 +92,10 @@ def seed():
             currency="ALL",
             monthly_budget_per_employee=15000,
             approval_required_above=10000,
+            allow_charity_donations=True,
+            donation_match_percent=50,
+            donation_approval_required_above=5000,
+            allow_employee_charity_suggestions=True,
         )
         banka_besa = Company(
             name="Banka Besa",
@@ -97,8 +103,36 @@ def seed():
             currency="ALL",
             monthly_budget_per_employee=20000,
             approval_required_above=12000,
+            allow_charity_donations=True,
+            donation_match_percent=25,
+            donation_approval_required_above=None,
+            allow_employee_charity_suggestions=True,
         )
         db.add_all([tirantech, banka_besa])
+        db.flush()
+
+        # ── Charities ──────────────────────────────────────────────────────────
+        print("Seeding charities...")
+        platform_charities = [
+            {"name": "Tirana Food Bank",          "category": "community",   "description": "Provides meals to families in need across Tirana."},
+            {"name": "Albania Green Future",      "category": "environment", "description": "Reforestation and clean-up projects throughout Albania."},
+            {"name": "Books for Every Child",     "category": "education",   "description": "Supplies books and school kits to rural schools."},
+            {"name": "Tirana Animal Rescue",      "category": "animals",     "description": "Shelter and medical care for stray animals."},
+            {"name": "Children's Hospital Fund",  "category": "children",    "description": "Equipment and care for the paediatric hospital in Tirana."},
+            {"name": "Mind & Wellbeing Albania",  "category": "health",      "description": "Free mental-health support and counselling services."},
+        ]
+        for c in platform_charities:
+            db.add(Charity(
+                name=c["name"], category=c["category"], description=c["description"],
+                company_id=None, is_platform_wide=True, is_active=True,
+            ))
+        # One company-specific charity for TiranaTech.
+        db.add(Charity(
+            name="TiranaTech Community Fund",
+            category="community",
+            description="TiranaTech's own fund supporting local tech education for youth.",
+            company_id=tirantech.id, is_platform_wide=False, is_active=True,
+        ))
         db.flush()
 
         # ── Providers ──────────────────────────────────────────────────────────

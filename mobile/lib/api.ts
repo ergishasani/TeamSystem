@@ -116,6 +116,17 @@ export const requestsApi = {
   getById: (id: number) => apiClient.get(`/benefit-requests/${id}`),
 
   cancel: (id: number) => apiClient.patch(`/benefit-requests/${id}/cancel`),
+
+  donate: (data: { charity_id: number; amount?: number; percent_of_remaining?: number; donate_full_remaining?: boolean }) =>
+    apiClient.post('/benefit-requests/donation', data),
+};
+
+// ─── Charities ────────────────────────────────────────────────────────────────
+
+export const charitiesApi = {
+  list: () => apiClient.get('/charities'),
+  suggest: (data: { charity_name: string; charity_website?: string; reason?: string }) =>
+    apiClient.post('/charity-suggestions', data),
 };
 
 // ─── Redemptions ──────────────────────────────────────────────────────────────

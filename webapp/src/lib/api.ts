@@ -51,6 +51,23 @@ export const employerApi = {
   wallets: () => apiClient.get('/employer/wallets'),
 };
 
+// ─── Charity donations ────────────────────────────────────────────────────────
+
+export const donationsApi = {
+  stats: () => apiClient.get('/employer/donations'),
+  charities: () => apiClient.get('/employer/charities'),
+  createCharity: (data: {
+    name: string; description?: string; logo_url?: string;
+    category?: string; is_platform_wide?: boolean;
+  }) => apiClient.post('/employer/charities', data),
+  updateCharity: (id: number, data: Partial<{
+    name: string; description: string; logo_url: string; category: string; is_active: boolean;
+  }>) => apiClient.patch(`/employer/charities/${id}`, data),
+  suggestions: () => apiClient.get('/employer/charity-suggestions'),
+  reviewSuggestion: (id: number, status: 'approved' | 'rejected') =>
+    apiClient.patch(`/employer/charity-suggestions/${id}`, { status }),
+};
+
 // ─── Provider ─────────────────────────────────────────────────────────────────
 
 export const providerApi = {

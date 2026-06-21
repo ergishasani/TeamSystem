@@ -43,6 +43,22 @@ def approve_request(db: Session, request_id: int, approver_company_id: int) -> B
         profile.pending_amount = max(0, float(profile.pending_amount) - float(req.total_amount))
         profile.remaining_amount = float(profile.monthly_budget) - float(profile.used_amount)
 
+    # Donations debit the wallet but never create payments or redemptions.
+    if req.request_type == "donation":
+        from app.models.charity import Charity
+        from app.services.donation_service import award_first_donation_xp
+        charity = db.query(Charity).filter(Charity.id == req.charity_id).first()
+        charity_name = charity.name if charity else "the charity"
+        create_notification(
+            db, req.employee_id,
+            f"Your donation to {charity_name} was approved. Thanks for giving back!",
+            type="donation_approved",
+        )
+        award_first_donation_xp(db, req.employee_id)
+        db.commit()
+        db.refresh(req)
+        return req
+
     # Create payments and redemptions
     if req.request_type == "package" and req.package_id:
         items = db.query(PackageItem).filter(PackageItem.package_id == req.package_id).all()
@@ -118,12 +134,19 @@ def reject_request(db: Session, request_id: int, approver_company_id: int, reaso
         profile.pending_amount = max(0, float(profile.pending_amount) - float(req.total_amount))
         profile.remaining_amount = float(profile.remaining_amount) + float(req.total_amount)
 
-    reason_suffix = f": {reason}" if reason else ""
-    create_notification(
-        db, req.employee_id,
-        f"Your benefit request #{req.id} was rejected{reason_suffix}.",
-        type="request_rejected",
-    )
+    if req.request_type == "donation":
+        create_notification(
+            db, req.employee_id,
+            "Your donation request was not approved. Your balance has not been charged.",
+            type="donation_rejected",
+        )
+    else:
+        reason_suffix = f": {reason}" if reason else ""
+        create_notification(
+            db, req.employee_id,
+            f"Your benefit request #{req.id} was rejected{reason_suffix}.",
+            type="request_rejected",
+        )
 
     db.commit()
     db.refresh(req)

@@ -22,6 +22,7 @@ import PlatformRequestsPage from './pages/platform/RequestsPage';
 import RedemptionsPlatformPage from './pages/platform/RedemptionsPage';
 import UsersPage from './pages/platform/UsersPage';
 import WalletsPage from './pages/platform/WalletsPage';
+import DonationsPage from './pages/platform/DonationsPage';
 import ProvidersPage from './pages/platform/ProvidersPage';
 import CategoriesPage from './pages/platform/CategoriesPage';
 import AnalyticsPage from './pages/platform/AnalyticsPage';
@@ -79,6 +80,7 @@ export default function App() {
           <Route path="redemptions" element={<RedemptionsPlatformPage />} />
           <Route path="users" element={<UsersPage />} />
           <Route path="wallets" element={<WalletsPage />} />
+          <Route path="donations" element={<DonationsPage />} />
           <Route path="providers" element={<ProvidersPage />} />
           <Route path="categories" element={<CategoriesPage />} />
           <Route path="analytics" element={<AnalyticsPage />} />

@@ -30,4 +30,4 @@ def test_get_missing_offer_404(client, employee, auth):
 
 
 def test_offers_require_auth(client, offer):
-    assert client.get("/api/v1/offers").status_code == 403
+    assert client.get("/api/v1/offers").status_code == 401

@@ -20,6 +20,7 @@ from app.models.card import Card
 from app.models.invite import Invite
 from app.models.broadcast import Broadcast, NotificationTemplate
 from app.models.campaign import Campaign
+from app.models.charity import Charity, CharitySuggestion
 
 __all__ = [
     "User", "Company", "EmployeeProfile", "Provider", "Offer",
@@ -28,4 +29,5 @@ __all__ = [
     "Notification", "UserInterest", "SwipeInteraction", "DailyDeal",
     "ProviderCollaboration", "CollaborationItem", "ShakeCredit", "ShakeAttempt",
     "Card", "Invite", "Broadcast", "NotificationTemplate", "Campaign",
+    "Charity", "CharitySuggestion",
 ]

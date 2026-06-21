@@ -26,6 +26,7 @@ from app.api.v1.routes import (
     team,
     broadcasts,
     campaigns,
+    charities,
 )
 
 api_router = APIRouter(prefix="/api/v1")
@@ -55,3 +56,4 @@ api_router.include_router(settings.router)
 api_router.include_router(team.router)
 api_router.include_router(broadcasts.router)
 api_router.include_router(campaigns.router)
+api_router.include_router(charities.router)

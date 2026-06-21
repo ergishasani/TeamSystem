@@ -10,6 +10,7 @@ import {
   ShieldCheck,
   Users,
   Wallet,
+  Heart,
   Building2,
   Grid3X3,
   BarChart2,
@@ -49,6 +50,7 @@ const NAV: { section: string; items: Item[] }[] = [
       { to: '/platform/redemptions', label: 'Redemptions', icon: ShieldCheck },
       { to: '/platform/users', label: 'Users', icon: Users },
       { to: '/platform/wallets', label: 'Wallets', icon: Wallet },
+      { to: '/platform/donations', label: 'Donations', icon: Heart },
     ],
   },
   {

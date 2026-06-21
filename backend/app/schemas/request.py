@@ -23,6 +23,9 @@ class BenefitRequestOut(BaseModel):
     currency: str
     status: str
     title: Optional[str] = None
+    charity_id: Optional[int] = None
+    donation_amount: Optional[float] = None
+    donation_match_amount: Optional[float] = None
     ai_reason: Optional[str] = None
     submitted_at: datetime
     approved_at: Optional[datetime] = None

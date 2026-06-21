@@ -2,7 +2,7 @@
 import { View, Text, StyleSheet, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { Gift, Package, ChevronRight } from 'lucide-react-native';
+import { Gift, Package, ChevronRight, Heart } from 'lucide-react-native';
 import { walletApi, requestsApi } from '@/lib/api';
 import { WalletCard } from '@/components/WalletCard';
 import { WalletContentSkeleton } from '@/components/Skeleton';
@@ -82,6 +82,26 @@ export default function WalletScreen() {
 
       {wallet && (
         <WalletCard wallet={wallet} />
+      )}
+
+      {/* Donate unused balance nudge */}
+      {wallet && wallet.remaining_amount > 0 && (
+        <TouchableOpacity
+          style={styles.donateNudge}
+          onPress={() => router.push('/donate' as any)}
+          activeOpacity={0.85}
+        >
+          <View style={styles.donateIcon}>
+            <Heart size={20} color={colors.ink} strokeWidth={2} />
+          </View>
+          <View style={styles.donateBody}>
+            <Text style={styles.donateTitle}>Donate unused balance</Text>
+            <Text style={styles.donateSub}>
+              {wallet.remaining_amount.toLocaleString()} {wallet.currency} left — give it before it resets
+            </Text>
+          </View>
+          <ChevronRight size={18} color={colors.labelTertiary} strokeWidth={2} />
+        </TouchableOpacity>
       )}
 
       {/* History tabs */}
@@ -171,6 +191,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.screenX,
     marginBottom: 20,
   },
+  // Donate nudge
+  donateNudge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
+    backgroundColor: colors.white,
+    borderRadius: radius['2xl'],
+    marginHorizontal: spacing.screenX,
+    marginTop: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+  },
+  donateIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: colors.lime,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  donateBody: { flex: 1, gap: 3 },
+  donateTitle: { fontSize: 15, fontFamily: fonts.semiBold, color: colors.ink, letterSpacing: -0.2 },
+  donateSub: { fontSize: 12, fontFamily: fonts.regular, color: colors.labelSecondary },
+
   // History tab control
   tabTrack: {
     flexDirection: 'row',

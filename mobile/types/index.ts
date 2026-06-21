@@ -95,11 +95,25 @@ export interface BenefitRequest {
   currency: string;
   status: RequestStatus;
   title: string | null;
+  charity_id: number | null;
+  donation_amount: number | null;
+  donation_match_amount: number | null;
   ai_reason: string | null;
   submitted_at: string;
   approved_at: string | null;
   rejected_at: string | null;
   rejection_reason: string | null;
+}
+
+export interface Charity {
+  id: number;
+  name: string;
+  description: string | null;
+  logo_url: string | null;
+  category: string;
+  company_id: number | null;
+  is_platform_wide: boolean;
+  is_active: boolean;
 }
 
 export interface Wallet {

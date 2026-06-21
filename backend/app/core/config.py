@@ -9,8 +9,14 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
     BACKEND_CORS_ORIGINS: str = "http://localhost:3000,http://localhost:8081"
 
-    # OpenAI concierge. When OPENAI_API_KEY is unset the AI routes fall back to
-    # the rule-based engine, so the app works with no key and no cost.
+    # AI concierge engine priority: Google ADK (Gemini) → OpenAI → rule-based.
+    # Each is optional; with no keys set the app uses the rule-based engine, so
+    # it always works with no key and no cost.
+    #
+    # Google ADK / Gemini (preferred). Get a key from https://aistudio.google.com.
+    GOOGLE_API_KEY: Optional[str] = None
+    GEMINI_MODEL: str = "gemini-2.0-flash"
+    # OpenAI (legacy fallback engine).
     OPENAI_API_KEY: Optional[str] = None
     OPENAI_MODEL: str = "gpt-4o-mini"
 

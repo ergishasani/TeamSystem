@@ -12,8 +12,12 @@ class BenefitRequest(Base):
     package_id = Column(Integer, ForeignKey("packages.id"), nullable=True)
     offer_id = Column(Integer, ForeignKey("offers.id"), nullable=True)
     collaboration_id = Column(Integer, ForeignKey("provider_collaborations.id"), nullable=True)
-    # package | single_offer | collab
+    # package | single_offer | collab | donation
     request_type = Column(String, nullable=False, default="package")
+    # ── Charity donation fields (request_type == "donation") ──────────────────
+    charity_id = Column(Integer, ForeignKey("charities.id"), nullable=True)
+    donation_amount = Column(Numeric(12, 2), nullable=True)
+    donation_match_amount = Column(Numeric(12, 2), nullable=True)
     total_amount = Column(Numeric(12, 2), nullable=False)
     currency = Column(String(3), default="ALL")
     # pending | approved | rejected | cancelled
